@@ -1,7 +1,11 @@
+<?php
+		include './../TestHeader.html';
+?>
+
 <html>
 
 <head>
-	<title>TP 7</title>
+	<title>ECEbay</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="styles.css">
@@ -35,6 +39,7 @@
 						<table>
 							<tr>
 								<td>
+								<h6>Types de vente</h6>
 								<table id="typeVenteFilter">
 								<tr>
 									<td><input type="radio" value="tout" name="bt"> Tout </td>

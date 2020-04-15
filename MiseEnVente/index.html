@@ -1,0 +1,81 @@
+<?php
+		include './../TestHeader.html';
+?>
+
+<html>
+
+<head>
+	<title>ECEbay - Mise en vente</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  	<script type="text/javascript">tinymce.init({selector:'#mytextarea'});</script>
+</head>
+
+<body>
+	<div class="container">
+		<form action="traitementMEV.php" method="post">
+			<table class="container-fluid dead_center" border="1" style="border: 2px;">
+				<tr>
+				<td class="container-fluid" align="center">
+					<input class="col-lg-6" type="text" name="titre" placeholder="Titre de l'annonce">
+					<select class="col-lg-3" name="categories">
+						<option value="FerOuTres">Ferraile ou Tresor</option>
+						<option value="BonMusee">Bon pour le musee</option>
+						<option value="AccesVIP">Accessoire VIP</option>
+					</select>
+				</td>
+				</tr>
+				<tr>
+				<td>
+					<div class="col-lg-6" style="float: left"><img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png"></div>
+					<div class="col-lg-2" style="float: left">
+						<img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png">
+						<img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png">
+						<img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png">
+					</div>
+					<div class="col-lg-2" style="float: left">
+						<img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png">
+						<img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png">
+						<img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png">
+					</div>
+					<div class="col-lg-2" style="float: left">
+						<img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png">
+						<img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png">
+						<img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png">
+					</div>
+				</td>
+				</tr>
+				<tr>
+					<td align="center">
+					<input type="file" name="file" multiple="" accept="image/*" data-w-onchange="startUpload|wc0-w0-LIST_PAGE_WRAPPER__-OCS_DESCRIBE_SECTION__-PHOTOS__-photosInput__-2">
+					</td>
+				</tr>
+				<tr>
+					<td align="center">
+						 <form method="post">
+							<textarea id="mytextarea">Hello, World!</textarea>
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td align="center">
+
+					</td>
+				</tr>
+				<tr>
+					<td align="center">
+						<input type="submit" name="valider" value="Valider">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+
+</html>

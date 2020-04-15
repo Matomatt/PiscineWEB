@@ -1,0 +1,3 @@
+<?php
+	isset($_POST())
+?>

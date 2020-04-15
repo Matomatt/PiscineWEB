@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html>
-
 <!-- sources : 
-	https://www.ebay.fr/ : style de la page
-	https://www.w3schools.com/bootstrap4/bootstrap_jumbotron.asp : fond gris
-	https://www.w3schools.com/bootstrap4/bootstrap_button_groups.asp : menu défilant
-	https://www.w3schools.com/bootstrap4/bootstrap_navbar.asp : barre de recherche
-	https://www.w3schools.com/bootstrap4/bootstrap_cards.asp : pour les produits
-	https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cncc.com%2Fle-cncc-met-en-place-un-comite-executif-enseignes%2Fpicto-caddie-redim%2F&psig=AOvVaw3VE0GWHIwwupvyvYfdv8vJ&ust=1586944794585000&source=images&cd=vfe&ved=0CAMQjB1qFwoTCKjEuJvU5-gCFQAAAAAdAAAAABAD : image caddie
+	index.html de Accueil : header et footer, articles similaires
+	https://www.w3schools.com/bootstrap4/bootstrap_navs.asp : description
+	https://www.w3schools.com/bootstrap4/bootstrap_collapse.asp : description
 -->
 <head>
 	<!--accents-->
@@ -28,7 +24,7 @@
 	<!-- external java sheet-->
 	<script type="text/javascript" src="accueil.js"></script>
 
-	<title>Ebay ECE</title>
+	<title>Page Produit</title>
 </head>
 <body>
 	<!-- 1er div : barre de navigation avec bouttons et barre de recherche-->
@@ -73,115 +69,112 @@
 		</nav>
 	</div>
 	<hr>
-	<div id="div2"><!--barre catégories, achat,vente-->
-		<div class="nav justify-content-center">
-			<button type="button" class="btn btn-light">Acheter</button>
-			<button type="button" class="btn btn-light">Vendre</button>
-			<button type="button" class="btn btn-light">Ferraille/Trésor</button>
-			<button type="button" class="btn btn-light">Bon pour le Musée</button>
-			<button type="button" class="btn btn-light">Accessoire VIP</button>
-		</div>
+	<!-- 2eme div : retour aux résultats-->
+	<div id="div2">
+		<h6><a href="#"><- Retour aux résultats</a></h6>
 	</div>
-	<hr>
-	<!-- 2eme div : carroussel-->
+	<br>
+	<!-- 3eme div : présentation produits et info vendeur-->
 	<div id="div3">
-		<!-- carroussel-->
-		<div id="carroussel" class="carousel slide container-fluid text-center" data-ride="carousel">
-			<!-- indicateur slide-->
-  			<ul class="carousel-indicators">
-    			<li data-target="#carroussel" data-slide-to="0" class="active"></li>
-    			<li data-target="#carroussel" data-slide-to="1"></li>
-  			</ul>
-  			<!--contenu slide du début-->
-  			<div class="carousel-inner">
-   				<div class="carousel-item active">
-      				<img class="img-fluid" src="../Images/caddie.jpg" alt="Pub">
-      				<!--ajout légende sur image-->
-      				<div class="carousel-caption">
-    					<h3>Logo</h3>
-    					<p>Commandez comme sur Ebay</p>
-  					</div>
-    			</div>
-    			<!--contenu slide-->
-    			<div class="carousel-item">
-      				<img class="img-fluid" src="../Images/caddie.jpg" alt="Pub">
-      				<!--ajout légende sur image-->
-      				<div class="carousel-caption">
-    					<h3>Caddie</h3>
-    					<p>Ajouter ce que vous voulez</p>
-  					</div>
-    			</div>
-  			</div>
-  			<!--contrôle droit et gauche -->
-  			<a class="carousel-control-prev" href="#carroussel" data-slide="prev">
-    		<span class="carousel-control-prev-icon"></span>
-  			</a>
-  			<a class="carousel-control-next" href="#carroussel" data-slide="next">
-    		<span class="carousel-control-next-icon"></span>
-  			</a>
-
+		<h4>Article</h4>	
+		<br>
+		<div class="wrapper container">
+		<br>
+			<div class="row">
+				<!-- images article-->
+	  			<div class="col-6">
+	  				<!-- carroussel-->
+					<div id="carroussel" class="carousel slide container-fluid" data-ride="carousel">
+						<!-- indicateur slide-->
+	  					<ul class="carousel-indicators">
+	    					<li data-target="#carroussel" data-slide-to="0" class="active"></li>
+	    					<li data-target="#carroussel" data-slide-to="1"></li>
+	  					</ul>
+			  			<!--contenu slide du début-->
+			  			<div class="carousel-inner">
+			   				<div class="carousel-item active">
+			      				<img class="img-fluid" src="../Images/caddie.jpg" alt="Article">
+			    			</div>
+			    			<!--contenu slide-->
+			    			<div class="carousel-item">
+			      				<img class="img-fluid" src="../Images/caddie.jpg" alt="Article">
+			    			</div>
+			  			</div>
+			  			<!--contrôle droit et gauche -->
+			  			<a class="carousel-control-prev" href="#carroussel" data-slide="prev">
+			    		<span class="carousel-control-prev-icon"></span>
+			  			</a>
+			  			<a class="carousel-control-next" href="#carroussel" data-slide="next">
+			    		<span class="carousel-control-next-icon"></span>
+			  			</a>
+					</div>
+				</div>
+				<!--Présentation produit, vendeur, son état et mode de paiment-->
+	  			<div class="col-6">
+					<table>
+						<tr>		
+							<th>Article</th>
+						</tr>
+						<tr>
+							<td>Vendu par : <a href="#">Mich3456</a> (6061 &#9733;)</td>
+						</tr>
+						<tr>
+							<td>État : Occasion</td>
+						</tr>
+						<tr>
+							<td>Quantité : <input type="number" name="qté"></td>
+						</tr>
+						<tr>
+							<td>Prix : 100€</td>
+						</tr>
+						<tr>
+							<td><button class="btn btn-primary" type="submit">Achat immédiat</button></td>
+						</tr>
+						<tr>
+							<td><a href="#">Ajouter au panier</a></td>
+						</tr>
+						<tr>
+							<td><button class="btn btn-primary" type="submit">Enchérir</button></td>
+						</tr>
+						<tr>
+							<td><a href="#">Faire une offre</a></td>
+						</tr>
+					</table>			
+	  			</div>
+			</div>	
 		</div>
 	</div>
 	<br>
-	<br>
-	<!-- 4eme div : dernières enchères-->
+	<!--4eme div : descripttion produit-->
 	<div id="div4">
-		<h4>Dernières enchères</h4>	
-		<br>	
-		<!-- .card-deck créer des grilles de taille automatique suivant le nombre d'articles-->
-		<div class="card-deck">
-			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Caddie</h4>
-    				<p class="card-text">Prix enchères : inconnu</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
-  			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Pyjama</h4>
-    				<p class="card-text">Prix enchères : 100€</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
-  			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Caddie</h4>
-    				<p class="card-text">Prix enchères : inconnu</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
-  			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Pyjama</h4>
-    				<p class="card-text">Prix enchères : 100€</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
-  			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Caddie</h4>
-    				<p class="card-text">Prix enchères : inconnu</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
-  		</div>		
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs">
+  			<li class="nav-item">
+    			<a class="nav-link " data-toggle="tab" href="#description"><button data-toggle="collapse" data-target="#demo">Description</button></a>
+  			</li>
+		</ul>
+		<br>
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div class="tab-pane container active" id="description">
+				<div id="demo" class="collapse">
+				Le vendeur assume l'entière responsabilité de cette annonce.
+				<br>
+				Caractéristiques de l'objet
+				<br>
+				État :	Occasion : Objet ayant été utilisé. 
+				<br>
+				Catégorie:	Accessoire VIP
+				<br>
+				Marque:	Bla	
+			</div>
+			</div>
+		</div>
 	</div>
 	<br>
-	<br>
-	<!--5eme div : Nouveautés-->
+	<!--5eme div : produits similaires-->
 	<div id="div5">
-		<h4>Nouveautés</h4>	
+		<h4>Articles similaires</h4>	
 		<br>	
 		<!-- .card-deck créer des grilles de taille automatique suivant le nombre d'articles-->
 		<div class="card-deck">
@@ -232,9 +225,10 @@
   			</div>
   		</div>
 	</div>
-	
+	<br>
 	<hr>
-	<!--dernier div : pied de page-->
+	<br>
+	<!--6eme div : pied de page-->
 	<div id="div6">
 		<footer class="page-footer">
  			<div class="container">
@@ -262,5 +256,6 @@
 			</div>
 		</footer>
 	</div>
+
 </body>
 </html>

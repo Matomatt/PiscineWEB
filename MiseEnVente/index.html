@@ -9,23 +9,55 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-  	<script type="text/javascript">tinymce.init({selector:'#mytextarea'});</script>
+	<script src="//cdn.ckeditor.com/4.14.0/basic/ckeditor.js"></script>
+	
+	<script type="text/javascript">
+	$(document).ready(function () {
+		for (let i = 0; i < 10; i++) 
+		{
+			//adapté de cette réponse sur stackoverflow https://stackoverflow.com/a/14069481/12758551
+			document.getElementById("media"+i).onchange = function () {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					if ( getFileTypeFromFileReader(e.target.result) == "video" )
+					{
+						document.getElementById("srcvid"+i).src = e.target.result;
+						document.getElementById("vid"+i).style.display = 'block';
+						document.getElementById("img"+i).style.display = 'none';
+						document.getElementById("vid"+i).load();
+					}
+					else
+					{
+						document.getElementById("img"+i).src = e.target.result;
+						document.getElementById("img"+i).style.display = 'block';
+						document.getElementById("vid"+i).style.display = 'none';
+					}
+				};
+				reader.readAsDataURL(this.files[0]);
+			}; 
+		}
+	});
+
+	function getFileTypeFromFileReader(filename)
+	{
+		return filename.substring(filename.indexOf(':')+1, filename.indexOf('/')) || filename;
+	}
+	</script>
 </head>
 
 <body>
 	<div class="container">
-		<form action="traitementMEV.php" method="post">
+		<form action="traitementMEV.php" method="post" enctype="multipart/form-data">
 			<table class="container-fluid dead_center" border="1" style="border: 2px;">
 				<tr>
 				<td class="container-fluid" align="center">
 					<input class="col-lg-6" type="text" name="titre" placeholder="Titre de l'annonce">
 					<select class="col-lg-3" name="categories">
-						<option value="FerOuTres">Ferraile ou Tresor</option>
+						<option value="FerOuTres">Ferraille ou Tresor</option>
 						<option value="BonMusee">Bon pour le musee</option>
 						<option value="AccesVIP">Accessoire VIP</option>
 					</select>
@@ -33,39 +65,104 @@
 				</tr>
 				<tr>
 				<td>
-					<div class="col-lg-6" style="float: left"><img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png"></div>
-					<div class="col-lg-2" style="float: left">
-						<img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png">
-						<img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png">
-						<img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png">
+					<h6 style="margin-bottom: 1%; margin-top: 1%; margin-left: 2%">Images png, jpg, gif | videos mp4 | 100 Mo max au total</h6>
+					<div class="col-lg-6" style="float: left">
+						<img class="img-fluid" id="img0" src="../Images/default.png">
+						<video class="uploadedImage" id="vid0" style="display: none;" type="video/mp4" controls> <source id="srcvid0" type="video/mp4"> Video not supported by your browser </video>
+						<input type="file" name="media0" id="media0" accept="image/png,image/jpeg,image/jpg,image/gif,video/mp4">
 					</div>
-					<div class="col-lg-2" style="float: left">
-						<img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png">
-						<img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png">
-						<img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png">
+					<div class="col-lg-2 imgUploader" style="float: left">
+						<img class="uploadedImage"  src="../Images/default.png" id="img1">
+						<video class="uploadedImage" id="vid1" style="display: none;" type="video/mp4" controls> <source id="srcvid1" type="video/mp4"> Video not supported by your browser </video>
+						<input class="uploadButton" type="file" name="media1" id="media1" accept="image/png,image/jpeg,image/jpg,image/gif,video/mp4">
+						<img class="uploadedImage"  src="../Images/default.png" id="img2">
+						<video class="uploadedImage" id="vid2" style="display: none;" type="video/mp4" controls> <source id="srcvid2" type="video/mp4"> Video not supported by your browser </video>
+						<input class="uploadButton" type="file" name="media2" id="media2" accept="image/png,image/jpeg,image/jpg,image/gif,video/mp4">
+						<img class="uploadedImage"  src="../Images/default.png" id="img3">
+						<video class="uploadedImage" id="vid3" style="display: none;" type="video/mp4" controls> <source id="srcvid3" type="video/mp4"> Video not supported by your browser </video>
+						<input class="uploadButton" type="file" name="media3" id="media3" accept="image/png,image/jpeg,image/jpg,image/gif,video/mp4">
 					</div>
-					<div class="col-lg-2" style="float: left">
-						<img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png">
-						<img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png">
-						<img class="img-fluid" src="../Images/on1xlu57hsp6vq1ns9cfheji1r0r129c.png">
+					<div class="col-lg-2 imgUploader" style="float: left">
+						<img class="uploadedImage"  src="../Images/default.png" id="img4">
+						<video class="uploadedImage" id="vid4" style="display: none;" type="video/mp4" controls> <source id="srcvid4" type="video/mp4"> Video not supported by your browser </video>
+						<input class="uploadButton" type="file" name="media4" id="media4" accept="image/png,image/jpeg,image/jpg,image/gif,video/mp4">
+						<img class="uploadedImage"  src="../Images/default.png" id="img5">
+						<video class="uploadedImage" id="vid5" style="display: none;" type="video/mp4" controls> <source id="srcvid5" type="video/mp4"> Video not supported by your browser </video>
+						<input class="uploadButton" type="file" name="media5" id="media5" accept="image/png,image/jpeg,image/jpg,image/gif,video/mp4">
+						<img class="uploadedImage"  src="../Images/default.png" id="img6">
+						<video class="uploadedImage" id="vid6" style="display: none;" type="video/mp4" controls> <source id="srcvid6" type="video/mp4"> Video not supported by your browser </video>
+						<input class="uploadButton" type="file" name="media6" id="media6" accept="image/png,image/jpeg,image/jpg,image/gif,video/mp4">
+					</div>
+					<div class="col-lg-2 imgUploader" style="float: left">
+						<img class="uploadedImage"  src="../Images/default.png" id="img7">
+						<video class="uploadedImage" id="vid7" style="display: none;" type="video/mp4" controls> <source id="srcvid7" type="video/mp4"> Video not supported by your browser </video>
+						<input class="uploadButton" type="file" name="media7" id="media7" accept="image/png,image/jpeg,image/jpg,image/gif,video/mp4">
+						<img class="uploadedImage"  src="../Images/default.png" id="img8">
+						<video class="uploadedImage" id="vid8" style="display: none;" type="video/mp4" controls> <source id="srcvid8" type="video/mp4"> Video not supported by your browser </video>
+						<input class="uploadButton" type="file" name="media8" id="media8" accept="image/png,image/jpeg,image/jpg,image/gif,video/mp4">
+						<img class="uploadedImage"  src="../Images/default.png" id="img9">
+						<video class="uploadedImage" id="vid9" style="display: none;" type="video/mp4" controls> <source id="srcvid9" type="video/mp4"> Video not supported by your browser </video>
+						<input class="uploadButton" type="file" name="media9" id="media9" accept="image/png,image/jpeg,image/jpg,image/gif,video/mp4">
 					</div>
 				</td>
 				</tr>
 				<tr>
 					<td align="center">
-					<input type="file" name="file" multiple="" accept="image/*" data-w-onchange="startUpload|wc0-w0-LIST_PAGE_WRAPPER__-OCS_DESCRIBE_SECTION__-PHOTOS__-photosInput__-2">
+						<div class="col-lg-6" style="float: left">
+							<h5>Etat</h5>
+							<select name="etat">
+								<option value="neuf">Comme neuf</option>
+								<option value="bon">Bon etat</option>
+								<option value="use">Us�</option>
+							</select>
+						</div>
+						<div class="col-lg-6" style="float: left">
+							<h5>Marque</h5>
+							<input type="text" list="marque" name="marque"/>
+							<datalist id="marque">
+								<option>Rolex</option>
+								<option>Chevigon</option>
+								<option>Gucci</option>
+							</datalist>
+						</div>
 					</td>
 				</tr>
 				<tr>
 					<td align="center">
-						 <form method="post">
-							<textarea id="mytextarea">Hello, World!</textarea>
-						</form>
+						<textarea name="editor"></textarea>
+						<script> CKEDITOR.replace( 'editor' ); </script>
 					</td>
 				</tr>
 				<tr>
-					<td align="center">
-
+					<td align="left">
+						
+						<h5 style="margin-left:2%">Type de vente</h5>
+						<div class="col-lg-2" style="float: left"><input type="checkbox" name="achat_imm" value="achat_imm"> Achat Immediat</div>
+							
+						<div class="col-lg-2" style="float: left"><input type="checkbox" name="encheres" id="encheres" value="encheres" onclick="document.getElementById('offres').checked = false; document.getElementById('prixencheres').style.visibility = (document.getElementById('encheres').checked?'visible':'hidden')"> Encheres</div>
+							
+						<div class="col-lg-2" style="float: left"><input type="checkbox" name="offres" id="offres" value="offres" onclick="document.getElementById('encheres').checked = false; document.getElementById('prixencheres').style.visibility = 'hidden'"> Offres</div>
+						
+						<div style="margin-left:2%; margin-top:2%;">
+							<br>
+							<h5>Prix</h5>
+							<input type="number" name="prix" placeholder="Prix">�
+							<input type="number" name="prixencheres" id="prixencheres" placeholder="Depart des encheres �" style="visibility: hidden; margin-left:2%">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td align="left">
+						<div style="margin-left: 2%">
+							<h5>Mode d'envoi</h5>
+							<input type="text" list="modesenvoi" name="modeenvoi"/>
+							<datalist id="modesenvoi">
+								<option>Remise en main propre</option>
+								<option>Colissimo</option>
+								<option>DHL</option>
+							</datalist>
+							<input type="number" name="prixenvoi" placeholder="Prix de la livraison" style="margin-left:2%">�
+						</div>
 					</td>
 				</tr>
 				<tr>

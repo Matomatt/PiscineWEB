@@ -25,8 +25,6 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<!--external style sheet-->
 	<link href="styles.css" rel="stylesheet" type="text/css">
-	<!-- external java sheet-->
-	<script type="text/javascript" src="accueil.js"></script>
 
 	<title>Ebay ECE</title>
 </head>

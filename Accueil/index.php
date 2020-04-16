@@ -35,7 +35,7 @@
   		<nav class="navbar navbar-expand-sm bg-basic navbar-basic "> 
   			<!--placement logo-->
   			<a class="navbar-brand" href="#"> 
-    			<button><img class="img-fluid" id="logo" src="../Images/logo.png"></button>
+    			<button type="button" class="btn btn-light" onclick="location.href='../Accueil/index.php';"><img class="img-fluid" id="logo" src="../Images/logo.png"></button>
   			</a>
   			<!-- bouton explorer par catégories-->
   			<ul class="navbar-nav">
@@ -86,38 +86,37 @@
 		<!-- carroussel-->
 		<div id="carroussel" class="carousel slide container-fluid text-center" data-ride="carousel">
 			<!-- indicateur slide-->
-  			<ul class="carousel-indicators">
-    			<li data-target="#carroussel" data-slide-to="0" class="active"></li>
-    			<li data-target="#carroussel" data-slide-to="1"></li>
-  			</ul>
-  			<!--contenu slide du début-->
-  			<div class="carousel-inner">
-   				<div class="carousel-item active">
-      				<img class="img-fluid" src="../Images/caddie.jpg" alt="Pub">
-      				<!--ajout légende sur image-->
-      				<div class="carousel-caption">
-    					<h3>Logo</h3>
-    					<p>Commandez comme sur Ebay</p>
-  					</div>
-    			</div>
-    			<!--contenu slide-->
-    			<div class="carousel-item">
-      				<img class="img-fluid" src="../Images/caddie.jpg" alt="Pub">
-      				<!--ajout légende sur image-->
-      				<div class="carousel-caption">
-    					<h3>Caddie</h3>
-    					<p>Ajouter ce que vous voulez</p>
-  					</div>
-    			</div>
-  			</div>
-  			<!--contréle droit et gauche -->
-  			<a class="carousel-control-prev" href="#carroussel" data-slide="prev">
-    		<span class="carousel-control-prev-icon"></span>
-  			</a>
-  			<a class="carousel-control-next" href="#carroussel" data-slide="next">
-    		<span class="carousel-control-next-icon"></span>
-  			</a>
-
+  		<ul class="carousel-indicators">
+    		<li data-target="#carroussel" data-slide-to="0" class="active"></li>
+    		<li data-target="#carroussel" data-slide-to="1"></li>
+  		</ul>
+  		<!--contenu slide du début-->
+  		<div class="carousel-inner">
+   			<div class="carousel-item active">
+      		<img class="img-fluid" src="../Images/caddie.jpg" alt="Pub">
+      		<!--ajout légende sur image-->
+      		<div class="carousel-caption">
+    				<h3>Logo</h3>
+    				<p>Commandez comme sur Ebay</p>
+  				</div>
+    		</div>
+    		<!--contenu slide-->
+    		<div class="carousel-item">
+      		<img class="img-fluid" src="../Images/caddie.jpg" alt="Pub">
+      		<!--ajout légende sur image-->
+      		<div class="carousel-caption">
+    				<h3>Caddie</h3>
+    				<p>Ajouter ce que vous voulez</p>
+  				</div>
+    		</div>
+  		</div>
+  		<!--contréle droit et gauche -->
+  		<a class="carousel-control-prev" href="#carroussel" data-slide="prev">
+    	<span class="carousel-control-prev-icon"></span>
+  		</a>
+  		<a class="carousel-control-next" href="#carroussel" data-slide="next">
+    	<span class="carousel-control-next-icon"></span>
+  		</a>
 		</div>
 	</div>
 	<br>
@@ -126,54 +125,49 @@
 	<div id="div4">
 		<h4>Dernières enchères</h4>	
 		<br>	
-		<!-- .card-deck créer des grilles de taille automatique suivant le nombre d'articles-->
-		<div class="card-deck">
-			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Caddie</h4>
-    				<p class="card-text">Prix enchères : inconnu</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
-  			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Pyjama</h4>
-    				<p class="card-text">Prix enchères : 100€</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
-  			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Caddie</h4>
-    				<p class="card-text">Prix enchères : inconnu</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
-  			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Pyjama</h4>
-    				<p class="card-text">Prix enchères : 100€</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
-  			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Caddie</h4>
-    				<p class="card-text">Prix enchères : inconnu</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
-  		</div>		
+    <!--.card-deck créer des grilles de taille automatique suivant le nombre d'articles-->
+    <div class="card-deck">
+
+      <!-- articles-->
+      <?php
+        
+        $db_handle = mysqli_connect('localhost', 'root', '');
+        $db_found = mysqli_select_db($db_handle, 'ecebay');
+
+        if (!$db_found) { die('Database not found'); }
+
+        $query = "SELECT * FROM items";
+        $result = mysqli_query($db_handle, $query);
+
+        if (!$result)
+        {
+          die('Couldn\'t find table');
+        }
+                      
+        if (mysqli_num_rows($result) < 1)
+        {
+          die('Empty');
+        }
+
+        while($row = $result->fetch_assoc()) {
+          if($row["Type_de_vente_1"]=="encheres")
+          {
+            echo '<div class="card bg-basic">'.
+                    $row["ID_Medias"].
+                    '<div class="card-body text-center">
+                      <h4 class="card-title">'.
+                      $row["Nom"].
+                      '</h4>
+                      <p class="card-text">Prix Enchères : '.
+                      $row["Prix_Encheres"].
+                      '€</p>
+                      <a href="../Produit/index.html" class="btn btn-primary">En savoir plus</a>
+                    </div>
+                  </div>';
+          }
+        }               
+      ?>
+  	</div>				
 	</div>
 	<br>
 	<br>
@@ -181,53 +175,28 @@
 	<div id="div5">
 		<h4>Nouveautés</h4>	
 		<br>	
-		<!-- .card-deck cr�er des grilles de taille automatique suivant le nombre d'articles-->
+		<!-- .card-deck créer des grilles de taille automatique suivant le nombre d'articles-->
 		<div class="card-deck">
 			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Caddie</h4>
-    				<p class="card-text">Prix : inconnu</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
-  			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Pyjama</h4>
-    				<p class="card-text">Prix : 100€</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
-  			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Caddie</h4>
-    				<p class="card-text">Prix : inconnu</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
-  			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Pyjama</h4>
-    				<p class="card-text">Prix : 100€</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
-  			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Caddie</h4>
-    				<p class="card-text">Prix : inconnu</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
+      <?php
+          while($row = $result->fetch_assoc()) {
+            if($row["Type_de_vente_1"]=="achat_imm")
+            {
+              echo '<div class="card bg-basic">'.
+                      $row["ID_Medias"].
+                      '<div class="card-body text-center">
+                        <h4 class="card-title">'.
+                        $row["Nom"].
+                        '</h4>
+                        <p class="card-text">Prix : '.
+                        $row["Prix"].
+                        '€</p>
+                        <a href="../Produit/index.html" class="btn btn-primary">En savoir plus</a>
+                      </div>
+                    </div>';
+            }
+          }     
+        ?>    
   		</div>
 	</div>
 	

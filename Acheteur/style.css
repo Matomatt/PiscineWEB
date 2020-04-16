@@ -1,0 +1,136 @@
+
+.leftnavbar {
+    
+    height: 500px;
+    width: 200px;
+    border-style: groove;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    
+    border-collapse: collapse;
+  }
+  
+  .leftnavbar a {
+    padding: 10px 6px 4px 32px;
+    text-decoration: none;
+    font : Helvetica;
+    font-size: 12px;
+    color: #818181;
+    display: block;
+    text-align: justify;
+  }
+
+
+.leftnavbartop{
+    
+    position: fixed;
+    
+    background-color: #111;
+    border-collapse: collapse;
+  }
+  .leftnavbartop a{
+    padding: 6px 6px 6px 32px;
+    font : Helvetica;
+    font-size: 13px;
+    display: block;
+    text-align: center;
+}
+.leftnavbar p{
+    padding: 6px 6px 6px 32px;
+    text-decoration: none;
+    font : Helvetica;
+    font-size: 13px;
+    color: #000;
+    display: block;
+    text-align: center;
+}
+
+.topright{
+    font-size: 40px;
+
+    margin-top: 2%;
+} 
+
+.wishlist, .enchere{
+    margin-left: 5%;
+    border-style:groove;
+     width: 400px;
+    height:400px;
+    text-align: center;
+    overflow-x: hidden;
+    overflow-x: auto;
+
+}
+
+.wishlist table img{
+    max-width: 100px;
+}
+
+.panierachat{
+    width: 650px;
+    height: 200px;
+    margin-left: 10%;
+    margin-top: 10%;
+    
+}
+
+.panierachat img {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    width: 150px; 
+    height: 150px; 
+    object-fit: cover; 
+}
+
+.panierachat .prix{
+    margin: 15px;
+}
+
+.panierachat tr{
+
+    border-style: groove;
+    border-color: #A7A7A7;
+}
+
+.payement{
+    margin-top: 20%;
+    border-style: groove;
+    margin-left: 5%;
+}
+
+/*HISTORIQUE */
+.achatpasse img {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    width: 150px; 
+    height: 150px; 
+    object-fit: cover; 
+    }
+
+
+
+.achatpasse button{
+    width: 80px;
+    margin-right: 5px;
+}
+
+.achatpasse{
+    width: 650px;
+    height: 200px;
+
+    
+}
+
+.achatpasse .prix{
+    margin: 15px;
+}
+.achatpasse tr{
+
+    border-style: groove;
+    border-color: #A7A7A7;
+}

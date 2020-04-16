@@ -1,0 +1,40 @@
+#logo{
+	width:170px;
+}
+.navbar-brand{
+	margin: 30px;
+}
+.navbar-nav{
+	margin-right: 70px;
+}
+.custom-select{
+	margin-right: 10px;
+}
+.form-inline{
+	margin-top: 10px;
+}
+#caddie{
+	width:50px;
+}
+.btn-light{
+	margin-left: 30px;
+	margin-bottom: 20px; 
+}
+hr{
+	border: 1px solid lightgrey;
+}
+#div3 img{
+	width: 300px;
+}
+#carroussel{
+	width:300px;
+}
+.card-body a{
+	color:white;
+}
+.wrapper{
+	border: 1px solid lightgrey;
+}
+h4{
+	text-align: center;
+}

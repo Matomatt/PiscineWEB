@@ -1,0 +1,133 @@
+
+
+.leftnavbar {
+    
+    height: 500px;
+    width: 200px;
+    border-style: groove;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    
+    border-collapse: collapse;
+  }
+  
+  .leftnavbar a {
+    padding: 10px 6px 4px 32px;
+    text-decoration: none;
+    font : Helvetica;
+    font-size: 12px;
+    color: #818181;
+    display: block;
+    text-align: justify;
+  }
+
+
+.leftnavbartop{
+    
+    position: fixed;
+    
+    background-color: #111;
+    border-collapse: collapse;
+  }
+  .leftnavbartop a{
+    padding: 6px 6px 6px 32px;
+    font : Helvetica;
+    font-size: 13px;
+    display: block;
+    text-align: center;
+}
+.leftnavbar p{
+    padding: 6px 6px 6px 32px;
+    text-decoration: none;
+    font : Helvetica;
+    font-size: 13px;
+    color: #000;
+    display: block;
+    text-align: center;
+}
+
+.topright{
+    font-size: 40px;
+
+    margin-top: 2%;
+} 
+
+.banniere {
+   
+    border-style: groove;
+     background-image: url(../Images/bubble.jpg) ;
+     height: 230px;
+     opacity: 0.9;
+     z-index: 1;
+ }
+
+ .gauche{
+    padding: 15px 4px 4px 34px;
+    
+    width: 210px;
+    size: 220px;
+    overflow-wrap : break-word; 
+    float: left;
+    z-index: 2;
+    }
+    
+.gauche p, .droite p{
+        padding: 7px 4px 4px 3px;
+        font-size: 13px;
+        }
+    
+.droite{
+        padding: 15px 4px 4px 34px;
+    margin-left: 69%;
+    z-index: 3;
+    
+    overflow-wrap : break-word; 
+    }
+    
+.opacite{
+    margin-left: 10%;
+    margin-top: 5%;
+    background-color: white;
+    position: absolute;
+    height: 250px;
+    width: auto;
+    border-style: groove;
+    border-width: 1px;
+    border-color: #DDDDDD; 
+    opacity: 0.8;
+}
+    
+.avatar{
+      margin-top: 5%;}
+
+.ph {
+    max-width: 20px;
+}
+
+
+
+.PublierItem , .AddSupprItem{
+    margin-left: 5%;
+    border-style:groove;
+     width: 400px;
+    height:200px;
+    text-align: center;
+}
+
+
+
+.PublierItem h3, .AddSupprItem h3{
+    text-align: center;
+    margin-top: 5px;
+    margin-left: 20%;
+
+}
+
+
+.PublierItem button, .AddSupprItem button{
+    margin-top: 10%;
+    margin-left: 20%;
+}

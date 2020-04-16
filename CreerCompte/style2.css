@@ -1,0 +1,50 @@
+.connexion{
+
+    box-shadow: 0px 2px 6px 0px #000000;
+    padding-top: 20px;
+    border-radius: 0px;
+    margin-top : 5%;
+
+}
+
+
+.creercompte{
+
+    text-align : center;
+    box-shadow: 0px 2px 6px 0px #000000;
+    margin-top: 5%;
+}
+
+.creercompte input{
+
+    padding: 10px 12px 10px 12px;
+    width: 300px;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    margin-bottom: 5px;
+    margin-top: 2px;
+    box-sizing: border-box;
+    color: #2C3E50;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+input{
+
+    padding: 10px 12px 10px 12px;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    margin-bottom: 5px;
+    margin-top: 2px;
+    width: 50%;
+    box-sizing: border-box;
+    color: #2C3E50;
+    font-size: 14px;
+    letter-spacing: 1px
+}
+
+::placeholder {
+    color: #BDBDBD;
+    opacity: 1;
+    font-weight: 300
+}

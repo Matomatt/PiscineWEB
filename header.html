@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html>
+
+<!-- sources : 
+	https://www.ebay.fr/ : style de la page
+	https://www.w3schools.com/bootstrap4/bootstrap_jumbotron.asp : fond gris
+	https://www.w3schools.com/bootstrap4/bootstrap_button_groups.asp : menu défilant
+	https://www.w3schools.com/bootstrap4/bootstrap_navbar.asp : barre de recherche
+-->
 <head>
 	<!--accents-->
 	<meta charset="UTF-8">
@@ -14,36 +21,10 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	
-	<style>
-		.navbar-brand{
-			margin: 30px;
-		}
-		#logo{
-			width:170px;
-		}
-		.navbar-nav{
-			margin-right: 70px;
-		}
-		.form-inline{
-			margin-top: 10px;
-		}
-		.custom-select{
-			margin-right: 10px;
-		}
-		.btn-light{
-			margin-left: 30px;
-			margin-bottom: 20px; 
-		}
-		#caddie{
-			width:50px;
-		}
-		hr{
-			border: 1px solid lightgrey;
-		}
-	</style>
+	<!--external style sheet-->
+	<link href="styles.css" rel="stylesheet" type="text/css">
 
-	<title>Header</title>
+	<title>Ebay ECE</title>
 </head>
 <body>
 	<!-- 1er div : barre de navigation avec bouttons et barre de recherche-->
@@ -52,7 +33,7 @@
   		<nav class="navbar navbar-expand-sm bg-basic navbar-basic "> 
   			<!--placement logo-->
   			<a class="navbar-brand" href="#"> 
-    			<img class="img-fluid" id="logo" src="../img/logo.png">
+    			<button><img class="img-fluid" id="logo" src="../Images/logo.png"></button>
   			</a>
   			<!-- bouton explorer par catégories-->
   			<ul class="navbar-nav">
@@ -67,7 +48,7 @@
     			</li>
   			</ul>
   			<!--barre de recherche et boutons associés-->
-  			<form class="form-inline" action="/accueil.php">
+  			<form class="form-inline" action="../ResultatsDeRecherche/index.php" method="post">
   				<div class="input-group mb-3">
   					<!-- barre de recherche-->
     				<input class="form-control mr-sm-2" type="text" placeholder="Rechercher" name="rechercher">
@@ -82,11 +63,8 @@
     				<button class="btn btn-primary" type="submit">Rechercher</button>
     			</div>
     			<!-- boutons de panier et de connexion-->
-    			<button type="button" class="btn btn-light"><img class="img-fluid" id="caddie" src="../img/caddie.jpg"></button>
-    			<button type="button" class="btn btn-light" onClick="connexion()">Connexion</button>
+    			<button type="button" class="btn btn-light"><img class="img-fluid" id="caddie" src="../Images/caddie.jpg" onclick="location.href='../Acheteur/panier.html';"></button>
+    			<button type="button" class="btn btn-light" onclick="location.href='../CreerCompte/connexion.html';">Connexion</button>
   			</form>
 		</nav>
 	</div>
-	<hr>
-</body>
-</html>

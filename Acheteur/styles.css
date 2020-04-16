@@ -1,0 +1,26 @@
+#div1{
+	border : 2px solid lightgrey;
+	background-color: lightgrey;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+#div1 h1{
+	text-align: center;
+}
+table{
+	margin-left: 100px;
+}
+table, td{
+	border: 1px solid black;
+  	border-collapse: collapse;
+}
+td {
+  padding: 15px;
+  text-align: center;
+}
+hr{
+	border: 1px solid lightgrey;
+}
+.tdText{
+	background-color: lightgrey;
+}

@@ -1,0 +1,51 @@
+.banniere {
+   
+    border-style: groove;
+     background-image: url(../Images/bubble.jpg) ;
+     height: 230px;
+     opacity: 0.9;
+     z-index: 1;
+ }
+
+ .gauche{
+    padding: 15px 4px 4px 34px;
+    
+    width: 210px;
+    size: 220px;
+    overflow-wrap : break-word; 
+    float: left;
+    z-index: 2;
+    }
+    
+.gauche p, .droite p{
+        padding: 7px 4px 4px 3px;
+        font-size: 13px;
+        }
+    
+.droite{
+        padding: 15px 4px 4px 34px;
+    margin-left: 69%;
+    z-index: 3;
+    
+    overflow-wrap : break-word; 
+    }
+    
+.opacite{
+    margin-left: 10%;
+    margin-top: 5%;
+    background-color: white;
+    position: absolute;
+    height: 250px;
+    width: auto;
+    border-style: groove;
+    border-width: 1px;
+    border-color: #DDDDDD; 
+    opacity: 0.8;
+}
+    
+.avatar{
+      margin-top: 5%;}
+
+.ph {
+    max-width: 20px;
+}

@@ -23,7 +23,7 @@
 			document.getElementById("media"+i).onchange = function () {
 				var reader = new FileReader();
 				reader.onload = function (e) {
-					if ( getFileTypeFromFileReader(e.target.result) == "video" )
+					if ( getFileTypeFromFileReader(e.target.result) == "video" && i!=0)
 					{
 						document.getElementById("srcvid"+i).src = e.target.result;
 						document.getElementById("vid"+i).style.display = 'block';
@@ -68,8 +68,7 @@
 					<h6 style="margin-bottom: 1%; margin-top: 1%; margin-left: 2%">Images png, jpg, gif | videos mp4 | 100 Mo max au total</h6>
 					<div class="col-lg-6" style="float: left">
 						<img class="img-fluid" id="img0" src="../Images/default.png">
-						<video class="uploadedImage" id="vid0" style="display: none;" type="video/mp4" controls> <source id="srcvid0" type="video/mp4"> Video not supported by your browser </video>
-						<input type="file" name="media0" id="media0" accept="image/png,image/jpeg,image/jpg,image/gif,video/mp4">
+						<input type="file" name="media0" id="media0" accept="image/png,image/jpeg,image/jpg,image/gif"> <br>(pas de video pour l'image principale)
 					</div>
 					<div class="col-lg-2 imgUploader" style="float: left">
 						<img class="uploadedImage"  src="../Images/default.png" id="img1">

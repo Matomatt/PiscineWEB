@@ -163,9 +163,18 @@
 							
 							if ($item["Type_de_vente_1"] == "encheres" || $item["Type_de_vente_2"] == "encheres")
 							{
+							    //<button class="btn btn-primary navbar-toggler" data-toggle="collapse" data-target="#encherir" onclick="location.href=\'../Encheres/index.php?id=' . $item["ID"] . '&e=' . $item["Prix_Encheres"] . '\';">Enchérir</button></td>
 								echo '<tr>
-										<td><button class="btn btn-primary" onclick="location.href=\'../Encheres/index.php?id=' . $item["ID"] . '\';">Enchérir</button></td>
-									</tr>';
+										<td><button class="btn btn-primary toggler" data-toggle="collapse" data-target="#encherir">Enchérir</button>
+        								    
+                                        <form method="post" action="encherir.php?id1='. $id .'&id2='. 1 .'" class="collapse" id="encherir" style="box-shadow: 0px 2px 6px 0px #000000;">
+                                        	<h4>Enchérir</h4>
+                                        	Enchère maximale actuelle : ' . $item["Prix_Encheres"] . '<br>
+											Votre enchère : <input type="number" name="enchere" min="'. $item["Prix_Encheres"] .'"></input>€ <br><br>
+                                            <button type="submit">Valider</button>
+                                    	</from>
+									</td>
+                                </tr>';
 							}
 							if ($item["Type_de_vente_1"] == "offres" || $item["Type_de_vente_2"] == "offres")
 							{

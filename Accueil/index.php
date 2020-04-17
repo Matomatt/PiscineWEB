@@ -91,7 +91,7 @@
     		<li data-target="#carroussel" data-slide-to="1"></li>
   		</ul>-->
 
-      <div class="carousel-inner">
+      <div class="carousel-inner" style="background-color: lightgrey;">
         <?php
           
           $db_handle = mysqli_connect('localhost', 'root', '');
@@ -123,7 +123,7 @@
             {
               /*affichage 1ere image*/
               echo '<div class="carousel-item active">
-                      <img class="img-fluid" alt="Article" style="width: 26em; height: 23em; object-fit:contain; background: black;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">
+                      <img class="img-fluid" alt="Article" style="width: 26em; height: 23em; object-fit:contain; background: lightgrey;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">
                     </div>';
               $first = 1;
             }
@@ -132,7 +132,7 @@
             {
               /*affichage autres images*/
               echo '<div class="carousel-item">
-                      <img class="img-fluid" alt="Article" style="width: 26em; height: 23em; object-fit: contain; background: black;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">
+                      <img class="img-fluid" alt="Article" style="width: 26em; height: 23em; object-fit: contain; background: lightgrey;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">
                     </div>';
             }             
           }               
@@ -142,7 +142,7 @@
   		<a class="carousel-control-prev" href="#carroussel" data-slide="prev">
     	<span class="carousel-control-prev-icon"></span>
   		</a>
-  		<a class="carousel-control-next" href="#carroussel" data-slide="next">
+  		<a class="carousel-control-next" href="#carroussel" data-slide="next" >
     	<span class="carousel-control-next-icon"></span>
   		</a>
 		</div>
@@ -183,7 +183,7 @@
             echo '<div class="card bg-basic">';
             /*on récupère les données de la table medias*/
             $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
-            echo '<img class="img-fluid" style="width: auto; height: 16em; object-fit: contain; background: black;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">';
+            echo '<img class="img-fluid" style="width: auto; height: 16em; object-fit: contain; background: lightgrey;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">';
             echo '<div class="card-body text-center">
                     <h4 class="card-title">'.$row["Nom"].'</h4>
                     <p class="card-text">Prix : '.$row["Prix"].'€</p>
@@ -232,7 +232,7 @@
             echo '<div class="card bg-basic">';
             /*on récupère les données de la table medias*/
             $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
-            echo '<img class="img-fluid" style="width: auto; height: 16em; object-fit: contain; background: black;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">';
+            echo '<img class="img-fluid" style="width: auto; height: 16em; object-fit: contain; background: lightgrey;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">';
             echo '<div class="card-body text-center">
                     <h4 class="card-title">'.$row["Nom"].'</h4>
                     <p class="card-text">Prix : '.$row["Prix"].'€</p>

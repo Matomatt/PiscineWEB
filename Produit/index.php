@@ -1,3 +1,7 @@
+<?php
+	include '../header.php';
+?>
+
 <!DOCTYPE html>
 <html>
 <!-- sources : 
@@ -27,54 +31,13 @@
 	<title>Page Produit</title>
 </head>
 <body>
-	<!-- 1er div : barre de navigation avec bouttons et barre de recherche-->
-	<div id="div1"> 
-		<!--barre de navigation-->
-  		<nav class="navbar navbar-expand-sm bg-basic navbar-basic "> 
-  			<!--placement logo-->
-  			<a class="navbar-brand" href="#"> 
-    			<img class="img-fluid" id="logo" src="../Images/logo.png">
-  			</a>
-  			<!-- bouton explorer par catégories-->
-  			<ul class="navbar-nav">
-        	    <li class="nav-item dropdown">
-      				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Explorer par catégories
-      				</a>
-      				<div class="dropdown-menu">
-        				<a class="dropdown-item" href="#">Ferraille/Trésor</a>
-        				<a class="dropdown-item" href="#">Bon pour le Musée</a>
-        				<a class="dropdown-item" href="#">Accessoire VIP</a>
-      				</div>
-    			</li>
-  			</ul>
-  			<!--barre de recherche et boutons associés-->
-  			<form class="form-inline" action="/accueil.php">
-  				<div class="input-group mb-3">
-  					<!-- barre de recherche-->
-    				<input class="form-control mr-sm-2" type="text" placeholder="Rechercher" name="rechercher">
-    				<!-- bouton catégories dans recherche-->
-  					<select class="custom-select">
-   						<option selected>Toutes les catégories</option>
-    					<option value="ferraille/tresor">Ferraille/Trésor</option>
-    					<option value="musee">Bon pour le Musée</option>
-    					<option value="vip">Accessoire VIP</option>
-  					</select>
-  					<!-- bouton pour rechercher-->
-    				<button class="btn btn-primary" type="submit">Rechercher</button>
-    			</div>
-    			<!-- boutons de panier et de connexion-->
-    			<button type="button" class="btn btn-light"><img class="img-fluid" id="caddie" src="../Images/caddie.jpg"></button>
-    			<button type="button" class="btn btn-light" onClick="connexion()">Connexion</button>
-  			</form>
-		</nav>
-	</div>
 	<hr>
-	<!-- 2eme div : retour aux résultats-->
+	<!-- 2eme div : retour aux rï¿½sultats-->
 	<div id="div2">
-		<h6><a href="#"><- Retour aux résultats</a></h6>
+		<h6><a href="javascript:history.back()"><- Retour aux rÃ©sultats</a></h6>
 	</div>
 	<br>
-	<!-- 3eme div : présentation produits et info vendeur-->
+	<!-- 3eme div : prï¿½sentation produits et info vendeur-->
 	<div id="div3">
 		<h4>Article</h4>	
 		<br>
@@ -90,17 +53,35 @@
 	    					<li data-target="#carroussel" data-slide-to="0" class="active"></li>
 	    					<li data-target="#carroussel" data-slide-to="1"></li>
 	  					</ul>
-			  			<!--contenu slide du début-->
+			  			<!--contenu slide du dï¿½but-->
 			  			<div class="carousel-inner">
-			   				<div class="carousel-item active">
-			      				<img class="img-fluid" src="../Images/caddie.jpg" alt="Article">
-			    			</div>
-			    			<!--contenu slide-->
-			    			<div class="carousel-item">
-			      				<img class="img-fluid" src="../Images/caddie.jpg" alt="Article">
-			    			</div>
+
+						<?php
+							$db_handle = mysqli_connect('localhost', 'root', '');
+							$db_found = mysqli_select_db($db_handle, 'ecebay');
+
+							if (!$db_found) { die('Database not found'); }
+
+							$id = isset($_GET["id"])?$_GET["id"]:"";
+							$first = 0;
+							$imgs = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $id . " ORDER BY indx ASC;");
+							while($img = $imgs->fetch_assoc()) {
+								if ($first == 0)
+								{
+									echo '<div class="carousel-item active">
+			      							<img class="img-fluid" src="../UploadedContent/' . $img["File"] . '" alt="photo">
+										</div>';
+									$first = 1;
+								}
+								else
+									echo '<div class="carousel-item">
+			      							<img class="img-fluid" src="../UploadedContent/' . $img["File"] . '" alt="photo">
+										</div>';
+							}
+						?>
+
 			  			</div>
-			  			<!--contrôle droit et gauche -->
+			  			<!--contrï¿½le droit et gauche -->
 			  			<a class="carousel-control-prev" href="#carroussel" data-slide="prev">
 			    		<span class="carousel-control-prev-icon"></span>
 			  			</a>
@@ -109,32 +90,52 @@
 			  			</a>
 					</div>
 				</div>
-				<!--Présentation produit, vendeur, son état et mode de paiment-->
+				<!--Prï¿½sentation produit, vendeur, son ï¿½tat et mode de paiment-->
 	  			<div class="col-6">
 					<table>
-						<tr>		
-							<th>Article <button class="btn btn-danger" type="submit">&#x2661;</button>(6061 &#x2661;)</th>
+						<?php
+							$db_handle = mysqli_connect('localhost', 'root', '');
+							$db_found = mysqli_select_db($db_handle, 'ecebay');
+
+							if (!$db_found) { die('Database not found'); }
+
+							$id = isset($_GET["id"])?$_GET["id"]:"";
+							$first = 0;
+							$item = mysqli_query($db_handle, "SELECT * FROM items WHERE ID=" . $id . ";")->fetch_assoc();
+
+							$nbLikes = mysqli_query($db_handle, 'SELECT COUNT( * ) as "Number of Rows" FROM wishlists WHERE ID_Item = ' . $id . ';')->fetch_assoc()["Number of Rows"];
+
+							echo '<tr>
+									<th>'. $item["Nom"] . '<br>
+									<button class="btn btn-danger" type="submit"> &#x2661; </button> ('. $nbLikes . ' &#x2661;)</th>
+								</tr>';
+
+							$boutique = mysqli_query($db_handle, 'SELECT Boutique FROM vendeurs WHERE ID="' . $item["ID_Vendeur"] . '";')->fetch_assoc()["Boutique"];
+							$moyenneNotes = mysqli_query($db_handle, 'SELECT AVG( Note ) as "moyenne" FROM notes WHERE ID_Vendeur = ' . $item["ID_Vendeur"] . ';')->fetch_assoc()["moyenne"];
+							
+							echo '<tr>
+									<td>Vendu par : <a href="../Vendeur/pagevendeur.html?id='. $item["ID_Vendeur"] . '"> ' . $boutique . '</a> ('. (int)$moyenneNotes/2 . '&#9733;)</td>
+								</tr>';
+						?>
+						
+						
+						<tr>
+							<td>Etat : Occasion</td>
 						</tr>
 						<tr>
-							<td>Vendu par : <a href="#">Mich3456</a> (6061 &#9733;)</td>
+							<td>QuantitÃ© : <input type="number" name="qtï¿½"></td>
 						</tr>
 						<tr>
-							<td>État : Occasion</td>
+							<td>Prix : 100â‚¬</td>
 						</tr>
 						<tr>
-							<td>Quantité : <input type="number" name="qté"></td>
-						</tr>
-						<tr>
-							<td>Prix : 100€</td>
-						</tr>
-						<tr>
-							<td><button class="btn btn-primary" type="submit">Achat immédiat</button></td>
+							<td><button class="btn btn-primary" type="submit">Achat immÃ©diat</button></td>
 						</tr>
 						<tr>
 							<td><a href="#">Ajouter au panier</a></td>
 						</tr>
 						<tr>
-							<td><button class="btn btn-primary" type="submit">Enchérir</button></td>
+							<td><button class="btn btn-primary" type="submit">EnchÃ©rir</button></td>
 						</tr>
 						<tr>
 							<td><a href="#">Faire une offre</a></td>
@@ -155,13 +156,13 @@
 				<div class="tab-content">
 					<div class="tab-pane container active" id="description">
 						<div id="demo" class="collapse">
-							Le vendeur assume l'entière responsabilité de cette annonce.
+							Le vendeur assume l'entiÃ¨re responsabilitÃ© de cette annonce.
 							<br>
-							Caractéristiques de l'objet
+							CaractÃ©ristiques de l'objet
 							<br>
-							État :	Occasion : Objet ayant été utilisé. 
+							Etat :	Occasion : Objet ayant Ã©tÃ© utilisÃ©. 
 							<br>
-							Catégorie:	Accessoire VIP
+							CatÃ©gorie:	Accessoire VIP
 							<br>
 							Marque:	Bla	
 						</div>
@@ -177,7 +178,7 @@
 	<div id="div5">
 		<h4>Articles similaires</h4>	
 		<br>	
-		<!-- .card-deck créer des grilles de taille automatique suivant le nombre d'articles-->
+		<!-- .card-deck crï¿½er des grilles de taille automatique suivant le nombre d'articles-->
 		<div class="card-deck">
 			<!--un article-->
   			<div class="card bg-basic">
@@ -193,7 +194,7 @@
   				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
     			<div class="card-body text-center">
       				<h4 class="card-title">Pyjama</h4>
-    				<p class="card-text">Prix : 100€</p>
+    				<p class="card-text">Prix : 100ï¿½</p>
     				<a href="#" class="btn btn-primary">En savoir plus</a>
     			</div>
   			</div>
@@ -211,7 +212,7 @@
   				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
     			<div class="card-body text-center">
       				<h4 class="card-title">Pyjama</h4>
-    				<p class="card-text">Prix : 100€</p>
+    				<p class="card-text">Prix : 100ï¿½</p>
     				<a href="#" class="btn btn-primary">En savoir plus</a>
     			</div>
   			</div>
@@ -231,31 +232,9 @@
 	<br>
 	<!--6eme div : pied de page-->
 	<div id="div6">
-		<footer class="page-footer">
- 			<div class="container">
-				<div class="row">
-					<div class="col-lg-8 col-md-8 col-sm-12">
-						<h6 class="text-uppercase font-weight-bold">Information additionnelle</h6>
-						<p>
-						Le site web ECEbay est un projet piscine étudiant fait lors de la semaine piscine d'ING3 Promo 2022 dans le cadre du module de Web Dynamique.
-						</p>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-12">
-						<h6 class="text-uppercase font-weight-bold">Contact</h6>
-						<p>
-						37, quai de Grenelle, 75015 Paris, France <br>
-						info@webDynamique.ece.fr <br>
-						+33 01 02 03 04 05 <br>
-						+33 01 03 02 05 04
-			 			</p>
-			 		</div>
- 				</div>
- 				<br>
-				<div class="footer-copyright text-center">
-					<small>&copy; 2020 Copyright | Droit d'auteur: Bocher Célia, Cadot Léonie, Gaucher Matthieu</small>
-				</div>
-			</div>
-		</footer>
+		<?php
+			include '../footer.html';
+		?>
 	</div>
 
 </body>

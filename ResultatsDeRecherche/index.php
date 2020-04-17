@@ -1,20 +1,28 @@
 <?php
-		include './../header.html';
+	echo '<div class="container">';
+	include '../header.php';
+	echo '</div>';
 ?>
 
 <html>
 
 <head>
 	<title>ECEbay</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--accents-->
+	<meta charset="UTF-8">
+	<!--reseting my viewport, for making my website responsive-->
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<!-- importing bootstrap-->
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">s
+	<!--external style sheet-->
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
-	<script type="text/javascript">
-	</script>
 </head>
 
 <body>
@@ -29,14 +37,11 @@
 						<h4>Filtres</h4>
 						<table>
 							<?php
-								if (isset($_POST["rechercher"]))
-								{
-									echo '<input type="text" name="rechercher" value="' .  $_POST["rechercher"] . '" style="visibility=\'hidden\'">';
-								}
+							
+								/*if (isset($_POST["rechercher"]))
+									echo '<input type="text" name="rechercher" value="' .  $_POST["rechercher"] . '" style="display:none">';
 								else
-								{
-									echo '<input type="text" name="rechercher" value="" >';
-								}
+									echo '<input type="text" name="rechercher" value="" >';*/
 								
 								echo '<tr>
 									<td>
@@ -61,6 +66,7 @@
 									<td id="categorieList">
 										<h6>Categories</h6>';
 								
+										$categorie = (isset($_GET["categorie"])?htmlspecialchars($_GET["categorie"]):(isset($_POST["categorie"])?$_POST["categorie"]:"none"));
 									
 										$db_handle = mysqli_connect('localhost', 'root', '');
 										$db_found = mysqli_select_db($db_handle, 'ecebay');
@@ -81,7 +87,7 @@
 										}
 
 										while($row = $result->fetch_assoc()) {
-											echo '<input type="checkbox" value="true" name="' . $row["ID"] . '" ' . (isset($_POST[$row["ID"]])?(($_POST[$row["ID"]] == "true")? 'checked="checked"':''):'') . '> ' . $row["Nom"] . ' <br>';
+											echo '<input type="checkbox" value="true" name="' . $row["ID"] . '" ' . ($categorie == $row["ID"]?'checked="checked"':(isset($_POST[$row["ID"]])?(($_POST[$row["ID"]] == "true")? 'checked="checked"':''):'')) . '> ' . $row["Nom"] . ' <br>';
 										}
 
 								echo '</td>
@@ -105,7 +111,8 @@
 
 						if (isset($_POST["rechercher"]))
 						{
-								$query = $query . ' AND ( Nom LIKE \'' . $_POST["rechercher"] . '\' OR Description LIKE \'' . $_POST["rechercher"] . '\')';
+							if ($_POST["rechercher"] != "")
+								$query = $query . ' AND ( Nom LIKE \'%' . $_POST["rechercher"] . '%\' OR Description LIKE \'%' . $_POST["rechercher"] . '%\')';
 						}
 
 						if (isset($_POST["bt"]))
@@ -127,31 +134,40 @@
 							}
 							
 						}
-						
-						$queryCategories = "SELECT * FROM categories";
-						$resultCategories = mysqli_query($db_handle, $queryCategories);
 
-						if ($resultCategories)
+						$categorie = (isset($_GET["categorie"])?htmlspecialchars($_GET["categorie"]):(isset($_POST["categorie"])?$_POST["categorie"]:"none"));
+
+						if ($categorie != "none")
 						{
-							if (mysqli_num_rows($resultCategories) > 0)
+							$query .= ' AND (Categorie="' . $categorie .'");';
+						}
+						else
+						{
+							$queryCategories = "SELECT * FROM categories";
+							$resultCategories = mysqli_query($db_handle, $queryCategories);
+
+							if ($resultCategories)
 							{
-								$toAdd = " AND (";
-								while($row = $resultCategories->fetch_assoc()) {
-									if (isset($_POST[$row["ID"]]))
-									{
-										if ($_POST[$row["ID"]] == "true")
+								if (mysqli_num_rows($resultCategories) > 0)
+								{
+									$toAdd = " AND (";
+									while($row = $resultCategories->fetch_assoc()) {
+										if (isset($_POST[$row["ID"]]))
 										{
-											$toAdd = $toAdd . ((strlen($toAdd) > 6)?' OR (':' (') . 'Categorie="' . $row["ID"] . '")';
+											if ($_POST[$row["ID"]] == "true")
+											{
+												$toAdd = $toAdd . ((strlen($toAdd) > 6)?' OR (':' (') . 'Categorie="' . $row["ID"] . '")';
+											}
 										}
 									}
-								}
-								if (strlen($toAdd) > 6)
-								{
-									$query = $query . $toAdd . ")";
+									if (strlen($toAdd) > 6)
+									{
+										$query .= $toAdd . ")";
+									}
 								}
 							}
 						}
-						
+
 						$result = mysqli_query($db_handle, $query);
 
 						if (!$result)
@@ -168,7 +184,7 @@
 						while($row = $result->fetch_assoc()) {
 							echo "<tr> <td align='center'>";
 							$img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
-							echo '<img class="img-fluid" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '" style="max-width: 13em; max-height: 10em"> </td> <td align="center">' . $row["Nom"] . "<br> $" . $row["Prix"] . '</td>';
+							echo '<input type="image" class="img-fluid" onclick="location.href=\'../Produit/index.php?id=' . $row["ID"] . '\';" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '" style="max-width: 13em; max-height: 10em"> </input> </td> <td align="center">' . $row["Nom"] . "<br> $" . $row["Prix"] . '</td>';
 							
 							echo '<td  align="center"><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 									<input type="hidden" name="cmd" value="_xclick">
@@ -187,6 +203,7 @@
 									<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 									</form>';
 							echo "</td> </tr>";
+							echo "<tr> <td> <br> </td> </tr>";
 						}
 						echo "</table>";
 					?>

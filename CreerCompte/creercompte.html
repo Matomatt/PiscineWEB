@@ -20,60 +20,68 @@
 
 
 
-        <div class="container ">
-            <div class=" col-lg-9 center-block" style=float:none;>
+    <div class="container ">
+        <div class=" col-lg-9 center-block" style=float:none;>
 
-                <div class="creercompte ">
-                <h2 style="text-align: center;">Bonjour ! </h2>
-                <h4 style="text-align: center;">Saissisez vos informations afin de vous enregistrer.</h4><br>
+        <div class="creercompte ">
+            <h2 style="text-align: center;">Bonjour ! </h2>
+            <h4 style="text-align: center;">Saissisez vos informations afin de vous enregistrer.</h4><br>
             
-            
-        <div class="row">
+        <form method="post" action="creercompte.php">
 
-            <div class="col-lg-6 col-xs-6 col-md-6" >
-                <div class="form-group">
-                    <input type="text"  placeholder="Prénom *" name=prenom" />
-                </div>
-                <div class="form-group">
-                    <input type="text"  placeholder="Nom *" name="nom" />
-                </div>
+            <div class="row">
 
-                <div class="form-group">
-                    <input type="email"  placeholder="Votre e-mail *" nom="" />
-                </div>
+                <div class="col-lg-6 col-xs-6 col-md-6" >
                 
-                <div class="form-group">
-                    <input type="password" placeholder="Mot de passe *" nom="mdp" />
-                </div>
-                <div class="form-group">
-                    <input type="password" placeholder="Confirmer le mot de passe *"  nom="mdp"/>
-                </div>
+                    <div class="form-group">
+                        <input type="text"  placeholder="Prénom *" name="prenom" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text"  placeholder="Nom *" name="nom" />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email"  placeholder="Votre e-mail *" name="email" />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" placeholder="Mot de passe *" name="mdp" />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Confirmer le mot de passe *"  name="mdpverif"/>
+                    </div>
                 
-            </div>
+                </div>
 
            
-            <div class="col-lg-6 col-xs-6 col-md-6">
-                <div class="form-group">
-                    <input type="tel" name="tel"  placeholder="Numéro de téléphone *" />
+                <div class="col-lg-6 col-xs-6 col-md-6">
+
+                    <div class="form-group">
+                        <input type="tel"  placeholder="Numéro de téléphone *"  name="tel" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Adresse *" name="adresse"><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Complement d'adresse" name="cpadresse"><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Ville *" name="ville"><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" placeholder="Code Postal *" name="cp"><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Pays *" name="pays"><br>
+                    </div>
+                    <input type="submit"   value="S'enregistrer" name="bouton1"/>
                 </div>
-                <div class="form-group">
-                    <input type="text" placeholder="Adresse *" name="adresse"><br>
-                </div>
-                <div class="form-group">
-                    <input type="text" placeholder="Complement d'adresse" name="cpadresse"><br>
-                </div>
-                <div class="form-group">
-                    <input type="number" placeholder="Code Postal *" name="cp"><br>
-                </div>
-                <div class="form-group">
-                    <input type="text" placeholder="Pays *" name="pays"><br>
-                </div>
-                <input type="submit"   value="S'enregistrer"/>
+        
             </div>
-            
-            </div>
+        </form>
         </div>
-    </div>
+        </div>
+
     </div>
 
     </body>

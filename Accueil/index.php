@@ -36,15 +36,15 @@
 
 <body>
 	<hr>
-	<div id="div2"><!--barre catégories, achat,vente-->
-		<div class="nav justify-content-center">
+	<!--<div id="div2">--><!--barre catégories, achat,vente-->
+		<div class="nav justify-content-center" style="background-color: lightgrey; padding:13px;">
 			<button type="button" class="btn btn-light" onclick="location.href='../ResultatsDeRecherche/index.php';">Acheter</button>
 			<button type="button" class="btn btn-light">Vendre</button>
 			<button type="button" class="btn btn-light" onclick="location.href='../ResultatsDeRecherche/index.php?categorie=FerOuTres';">Ferraille/Trésor</button>
 			<button type="button" class="btn btn-light" onclick="location.href='../ResultatsDeRecherche/index.php?categorie=BonMusee';">Bon pour le Musée</button>
 			<button type="button" class="btn btn-light" onclick="location.href='../ResultatsDeRecherche/index.php?categorie=AccesVIP';">Accessoire VIP</button>
 		</div>
-	</div>
+	<!--</div>-->
 	<hr>
 	<!-- 2eme div : carroussel-->
 	<div id="div3">

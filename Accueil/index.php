@@ -36,26 +36,19 @@
 
 <body>
 	<hr>
-	<!--<div id="div2">--><!--barre catégories, achat,vente-->
-		<div class="nav justify-content-center" style="background-color: lightgrey; padding:13px;">
-			<button type="button" class="btn btn-light" onclick="location.href='../ResultatsDeRecherche/index.php';">Acheter</button>
-			<button type="button" class="btn btn-light">Vendre</button>
-			<button type="button" class="btn btn-light" onclick="location.href='../ResultatsDeRecherche/index.php?categorie=FerOuTres';">Ferraille/Trésor</button>
-			<button type="button" class="btn btn-light" onclick="location.href='../ResultatsDeRecherche/index.php?categorie=BonMusee';">Bon pour le Musée</button>
-			<button type="button" class="btn btn-light" onclick="location.href='../ResultatsDeRecherche/index.php?categorie=AccesVIP';">Accessoire VIP</button>
-		</div>
-	<!--</div>-->
+	<!--barre catégories, achat,vente-->
+	<div class="nav justify-content-center" style="background-color: lightgrey; padding:13px;">
+		<button type="button" class="btn btn-light" onclick="location.href='../ResultatsDeRecherche/index.php';">Acheter</button>
+		<button type="button" class="btn btn-light">Vendre</button>
+		<button type="button" class="btn btn-light" onclick="location.href='../ResultatsDeRecherche/index.php?categorie=FerOuTres';">Ferraille/Trésor</button>
+		<button type="button" class="btn btn-light" onclick="location.href='../ResultatsDeRecherche/index.php?categorie=BonMusee';">Bon pour le Musée</button>
+		<button type="button" class="btn btn-light" onclick="location.href='../ResultatsDeRecherche/index.php?categorie=AccesVIP';">Accessoire VIP</button>
+	</div>
 	<hr>
 	<!-- 2eme div : carroussel-->
 	<div id="div3">
 		<!-- carroussel-->
 		<div id="carroussel" class="carousel slide container-fluid text-center" data-ride="carousel">
-			<!-- indicateur slide-->
-  		<!--<ul class="carousel-indicators">
-    		<li data-target="#carroussel" data-slide-to="0" class="active"></li>
-    		<li data-target="#carroussel" data-slide-to="1"></li>
-  		</ul>-->
-
       <div class="carousel-inner" style="background-color: lightgrey;">
         <?php
           

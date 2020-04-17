@@ -1,5 +1,5 @@
 <?php
-		include './../TestHeader.html';
+		include './../header.html';
 ?>
 
 <html>
@@ -164,10 +164,13 @@
 							die('None');
 						}
 
+						echo "<table>";
 						while($row = $result->fetch_assoc()) {
-							$img = mysqli_query($db_handle, "SELECT Media1 FROM medias WHERE ID=" . $row["ID_Medias"] . ";")->fetch_assoc() ["Media1"];
-							echo '<div class="col-lg-4" style="float: left;"> <img class="img-fluid" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '"> </div> <div class="col-lg-8" style="float: left;">' . $row["Nom"] . "<br> $" . $row["Prix"] . " <br> " . $row["Description"] . '<br><br>';
-							echo '<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+							echo "<tr> <td align='center'>";
+							$img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
+							echo '<img class="img-fluid" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '" style="max-width: 13em; max-height: 10em"> </td> <td align="center">' . $row["Nom"] . "<br> $" . $row["Prix"] . '</td>';
+							
+							echo '<td  align="center"><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 									<input type="hidden" name="cmd" value="_xclick">
 									<input type="hidden" name="business" value="gauchermatthieu918@gmail.com">
 									<input type="hidden" name="lc" value="US">
@@ -182,9 +185,10 @@
 									<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest">
 									<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 									<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-									</form>' . '</div>';
-
+									</form>';
+							echo "</td> </tr>";
 						}
+						echo "</table>";
 					?>
 			</div>
 		</div>

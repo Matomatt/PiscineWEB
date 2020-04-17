@@ -1,47 +1,53 @@
-<?php
+<!DOCTYPE html>
 
-//recuperer les données venant de la page HTML
-$email = isset($_POST["email"])? $_POST["email"] : "";
-$mdp = isset($_POST["mdp"])? $_POST["mdp"] : "";
+<html>
+<head>
+    <title>Connexion - ECEbay</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style2.css">
+    
+    
+    <link rel="stylesheet"
+    	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script
+    	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.j s"
+    	type="text/javascript"> </script>
+    <script
+    	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/j s/bootstrap.min.j s"
+    	type="text/javascript"> </script>
+    <link rel="stylesheet"
+    	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    	type="text/javascript"></script>
+    <script
+    	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    	type="text/javascript"></script>
 
-//identifier votre BDD
-$database = "ecebay";
+</head>
 
-// se connecter à la BDD
-$db_handle = mysqli_connect('localhost', 'root', '');
-$db_found = mysqli_select_db($db_handle, $database);
+<body>
+	<div class="container">
+        <?php include "../header.php" ?>
+        <div class="connexion col-lg-6 center-block" style="float: none;">
+			<h2 style="text-align: center;">Bonjour !</h2>
+			<h4 style="text-align: center;">Saissisez vos identifiants pour vous connecter</h4>
+				
+			<form action="connexionTraitement.php" method="post"
+				style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
+				Adresse e-mail : <br> <input type="email" placeholder="e-mail" name="email"><br> 
+				Mot de passe :<br> <input type="password" placeholder="mot de passe" name="mdp"><br> 
+				<input type="submit" name='bouton' value="Se connecter"><br>
+			</form>
+			
+			<hr width="40%" color="grey" style="margin-top: 20px; margin-bottom: 20px;">
+			<br> Vous n'avez pas encore de compte ?<br> 
+			<a href="creercompte.html">Inscrivez vous!</a> <br> Vous voulez vendre ?<br> 
+			<a href="creercompte.html">Créez votre boutique ici !</a>
+		</div>
+	</div>
 
 
-if(!empty($_POST['bouton']))
-{
+</body>
 
-    if ($db_found) {
-
-        if (!empty($_POST['email']) && !empty($_POST['mdp'])) {
-
-            $sql=" SELECT * FROM acheteurs WHERE Email = '$email' AND Password = '$mdp'";
-
-                $result = mysqli_query($db_handle, $sql);
-                //tester s'il y a de résultat
-                if (mysqli_num_rows($result) == 0) {
-                    //Si le mot de passe et l'identifiant ne correspondent pas
-                    echo "Mot de passe ou identifiant incorect";
-                    echo "<a href=\"connexion.html\"> Revenir en arrière";
-                } 
-                else {
-
-                    echo "ok ";
-                    echo "<a href=\"creerboutique.html\"> Cliquez ici";
-                }
-        }
-        else 
-        {
-            echo 'Veuillez remplir tous les champs';
-            echo "<a href=\"connexion.html\"> Revenir en arrière";
-        }
-    }
-    else {
-    echo "Database not found";
-    }
-}
-?>
+</html>

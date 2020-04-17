@@ -69,9 +69,9 @@
 			<!-- bouton pour rechercher-->
 			<button class="btn btn-primary" type="submit">Rechercher</button>
 		</div>
-		<!-- boutons de panier et de connexion-->
-		<input type="image" class="img-fluid" src="../Images/caddie.jpg" onclick="location.href='../Acheteur/panier.html';" style="margin: 1em; max-width: 4em;"></input>
-		<button class="btn" onclick="location.href='../CreerCompte/connexion.html';">Connexion</button>
 	</form>
+	<!-- boutons de panier et de connexion-->
+	<input type="image" class="img-fluid" src="../Images/caddie.jpg" onclick="location.href='../Acheteur/panier.html';" style="margin: 1em; max-width: 4em;"></input>
+	<button class="btn" onclick="location.href='../CreerCompte/connexion.php';">Connexion</button>
 </nav>
 

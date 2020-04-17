@@ -1,5 +1,5 @@
 <?php
-	$ID_Vendeur = ""; //Variable de session
+	$ID_Vendeur = 1; //Variable de session
 	$Nom = isset($_POST["titre"])?$_POST["titre"]:"";
 	$Prix = isset($_POST["prix"])?$_POST["prix"]:"";
 	$Prix_Encheres = isset($_POST["prixencheres"])?$_POST["prixencheres"]:"";
@@ -9,6 +9,7 @@
 	$Marque = isset($_POST["marque"])?$_POST["marque"]:"";
 	$Type_de_vente_1 = (isset($_POST["achat_imm"])?"achat_imm":(isset($_POST["encheres"])?"encheres":(isset($_POST["offres"])?"offres":"")));
 	$Type_de_vente_2 = (($Type_de_vente_1!="achat_imm")?"":(isset($_POST["encheres"])?"encheres":(isset($_POST["offres"])?"offres":"")));
+	$Quantite = isset($_POST["quantite"])?$_POST["quantite"]:"1";
 
 	$error ="";
 
@@ -104,11 +105,47 @@
 			  </script>';
 	}
 
-	foreach ($mediaList as &$media) {
-		echo '-> ' . $media . '<br>'; 
+
+	$servername = "localhost";
+	$username = "root";
+	$password = "";
+	$dbname = "ecebay";
+
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	// Check connection
+	if ($conn->connect_error) {
+		die ('<script>
+				alert("Impossible d\'accéder à la base de donnée");
+				window.location = "../MiseEnVente/index.html";
+			  </script>');
 	}
 
-	$ID_Medias = "";
+	$sql = "INSERT INTO items (ID_Vendeur, Nom, Prix, Prix_Encheres, Description, Categorie, Etat, Marque, Type_de_vente_1, Type_de_vente_2, Quantite)
+	VALUES ('" . $ID_Vendeur . "', '" . $Nom . "', '" . $Prix . "', '" . $Prix_Encheres . "', '" . $Description .  "', '" . $Categorie .  "', '" . $Etat .  "', '" . $Marque .  "', '" . $Type_de_vente_1 .  "', '" . $Type_de_vente_2 .  "', '" . $Quantite .  "')";
 
-	echo $Nom . " " . $Prix . " " . $Prix_Encheres . " " . $Description . " " . $Categorie . " " . $Etat . " " . $Marque . " " . $Type_de_vente_1 . " " . $Type_de_vente_2;
+	if ($conn->query($sql) === TRUE) {
+		$last_id = $conn->insert_id;
+		echo "New record created successfully. Last inserted ID is: " . $last_id . "<br>";
+	} else {
+		echo "Error: " . $sql . "<br>" . $conn->error;
+	}
+
+
+	$sql = "INSERT INTO medias (ID_Item, File, indx) VALUES";
+
+	
+
+	for($i = 0; $i < count ($mediaList); $i++)
+	{
+		$sql .= (($i>0)?", ":" ") . "(" . $last_id . ", '" . $mediaList[$i] . "', " . $i . ")";
+	}
+
+	if ($conn->query($sql) === TRUE) {
+		echo "Medias succesfully saved ! <br>";
+	} else {
+		echo "Error: " . $sql . "<br>" . $conn->error;
+	}
+
+	$conn->close();
 ?>

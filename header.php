@@ -72,6 +72,23 @@
 	</form>
 	<!-- boutons de panier et de connexion-->
 	<input type="image" class="img-fluid" src="../Images/caddie.jpg" onclick="location.href='../Acheteur/panier.html';" style="margin: 1em; max-width: 4em;"></input>
-	<button class="btn" onclick="location.href='../CreerCompte/connexion.php';">Connexion</button>
+
+	<?php
+		session_start();
+		if (isset($_SESSION['UserType']) && isset($_SESSION['UserID']))
+		{
+			if ($_SESSION['UserType'] == "Acheteur")
+				echo '<input type="image" class="img-fluid" src="../Images/user-default.png" onclick="location.href=\'../Acheteur/compteclient.php\';" style="max-width: 4em;"></input>';
+			else if ($_SESSION['UserType'] == "Vendeur")
+				echo '<input type="image" class="img-fluid" src="../Images/user-default.png" onclick="location.href=\'../Vendeur/compte vendeur.html\';" style="max-width: 4em;"></input>';
+			else if ($_SESSION['UserType'] == "Admin")
+				echo '<input type="image" class="img-fluid" src="../Images/user-default.png" onclick="location.href=\'../Admin/compteadmin.html\';" style="max-width: 4em;"></input>';
+			else
+				echo '<button class="btn" onclick="location.href=\'../CreerCompte/connexion.php\';">Connexion</button>';
+		}
+		else
+			echo '<button class="btn" onclick="location.href=\'../CreerCompte/connexion.php\';">Connexion</button>';
+	
+	?>
 </nav>
 

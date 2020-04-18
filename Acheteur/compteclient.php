@@ -18,10 +18,20 @@
 
     <body >
 
-                <!-- BARRE DE NAVIGTION-->
-                <nav class="navbar navbar-expand-md"></nav>
-
-
+                <?php include '../header.php'; ?>
+				<h1>
+				<?php
+				    session_start();
+				    if (isset($_SESSION['UserType']))
+				    {
+				        echo $_SESSION['UserType'] . " n°";
+				    }
+			        if (isset($_SESSION['UserID']))
+			        {
+			            echo $_SESSION['UserID'];
+			        }
+				?>
+				</h1>
                 <div class="container-fluid" >
                     <div class="row" >
                         <div class="leftnavbartop col-lg-2 col-sm-4 col-xs-3">

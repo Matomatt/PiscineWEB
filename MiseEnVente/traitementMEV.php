@@ -15,19 +15,19 @@
 
 	if ($Nom == "")
 	{
-		$error .= "Il faut spécifier le titre de l'annonce. ";
+		$error .= "Il faut spï¿½cifier le titre de l'annonce. ";
 	}
 	if ($Type_de_vente_1 == "")
 	{
-		$error .= "Il faut spécifier le type de vente de l'annonce. ";
+		$error .= "Il faut spï¿½cifier le type de vente de l'annonce. ";
 	}
 	if ($Prix == "" &&  $Type_de_vente_1 == "achat_imm")
 	{
-		$error .= "Il faut spécifier le prix de l'objet. ";
+		$error .= "Il faut spï¿½cifier le prix de l'objet. ";
 	}
 	if ($Prix_Encheres == "" &&  $Type_de_vente_1 == "encheres" || $Prix_Encheres == "" &&  $Type_de_vente_2 == "encheres" )
 	{
-		$error .= "Il faut spécifier le prix de départ des enchères. ";
+		$error .= "Il faut spï¿½cifier le prix de dï¿½part des enchï¿½res. ";
 	}
 
 	if ($error != "")
@@ -46,7 +46,7 @@
 	$nbFilesUploaded = 0;
 	for($i=0; $i<10; $i++)
 	{
-		//Adapté de ce tutoriel https://www.tutorialrepublic.com/php-tutorial/php-file-upload.php
+		//Adaptï¿½ de ce tutoriel https://www.tutorialrepublic.com/php-tutorial/php-file-upload.php
 		if(isset($_FILES["media".$i]) && $_FILES["media".$i]["error"] == 0)
 		{
 			$error = "";
@@ -116,7 +116,7 @@
 	// Check connection
 	if ($conn->connect_error) {
 		die ('<script>
-				alert("Impossible d\'accéder à la base de donnée");
+				alert("Impossible d\'accï¿½der ï¿½ la base de donnï¿½e");
 				window.location = "../MiseEnVente/index.html";
 			  </script>');
 	}
@@ -143,7 +143,7 @@
 
 	if ($conn->query($sql) === TRUE) {
 		echo "Medias succesfully saved ! <br>";
-	} else {
+	} else if ($conn->error != 4){
 		echo "Error: " . $sql . "<br>" . $conn->error;
 	}
 

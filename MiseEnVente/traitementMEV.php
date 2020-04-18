@@ -171,5 +171,5 @@
 
 	$conn->close();
 	
-	echo '<script> window.location.href= "../Acheteur/pagevendeur.html"; </script>';
+	echo '<script> window.location.href= "../Vendeur/pagevendeur.html"; </script>';
 ?>

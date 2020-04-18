@@ -58,11 +58,7 @@
 	  			<div class="col-6">
 	  				<!-- carroussel-->
 					<div id="carroussel" class="carousel slide container-fluid" data-ride="carousel">
-						<!-- indicateur slide-->
-	  					<ul class="carousel-indicators">
-	    					<li data-target="#carroussel" data-slide-to="0" class="active"></li>
-	    					<li data-target="#carroussel" data-slide-to="1"></li>
-	  					</ul>
+						
 			  			<!--contenu slide du d�but-->
 			  			<div class="carousel-inner">
 
@@ -81,13 +77,21 @@
 									echo '<div class="carousel-item active">
 			      							<img class="img-fluid" src="../UploadedContent/' . $img["File"] . '" alt="photo">
 										</div>';
-									$first = 1;
 								}
 								else
 									echo '<div class="carousel-item">
 			      							<img class="img-fluid" src="../UploadedContent/' . $img["File"] . '" alt="photo">
 										</div>';
+								$first+=1;
 							}
+							//<!-- indicateur slide-->
+							echo '<ul class="carousel-indicators">';
+							echo '<li data-target="#carroussel" data-slide-to="0" class="active"></li>';
+							for($i=1;$i<$first; $i++)
+							{
+							    echo '<li data-target="#carroussel" data-slide-to="'.$i.'"></li>';
+							}
+							echo '</ul>';
 						?>
 
 			  			</div>

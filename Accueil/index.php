@@ -91,7 +91,15 @@
                     </div>';
             }
             $first+=1;
-          }               
+          }
+          
+          echo '<ul class="carousel-indicators">';
+          echo '<li data-target="#carroussel" data-slide-to="0" class="active"></li>';
+          for($i=1;$i<$first; $i++)
+          {
+              echo '<li data-target="#carroussel" data-slide-to="'.$i.'"></li>';
+          }
+          echo '</ul>';
         ?>
   		</div>
   		<!--contrôle droit et gauche -->

@@ -80,7 +80,7 @@
 			if ($_SESSION['UserType'] == "Acheteur")
 				echo '<input type="image" class="img-fluid" src="../Images/user-default.png" onclick="location.href=\'../Acheteur/compteclient.php\';" style="max-width: 4em;"></input>';
 			else if ($_SESSION['UserType'] == "Vendeur")
-				echo '<input type="image" class="img-fluid" src="../Images/user-default.png" onclick="location.href=\'../Vendeur/compte vendeur.html\';" style="max-width: 4em;"></input>';
+				echo '<input type="image" class="img-fluid" src="../Images/user-default.png" onclick="location.href=\'../Vendeur/comptevendeur.php\';" style="max-width: 4em;"></input>';
 			else if ($_SESSION['UserType'] == "Admin")
 				echo '<input type="image" class="img-fluid" src="../Images/user-default.png" onclick="location.href=\'../Admin/compteadmin.html\';" style="max-width: 4em;"></input>';
 			else

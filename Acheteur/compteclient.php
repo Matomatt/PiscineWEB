@@ -21,7 +21,6 @@
                 <?php include '../header.php'; ?>
 				<h1>
 				<?php
-				    session_start();
 				    if (isset($_SESSION['UserType']))
 				    {
 				        echo $_SESSION['UserType'] . " n°";
@@ -62,6 +61,8 @@
                             <a href="#">Les offres</a>
                             <hr color="grey" ">
                             <a href="#">Mes paramètres</a>
+                            <hr color="grey" ">
+                            <a href="../deconnexion.php">Déconnexion</a>
                 
                         </div>
                 

@@ -43,7 +43,7 @@
                             $_SESSION['UserID'] = $ID_Admin;
                             $_SESSION['UserType'] = "Admin";
                             die('<script>
-                				window.location = "../Acheteur/compteadmin.html";
+                				window.location = "../Admin/compteadmin.html";
                 			  </script>');
                         }
                         
@@ -59,7 +59,7 @@
                         $_SESSION['UserID'] = $ID_Vendeur;
                         $_SESSION['UserType'] = "Vendeur";
                         die('<script>
-                				window.location = "../Acheteur/compte vendeur.html";
+                				window.location = "../Vendeur/comptevendeur.php";
                 			  </script>');
                     }
                     

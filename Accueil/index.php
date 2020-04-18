@@ -36,12 +36,12 @@
 
 <body>
 	<!--barre catégories, achat,vente-->
-	<div class="nav justify-content-center" style="background-color: lightgrey; padding:13px;">
-		<button type="button" class="btn btn-light" onclick="location.href='../ResultatsDeRecherche/index.php';">Acheter</button>
-		<button type="button" class="btn btn-light">Vendre</button>
-		<button type="button" class="btn btn-light" onclick="location.href='../ResultatsDeRecherche/index.php?categorie=FerOuTres';">Ferraille/Trésor</button>
-		<button type="button" class="btn btn-light" onclick="location.href='../ResultatsDeRecherche/index.php?categorie=BonMusee';">Bon pour le Musée</button>
-		<button type="button" class="btn btn-light" onclick="location.href='../ResultatsDeRecherche/index.php?categorie=AccesVIP';">Accessoire VIP</button>
+	<div class="nav justify-content-center" style="background-color: #fafafa; padding:13px;">
+		<button type="button" class="btn btn-light secondHeaderButton" onclick="location.href='../ResultatsDeRecherche/index.php';">Acheter</button>
+		<button type="button" class="btn btn-light secondHeaderButton" onclick="location.href='../MiseEnVente/index.html'">Vendre</button>
+		<button type="button" class="btn btn-light secondHeaderButton" onclick="location.href='../ResultatsDeRecherche/index.php?categorie=FerOuTres';">Ferraille/Trésor</button>
+		<button type="button" class="btn btn-light secondHeaderButton" onclick="location.href='../ResultatsDeRecherche/index.php?categorie=BonMusee';">Bon pour le Musée</button>
+		<button type="button" class="btn btn-light secondHeaderButton" onclick="location.href='../ResultatsDeRecherche/index.php?categorie=AccesVIP';">Accessoire VIP</button>
 	</div>
 	<hr>
 	<!-- 2eme div : carroussel-->

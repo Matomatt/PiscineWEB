@@ -1,9 +1,16 @@
 hr{
 	border: 1px solid lightgrey;
 }
+
 #div2{
-	background-color: lightgrey;
+	background-color: #fafafa;
 }
 .card-body a{
-	color:white;
+	color: white;
+}
+
+.secondHeaderButton{
+	background-color: #e6f0ff;
+	margin-left: 1%;
+	margin-right: 1%;
 }

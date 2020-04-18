@@ -35,7 +35,6 @@
 </head>
 
 <body>
-	<hr>
 	<!--barre catégories, achat,vente-->
 	<div class="nav justify-content-center" style="background-color: lightgrey; padding:13px;">
 		<button type="button" class="btn btn-light" onclick="location.href='../ResultatsDeRecherche/index.php';">Acheter</button>

@@ -108,6 +108,20 @@
         }
     }
     
+    $query = "SELECT * FROM encheres ORDER BY ID_Item ASC";
+    $result = mysqli_query($db_handle, $query);
+    
+    if (!$result)
+        die ("Erreur lors de la requète");
+    
+    $str = "";
+    while($enchere = $result->fetch_assoc())
+    {
+        $str .= $enchere["ID_Item"] . " " . $enchere["ID_Acheteur"] . " " . $enchere["Prix_Max"] . "\n";
+    }
+    
+    //mail ( "gauchermatthieu918@gmail.com" , "Encheres processed" ,  $str);
+    
     
     /*
      $queryEnchere = 'SELECT * FROM encheres WHERE ID_Item=' . $item["ID"];

@@ -111,6 +111,7 @@
 
 							if (!$db_found) { die('Database not found'); }
 
+							
 							$id = isset($_GET["id"])?$_GET["id"]:"";
 							$first = 0;
 							$item = mysqli_query($db_handle, "SELECT * FROM items WHERE ID=" . $id . ";")->fetch_assoc();
@@ -172,14 +173,19 @@
                                         	Enchère maximale actuelle : ' . $item["Prix_Encheres"] . '<br>
 											Votre enchère : <input type="number" name="enchere" min="'. ($item["Prix_Encheres"]+1) .'"></input>€ <br><br>
                                             <button type="submit">Valider</button>
-                                    	</from>
+                                    	</form>
 									</td>
                                 </tr>';
 							}
 							if ($item["Type_de_vente_1"] == "offres" || $item["Type_de_vente_2"] == "offres")
 							{
 								echo '<tr>
-										<td><a href="../Offres/index.php?id=' . $item["ID"] . '">Faire une offre</a></td>
+										<td><a class="toggler" data-toggle="collapse" data-target="#offrir" href="../Offres/index.php?id=' . $item["ID"] . '">Faire une offre</a>
+                                            <form method="post" action="faireOffre.php?id1='. $id .'&id2='. 1 .'" class="collapse" id="offrir" style="box-shadow: 0px 2px 6px 0px #000000;">
+                                            	<h4>Votre offre</h4>
+    											<input type="number" name="offre" min="0" style="margin-left: 1em"></input>€ <br><br>
+                                                <button type="submit">Valider</button>
+                                        	</form></td>
 									</tr>';
 							}
 						?>

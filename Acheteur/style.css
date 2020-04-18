@@ -68,38 +68,38 @@
     max-width: 100px;
 }
 
-.panierachat{
+/*.panierachat{
     width: 650px;
     height: 200px;
     margin-left: 10%;
     margin-top: 10%;
     
-}
+}*/
 
-.panierachat img {
+/*.panierachat img {
     margin-top: 10px;
     margin-left: 10px;
     margin-bottom: 10px;
     width: 150px; 
     height: 150px; 
     object-fit: cover; 
-}
+}*/
 
-.panierachat .prix{
+/*.panierachat .prix{
     margin: 15px;
-}
+}*/
 
-.panierachat tr{
+/*.panierachat tr{
 
     border-style: groove;
     border-color: #A7A7A7;
-}
+}*/
 
-.payement{
+/*.payement{
     margin-top: 20%;
     border-style: groove;
     margin-left: 5%;
-}
+}*/
 
 /*HISTORIQUE */
 .achatpasse img {

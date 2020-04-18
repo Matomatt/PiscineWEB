@@ -8,8 +8,7 @@
     <link rel="stylesheet" type="text/css" href="style2.css">
     
     
-    <link rel="stylesheet"
-    	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
     <script
     	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.j s"
     	type="text/javascript"> </script>
@@ -29,7 +28,7 @@
 <body>
 	<div class="container">
         <?php include "../header.php" ?>
-        <div class="connexion col-lg-6 center-block" style="float: none;">
+        <div class="connexion col-lg-6 mx-auto" style="float: none;">
 			<h2 style="text-align: center;">Bonjour !</h2>
 			<h4 style="text-align: center;">Saissisez vos identifiants pour vous connecter</h4>
 				
@@ -41,9 +40,10 @@
 			</form>
 			
 			<hr width="40%" color="grey" style="margin-top: 20px; margin-bottom: 20px;">
+			<p style="text-align:center">
 			<br> Vous n'avez pas encore de compte ?<br> 
 			<a href="creercompte.html">Inscrivez vous!</a> <br> Vous voulez vendre ?<br> 
-			<a href="creercompte.html">Créez votre boutique ici !</a>
+			<a href="creerboutique.html">Créez votre boutique ici !</a></p>
 		</div>
 	</div>
 

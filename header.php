@@ -74,4 +74,4 @@
 	<input type="image" class="img-fluid" src="../Images/caddie.jpg" onclick="location.href='../Acheteur/panier.html';" style="margin: 1em; max-width: 4em;"></input>
 	<button class="btn" onclick="location.href='../CreerCompte/connexion.php';">Connexion</button>
 </nav>
-
+<hr style="border: 1px solid lightgrey;">

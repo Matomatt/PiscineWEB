@@ -155,7 +155,7 @@
 									else
 									{
 										echo'<tr>
-												<td> <a href="../Acheteur/panier.html"> ' . $dejaDansLePanier["Quantite"] . ' déjà dans le panier </a></td>
+												<td> <a href="../Acheteur/panier.php"> ' . $dejaDansLePanier["Quantite"] . ' déjà dans le panier </a></td>
 											</tr>';
 									}
 								
@@ -183,13 +183,7 @@
 									</tr>';
 							}
 						?>
-						
-						
-						
-						
-						
-						
-						
+								
 					</table>			
 	  			</div>
 			</div>

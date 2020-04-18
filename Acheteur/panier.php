@@ -23,6 +23,8 @@
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+        <title>Panier ECEbay</title>
+
     </head>
 
     <body>           
@@ -32,47 +34,87 @@
                 <tr>
                     <th>Mon panier</th>
                 </tr>
-                <tr>
-                    <td><img src="../Images/pic.png" style="width:100px;"></td>
-                    <td>
-                        <p class="nomproduit"><strong>Nom produit : </strong></p>
-                        <p class="description">Description Produit : </p>
-                    </td>
-                    <td><p class="prix">Prix Unitaire : </p></td>
-                    <td><p class="quantite">Quantité : </p></td>
-                    <td><p class="prix">Prix : </p></td>
-                    <td><button>Supprimer</button></td>
-                </tr>
-                <tr>
-                    <td><img src="../Images/pic.png" style="width:100px;"></td>
-                    <td>
-                        <p class="nomproduit"><strong>Nom produit : </strong></p>
-                        <p class="description">Description Produit : </p>
-                    </td>
-                    <td><p class="prix">Prix Unitaire : </p></td>
-                    <td><p class="quantite">Quantité : </p></td>
-                    <td><p class="prix">Prix : </p></td>
-                    <td><button>Supprimer</button></td>
-                </tr>
-                <tr>
-                    <th rowspan="5">Prix Total</th>
-                    <td>...euros</td>
-                </tr>
-                <tr>
-                    <td>...Frais de ports</td>
-                </tr>
-                <tr>
-                    <td>...total euros</td>
-                </tr>
-                <tr>
-                    <td><button>Poursuivre mes achats</button></td>
-                </tr>
-                <tr>
-                    <td><button>Finaliser la commande</button></td>
-                </tr>
-            </table>
+
+                <?php
+        
+                    $db_handle = mysqli_connect('localhost', 'root', '');
+                    $db_found = mysqli_select_db($db_handle, 'ecebay');
+
+                    if (!$db_found) { die('Database not found'); }
+
+                    /*Pour avoir l'utilisateur connecté*/
+                    if (!isset($_SESSION["UserID"]) || !isset($_SESSION["UserType"]))
+                    {
+                        die('<script>
+                                alert("Veuillez vous connecter à votre compte");
+                                window.location = "../CreerCompte/connexion.php";
+                             </script>');
+                    }
+                    if ($_SESSION["UserType"] != "Acheteur")
+                    {
+                        die('<script>
+                                alert("Veuillez vous connecter à votre compte Acheteur");
+                                window.location = "../CreerCompte/connexion.php";
+                             </script>');
+                    }
+                                            
+
+                    /*Pour avoir id de l'acheteur*/
+                    $id=(isset($_SESSION["UserID"])?$_SESSION["UserID"]:"");
+                    $query = "SELECT * FROM items WHERE ID IN (SELECT Id_Item FROM paniers WHERE ID_Acheteur=".$id.")";
+                    $result = mysqli_query($db_handle, $query);
+
+                    if (!$result)
+                    {
+                      die('Couldn\'t find table');
+                    }
+
+                    $prixTotalArticle=0;
+
+                    $prixTotalArticles=0;
+
+                    while($row = $result->fetch_assoc()) 
+                    {   
+                        /*on récupère les données de la table medias*/
+                        $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
+                        echo '<tr>
+                                <td><img style="width:100px;" src="../UploadedContent/'. (($img!="") ? $img : 'blank.png') . '" ></td>';
+
+                        echo '<td>
+                                <p class="nomproduit"><strong>Nom produit : </strong>'.$row["Nom"].'</p>
+                                <p class="description">Description Produit : '.$row["Description"].'</p>
+                            </td>
+                            <td><p class="prix">Prix Unitaire : '.$row["Prix"].'€</p></td>
+                            <td><p class="quantite">Quantité : '.$row["Quantite"].'</p></td>
+                            <td><p class="prix">Prix : '.($prixTotalArticle=$row["Prix"]*$row["Quantite"]).'€</p></td>
+                            <td><button onclick="'.$sql = "DELETE FROM paniers WHERE Id_Item=".$row["ID"].';">Supprimer</button></td>
+                        </tr>'; 
+
+                        $prixTotalArticles=$prixTotalArticles+$prixTotalArticle;  
+                    }
+
+                    echo '<tr>
+                            <th rowspan="5">Prix Total</th>
+                            <td>'.$prixTotalArticles.'€</td>
+                            </tr>
+                            <tr>
+                                <td>Frais de ports : 10€</td>
+                            </tr>';
+
+                    $prixTotal=0;
+                    $frais=10;
+
+                    $prixTotal=$prixTotalArticles+$frais;
+
+                    echo '<tr>
+                            <td>Total : '.$prixTotal.'€</td>
+                        </tr>';
+                ?>      
+                 
+                </table> 
+                <br>      
+                <button onclick="location.href='../Accueil/index.php';">Poursuivre mes achats</button>
+                <button onclick="location.href='../Acheteur/compteclient.php';">Finaliser la commande</button>  
         </div>
     </body>
 </html>
-
-

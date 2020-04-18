@@ -7,7 +7,7 @@
         
         if ($conn->connect_error) { die('<script> alert("Database not found"); history.back(); </script>'); }
         
-        $sql = "SELECT * FROM offres WHERE ID_Instigateur=" . $_GET["id2"] . " AND ID_Item=" . $_GET["id1"] . " AND Instigateur='Acheteur';";
+        $sql = "SELECT * FROM offres WHERE ID_Acheteur=" . $_GET["id2"] . " AND ID_Item=" . $_GET["id1"] . " AND Instigateur='Acheteur';";
         
         if (($result=$conn->query($sql)) == TRUE)
         {
@@ -18,7 +18,7 @@
         else
             echo '<script> alert("Error: ' . $sql . ' ' . $conn->error . '"); </script>';
             
-        $sql = "INSERT INTO `offres` (`ID_Item`, `ID_Instigateur`, `Instigateur`, `Prix`) VALUES ('" . $_GET["id1"] . "', '" . $_GET["id2"] . "', 'Acheteur', '" . $offre . "')";
+        $sql = "INSERT INTO `offres` (`ID_Item`, `ID_Acheteur`, `Instigateur`, `Prix`) VALUES ('" . $_GET["id1"] . "', '" . $_GET["id2"] . "', 'Acheteur', '" . $offre . "')";
         
         if ($conn->query($sql) === TRUE) {
             $last_id = $conn->insert_id;

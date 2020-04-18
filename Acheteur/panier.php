@@ -75,6 +75,13 @@
 
                     while($row = $result->fetch_assoc()) 
                     {   
+                        $queryQT = "SELECT Quantite FROM paniers WHERE Id_Item =" . $row["ID"] . " AND ID_Acheteur=".$id.";";
+                        $resultQT = mysqli_query($db_handle, $queryQT);
+                        $Quantite = 1;
+                        if ($resultQT)
+                        {
+                            $Quantite = $resultQT->fetch_assoc()["Quantite"];
+                        }
                         /*on récupère les données de la table medias*/
                         $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
                         echo '<tr>
@@ -85,8 +92,8 @@
                                 <p class="description">Description Produit : '.$row["Description"].'</p>
                             </td>
                             <td><p class="prix">Prix Unitaire : '.$row["Prix"].'€</p></td>
-                            <td><p class="quantite">Quantité : '.$row["Quantite"].'</p></td>
-                            <td><p class="prix">Prix : '.($prixTotalArticle=$row["Prix"]*$row["Quantite"]).'€</p></td>
+                            <td><p class="quantite">Quantité : '.$Quantite.'</p></td>
+                            <td><p class="prix">Prix : '.($prixTotalArticle=$row["Prix"]*$Quantite).'€</p></td>
                             <td><button onclick="'.$sql = "DELETE FROM paniers WHERE Id_Item=".$row["ID"].';">Supprimer</button></td>
                         </tr>'; 
 

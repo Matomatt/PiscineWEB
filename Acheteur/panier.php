@@ -73,6 +73,10 @@
 
                     $prixTotalArticles=0;
 
+                    $idItem=0;
+
+                    $item=0;
+
                     while($row = $result->fetch_assoc()) 
                     {   
                         /*on récupère les données de la table medias*/
@@ -87,7 +91,7 @@
                             <td><p class="prix">Prix Unitaire : '.$row["Prix"].'€</p></td>
                             <td><p class="quantite">Quantité : '.$row["Quantite"].'</p></td>
                             <td><p class="prix">Prix : '.($prixTotalArticle=$row["Prix"]*$row["Quantite"]).'€</p></td>
-                            <td><button onclick="'.$sql = "DELETE FROM paniers WHERE Id_Item=".$row["ID"].';">Supprimer</button></td>
+                            <td><button><a href="../Produit/supprimerDuPanier.php?idItem='.$item["ID"].'">Supprimer</button></td> 
                         </tr>'; 
 
                         $prixTotalArticles=$prixTotalArticles+$prixTotalArticle;  
@@ -109,12 +113,14 @@
                     echo '<tr>
                             <td>Total : '.$prixTotal.'€</td>
                         </tr>';
+                  
                 ?>      
+                unset($_SESSION['messageretour']);
                  
-                </table> 
-                <br>      
-                <button onclick="location.href='../Accueil/index.php';">Poursuivre mes achats</button>
-                <button onclick="location.href='../Acheteur/compteclient.php';">Finaliser la commande</button>  
+            </table> 
+            <br>      
+            <button onclick="location.href='../Accueil/index.php';">Poursuivre mes achats</button>
+            <button onclick="location.href='../Acheteur/verificationCommande.php';">Finaliser la commande</button>  
         </div>
     </body>
 </html>

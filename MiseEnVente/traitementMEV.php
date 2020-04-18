@@ -1,15 +1,37 @@
+<?php 
+    function lesBonsBackslash($string)
+    {
+        $start = 0;
+        while (($i = stripos($string, '"', $start)))
+        {
+            $string = substr ( $string , 0, $i ) . "\\" . substr( $string, $i);
+            $start = $i+2;
+        }
+        $start = 0;
+        while (($i = stripos($string, '\'', $start)) != false)
+        {
+            $string = substr ( $string , 0, $i ) . "\\" . substr( $string, $i);
+            $start = $i+2;
+        }
+        return $string;
+    }
+?>
+
 <?php
 	$ID_Vendeur = 1; //Variable de session
-	$Nom = isset($_POST["titre"])?$_POST["titre"]:"";
+	$Nom = isset($_POST["titre"])?lesBonsBackslash($_POST["titre"]):"";
 	$Prix = isset($_POST["prix"])?$_POST["prix"]:"";
 	$Prix_Encheres = isset($_POST["prixencheres"])?$_POST["prixencheres"]:"";
-	$Description = isset($_POST["editor"])?$_POST["editor"]:"";
+	$Description = isset($_POST["editor"])?lesBonsBackslash($_POST["editor"]):"";
 	$Categorie = isset($_POST["categories"])?$_POST["categories"]:"";
 	$Etat = isset($_POST["etat"])?$_POST["etat"]:"";
-	$Marque = isset($_POST["marque"])?$_POST["marque"]:"";
+	$Marque = isset($_POST["marque"])?lesBonsBackslash($_POST["marque"]):"";
 	$Type_de_vente_1 = (isset($_POST["achat_imm"])?"achat_imm":(isset($_POST["encheres"])?"encheres":(isset($_POST["offres"])?"offres":"")));
 	$Type_de_vente_2 = (($Type_de_vente_1!="achat_imm")?"":(isset($_POST["encheres"])?"encheres":(isset($_POST["offres"])?"offres":"")));
 	$Quantite = isset($_POST["quantite"])?$_POST["quantite"]:"1";
+	if ($Quantite < 1) $Quantite = 1;
+	$Type_livraison = isset($_POST["modeenvoi"])?lesBonsBackslash($_POST["modeenvoi"]):"";
+	$Frais_de_port = isset($_POST["prixenvoi"])?$_POST["prixenvoi"]:"";
 
 	$error ="";
 
@@ -148,4 +170,6 @@
 	}
 
 	$conn->close();
+	
+	echo '<script> window.location.href= "../Acheteur/pagevendeur.html"; </script>';
 ?>

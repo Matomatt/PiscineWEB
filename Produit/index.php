@@ -33,7 +33,6 @@
 	<script type="text/javascript">
 		function ajouterAuPanier(id1, id2)
 		{
-			alert("../Produit/ajouterAuPanier.php?id1=" + id1 + "&id2=" + id2 + "&qt=" + getQuantite());
 			window.location.href = "../Produit/ajouterAuPanier.php?id1=" + id1 + "&id2=" + id2 + "&qt=" + getQuantite();
 		}
 		function getQuantite()

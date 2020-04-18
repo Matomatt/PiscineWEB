@@ -43,7 +43,6 @@
 	</script>
 </head>
 <body>
-	<hr>
 	<!-- 2eme div : retour aux r�sultats-->
 	<div id="div2">
 		<h6><a href="javascript:history.back()"><- Retour aux résultats</a></h6>
@@ -106,11 +105,13 @@
 	  			<div class="col-6">
 					<table>
 						<?php
+						    $ID_Acheteur = isset($_SESSION["UserID"]) && isset($_SESSION["UserType"])?($_SESSION["UserType"] == "Acheteur"?$_SESSION["UserID"]:""):"";
+						
+						    echo 'ID acheteur : ' . $ID_Acheteur;
 							$db_handle = mysqli_connect('localhost', 'root', '');
 							$db_found = mysqli_select_db($db_handle, 'ecebay');
 
 							if (!$db_found) { die('Database not found'); }
-
 							
 							$id = isset($_GET["id"])?$_GET["id"]:"";
 							$first = 0;
@@ -142,23 +143,36 @@
 										<td><button class="btn btn-primary" type="submit">Achat immédiat</button></td>
 									</tr>';
 								
-									$dejaDansLePanier = mysqli_query($db_handle, 'SELECT Quantite FROM paniers WHERE ID_Item="' . $item["ID"] . '" AND ID_Acheteur =' . 1 . ';')->fetch_assoc();
+									$dejaDansLePanier = mysqli_query($db_handle, 'SELECT Quantite FROM paniers WHERE ID_Item="' . $item["ID"] . '" AND ID_Acheteur =' . $ID_Acheteur . ';');
 									
-									if (empty($dejaDansLePanier))
+									if ($dejaDansLePanier)
 									{
-										echo'<tr>
+									    $dejaDansLePanier = $dejaDansLePanier->fetch_assoc();
+									    if (empty($dejaDansLePanier))
+									    {
+									        echo'<tr>
 												<td>Quantité : <input type="number" min="1" max="' . $item["Quantite"] . '" id="qt"></td>
-											</tr>
-											<tr>
-												<td><a href="javascript:ajouterAuPanier(' . $item["ID"] . ', ' . 1 . ');" > Ajouter au panier </a></td>
 											</tr>';
-									}
-									else
-									{
-										echo'<tr>
+									        if ($ID_Acheteur != "")
+									        {
+									            echo'<tr>
+    												<td><a href="javascript:ajouterAuPanier(' . $item["ID"] . ', ' . $ID_Acheteur . ');" > Ajouter au panier </a></td>
+    											</tr>';
+									        }
+									        else
+									            echo'<tr>
+    												<td><a href="../CreerCompte/connexion.php?idItem=' . $item["ID"] . '" > Ajouter au panier </a></td>
+    											</tr>';
+									            
+									    }
+									    else
+									    {
+									        echo'<tr>
 												<td> <a href="../Acheteur/panier.php"> ' . $dejaDansLePanier["Quantite"] . ' déjà dans le panier </a></td>
 											</tr>';
+									    }
 									}
+									
 								
 							}
 							
@@ -167,25 +181,25 @@
 							    //<button class="btn btn-primary navbar-toggler" data-toggle="collapse" data-target="#encherir" onclick="location.href=\'../Encheres/index.php?id=' . $item["ID"] . '&e=' . $item["Prix_Encheres"] . '\';">Enchérir</button></td>
 								echo '<tr>
 										<td><button class="btn btn-primary toggler" data-toggle="collapse" data-target="#encherir">Enchérir</button>
-        								    
-                                        <form method="post" action="encherir.php?id1='. $id .'&id2='. 1 .'" class="collapse" id="encherir" style="box-shadow: 0px 2px 6px 0px #000000;">
-                                        	<h4>Enchérir</h4>
-                                        	Enchère maximale actuelle : ' . $item["Prix_Encheres"] . '<br>
-											Votre enchère : <input type="number" name="enchere" min="'. ($item["Prix_Encheres"]+1) .'"></input>€ <br><br>
-                                            <button type="submit">Valider</button>
-                                    	</form>
-									</td>
-                                </tr>';
+        								    <div class="collapse" id="encherir" style="text-align: center; box-shadow: 0px 2px 6px 0px #000000;">
+                                            <form method="post" action="encherir.php?id1='. $id .'&id2='. $ID_Acheteur .'">
+                                            	<h4>Enchérir</h4>
+                                            	Enchère maximale actuelle : ' . $item["Prix_Encheres"] . '<br>
+    											Votre enchère : <input type="number" name="enchere" min="'. ($item["Prix_Encheres"]+1) .'"></input>€ <br><br>' .
+    											(($ID_Acheteur!="")?'<button type="submit">Valider</button></form>':'</form><button onclick="window.location.href=\'../CreerCompte/connexion.php?idItem=' . $item["ID"] . '\'">Valider</button>') .
+									   '</div></td>
+                                     </tr>';
 							}
 							if ($item["Type_de_vente_1"] == "offres" || $item["Type_de_vente_2"] == "offres")
 							{
 								echo '<tr>
 										<td><a class="toggler" data-toggle="collapse" data-target="#offrir" href="../Offres/index.php?id=' . $item["ID"] . '">Faire une offre</a>
-                                            <form method="post" action="faireOffre.php?id1='. $id .'&id2='. 1 .'" class="collapse" id="offrir" style="box-shadow: 0px 2px 6px 0px #000000;">
+                                            <div class="collapse" id="offrir" style="text-align: center; box-shadow: 0px 2px 6px 0px #000000;">
+                                            <form method="post" action="faireOffre.php?id1='. $id .'&id2='. $ID_Acheteur .'">
                                             	<h4>Votre offre</h4>
-    											<input type="number" name="offre" min="0" style="margin-left: 1em"></input>€ <br><br>
-                                                <button type="submit">Valider</button>
-                                        	</form></td>
+    											<input type="number" name="offre" min="0" style="margin-left: 1em"></input>€ <br>' .
+    											(($ID_Acheteur!="")?'<button type="submit">Valider</button></form>':'</form><button onclick="window.location.href=\'../CreerCompte/connexion.php?idItem=' . $item["ID"] . '\'">Valider</button>') .
+                                        	'</div></td>
 									</tr>';
 							}
 						?>

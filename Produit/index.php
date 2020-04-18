@@ -170,7 +170,7 @@
                                         <form method="post" action="encherir.php?id1='. $id .'&id2='. 1 .'" class="collapse" id="encherir" style="box-shadow: 0px 2px 6px 0px #000000;">
                                         	<h4>Enchérir</h4>
                                         	Enchère maximale actuelle : ' . $item["Prix_Encheres"] . '<br>
-											Votre enchère : <input type="number" name="enchere" min="'. $item["Prix_Encheres"] .'"></input>€ <br><br>
+											Votre enchère : <input type="number" name="enchere" min="'. ($item["Prix_Encheres"]+1) .'"></input>€ <br><br>
                                             <button type="submit">Valider</button>
                                     	</from>
 									</td>

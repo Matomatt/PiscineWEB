@@ -15,19 +15,19 @@
 
 	if ($Nom == "")
 	{
-		$error .= "Il faut sp�cifier le titre de l'annonce. ";
+		$error .= "Il faut spécifier le titre de l'annonce. ";
 	}
 	if ($Type_de_vente_1 == "")
 	{
-		$error .= "Il faut sp�cifier le type de vente de l'annonce. ";
+		$error .= "Il faut spécifier le type de vente de l'annonce. ";
 	}
 	if ($Prix == "" &&  $Type_de_vente_1 == "achat_imm")
 	{
-		$error .= "Il faut sp�cifier le prix de l'objet. ";
+		$error .= "Il faut spécifier le prix de l'objet. ";
 	}
 	if ($Prix_Encheres == "" &&  $Type_de_vente_1 == "encheres" || $Prix_Encheres == "" &&  $Type_de_vente_2 == "encheres" )
 	{
-		$error .= "Il faut sp�cifier le prix de d�part des ench�res. ";
+		$error .= "Il faut spécifier le prix de départ des enchères. ";
 	}
 
 	if ($error != "")
@@ -116,13 +116,13 @@
 	// Check connection
 	if ($conn->connect_error) {
 		die ('<script>
-				alert("Impossible d\'acc�der � la base de donn�e");
+				alert("Impossible d\'accéder à la base de donnée");
 				window.location = "../MiseEnVente/index.html";
 			  </script>');
 	}
 
-	$sql = "INSERT INTO items (ID_Vendeur, Nom, Prix, Prix_Encheres, Description, Categorie, Etat, Marque, Type_de_vente_1, Type_de_vente_2, Quantite)
-	VALUES ('" . $ID_Vendeur . "', '" . $Nom . "', '" . $Prix . "', '" . $Prix_Encheres . "', '" . $Description .  "', '" . $Categorie .  "', '" . $Etat .  "', '" . $Marque .  "', '" . $Type_de_vente_1 .  "', '" . $Type_de_vente_2 .  "', '" . $Quantite .  "')";
+	$sql = "INSERT INTO items (ID_Vendeur, Nom, Prix, Prix_Encheres, Prix_depart_encheres, Description, Categorie, Etat, Marque, Type_de_vente_1, Type_de_vente_2, Quantite)
+	VALUES ('" . $ID_Vendeur . "', '" . $Nom . "', '" . $Prix . "', '" . $Prix_Encheres . "', '" . $Prix_Encheres . "', '" . $Description .  "', '" . $Categorie .  "', '" . $Etat .  "', '" . $Marque .  "', '" . $Type_de_vente_1 .  "', '" . $Type_de_vente_2 .  "', '" . $Quantite .  "')";
 
 	if ($conn->query($sql) === TRUE) {
 		$last_id = $conn->insert_id;

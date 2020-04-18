@@ -59,6 +59,8 @@
                             <a href="pagevendeur.html">Profil public boutique</a>
                             <hr color="grey" ">
                             <a href="#">Mes paramètres</a>
+                            <hr color="grey" ">
+                            <a href="../deconnexion.php">Déconnexion</a>
                 
                         </div>
 

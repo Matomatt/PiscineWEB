@@ -137,3 +137,7 @@
 .offre img{
     max-width: 50%;
 }
+
+.listeCartes td{
+    padding-right: 30px;
+}

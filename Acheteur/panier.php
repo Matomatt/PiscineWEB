@@ -16,13 +16,11 @@
 
     </head>
 
-    <body >
-
-             
+    <body>            
 
     <div class="container-fluid" >
-                   
-        <div class="col-lg-6 col-sm-4 col-xs-3">     
+        <!--permet de faire 3 colonnes-->
+        <div class="col-lg-6 col-sm-4 col-xs-3">    
           <div class="corps">
              <div class="panierachat">
                 <h3>Mon panier</h3>

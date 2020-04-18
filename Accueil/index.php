@@ -31,7 +31,7 @@
 	<!--external style sheet-->
 	<link href="styles.css" rel="stylesheet" type="text/css">
 
-	<title>Ebay ECE</title>
+	<title>ECEbay</title>
 </head>
 
 <body>

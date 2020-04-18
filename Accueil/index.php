@@ -71,7 +71,7 @@
 
           $first = 0;                   
 
-          while($row = $result->fetch_assoc()) 
+          while(($row = $result->fetch_assoc()) && $first < 10) 
           {
             /*on récupère les données de la table medias*/
             $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
@@ -82,16 +82,15 @@
               echo '<div class="carousel-item active">
                       <img class="img-fluid" onclick="location.href=\'../Produit/index.php?id=' . $row["ID"] . '\';" alt="Article" style="width: 26em; height: 23em; object-fit:contain; background: lightgrey;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">
                     </div>';
-              $first = 1;
             }
-
             else
             {
               /*affichage autres images*/
               echo '<div class="carousel-item">
                       <img class="img-fluid" onclick="location.href=\'../Produit/index.php?id=' . $row["ID"] . '\';" alt="Article" style="width: 26em; height: 23em; object-fit: contain; background: lightgrey;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">
                     </div>';
-            }             
+            }
+            $first+=1;
           }               
         ?>
   		</div>
@@ -120,7 +119,7 @@
 
         if (!$db_found) { die('Database not found'); }
         /*on récupère les données de la table items*/
-        $query = "SELECT * FROM items";
+        $query = "SELECT * FROM items WHERE (Type_de_vente_1='encheres' OR Type_de_vente_2='encheres') ORDER BY Date_MEV DESC";
         $result = mysqli_query($db_handle, $query);
 
         if (!$result)
@@ -132,8 +131,9 @@
         {
           die('Empty');
         }
-
-        while($row = $result->fetch_assoc()) 
+        
+        $nb=0;
+        while(($row = $result->fetch_assoc()) && $nb<5) 
         {
           if($row["Type_de_vente_1"] == "encheres" OR $row["Type_de_vente_2"] == "encheres")
           {
@@ -142,12 +142,13 @@
             $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
             echo '<img class="img-fluid" onclick="location.href=\'../Produit/index.php?id=' . $row["ID"] . '\';" style="width: auto; height: 16em; object-fit: contain; background: lightgrey;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">';
             echo '<div class="card-body text-center">
-                    <h4 class="card-title">'.$row["Nom"].'</h4>
-                    <p class="card-text">Prix : '.$row["Prix"].'€</p>
-                    <p class="card-text">Prix Enchères : '.$row["Prix_Encheres"].'€</p>
-                    <a href="../Produit/index.php?id='. $row["ID"].'" class="btn btn-primary">En savoir plus</a>
+                    <h4 class="card-title">'.$row["Nom"].'</h4>' .
+                    (($row["Type_de_vente_1"]!="offres")?'<p class="card-text">Prix ' . ($row["Type_de_vente_1"]=="encheres"?'enchères':'') . ' : '.(($row["Type_de_vente_1"]=="achat_imm")?$row["Prix"]:(($row["Type_de_vente_1"]=="encheres")?$row["Prix_Encheres"]:'-')).'</p>':'') .
+                    ($row["Type_de_vente_2"]=="encheres"?'<p class="card-text">Prix enchères : '.$row["Prix_Encheres"].'€</p>':'') .
+                    '<a href="../Produit/index.php?id='. $row["ID"].'" class="btn btn-primary">En savoir plus</a>
                   </div>
                 </div>';
+            $nb+=1;
           }
         }               
       ?>
@@ -169,7 +170,7 @@
 
         if (!$db_found) { die('Database not found'); }
         /*on récupère les données de la table items*/
-        $query = "SELECT * FROM items ORDER BY Date_MEV DESC";
+        $query = "SELECT * FROM items WHERE Type_de_vente_1='achat_imm' ORDER BY Date_MEV DESC";
         $result = mysqli_query($db_handle, $query);
 
         if (!$result)
@@ -182,7 +183,8 @@
           die('Empty');
         }
 
-        while($row = $result->fetch_assoc()) 
+        $nb=0;
+        while(($row = $result->fetch_assoc()) && $nb<5) 
         {
           if($row["Type_de_vente_1"] == "achat_imm" OR $row["Type_de_vente_2"] == "achat_imm")
           {
@@ -191,11 +193,12 @@
             $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
             echo '<img class="img-fluid" onclick="location.href=\'../Produit/index.php?id=' . $row["ID"] . '\';" style="width: auto; height: 16em; object-fit: contain; background: lightgrey;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">';
             echo '<div class="card-body text-center">
-                    <h4 class="card-title">'.$row["Nom"].'</h4>
-                    <p class="card-text">Prix : '.$row["Prix"].'€</p>
-                    <a href="../Produit/index.php?id='. $row["ID"].'" class="btn btn-primary">En savoir plus</a>
+                    <h4 class="card-title">'.$row["Nom"].'</h4>' .
+                    (($row["Type_de_vente_1"]!="offres")?'<p class="card-text">Prix : '.(($row["Type_de_vente_1"]=="achat_imm")?$row["Prix"]:(($row["Type_de_vente_1"]=="encheres")?$row["Prix_Encheres"]:'-')).'</p>':'') .
+                    '<a href="../Produit/index.php?id='. $row["ID"].'" class="btn btn-primary">En savoir plus</a>
                   </div>
                 </div>';
+            $nb+=1;
           }
         }               
       ?>

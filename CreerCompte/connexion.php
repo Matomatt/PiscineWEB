@@ -32,8 +32,8 @@
 			<h2 style="text-align: center;">Bonjour !</h2>
 			<h4 style="text-align: center;">Saissisez vos identifiants pour vous connecter</h4>
 				
-			<form action="connexionTraitement.php" method="post"
-				style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
+			<form action="connexionTraitement.php" method="post" style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
+				<?php if (isset($_GET["idItem"])) echo '<input type="number" name="ID_Item" value="' . $_GET["idItem"] .'" style="display: none">'; ?>
 				Adresse e-mail : <br> <input type="email" placeholder="e-mail" name="email"><br> 
 				Mot de passe :<br> <input type="password" placeholder="mot de passe" name="mdp"><br> 
 				<input type="submit" name='bouton' value="Se connecter"><br>

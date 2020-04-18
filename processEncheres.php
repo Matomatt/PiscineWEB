@@ -122,6 +122,21 @@
     
     //mail ( "gauchermatthieu918@gmail.com" , "Encheres processed" ,  $str);
     
+    $conn = new mysqli('localhost','root', '', 'ecebay');
+    
+    if ($conn->connect_error) { die('<script> alert("Database not found"); history.back(); </script>'); }
+    
+    $sql = "INSERT INTO `paniers` (`ID_Acheteur`, `ID_Item`, `Quantite`) VALUES ('8', '8', '8');";
+    
+    if ($conn->query($sql) === TRUE) {
+        $last_id = $conn->insert_id;
+        echo "Ajouté au panier ! " . $last_id . " id<br>";
+    } else {
+        echo '<script> alert("Error: ' . $sql . ' ' . $conn->error . '"); </script>';
+    }
+    
+    $conn->close();
+    
     
     /*
      $queryEnchere = 'SELECT * FROM encheres WHERE ID_Item=' . $item["ID"];

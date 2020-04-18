@@ -243,51 +243,31 @@
 		<br>	
 		<!-- .card-deck cr�er des grilles de taille automatique suivant le nombre d'articles-->
 		<div class="card-deck">
-			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Caddie</h4>
-    				<p class="card-text">Prix : inconnu</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
-  			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Pyjama</h4>
-    				<p class="card-text">Prix : 100�</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
-  			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Caddie</h4>
-    				<p class="card-text">Prix : inconnu</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
-  			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Pyjama</h4>
-    				<p class="card-text">Prix : 100�</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
-  			<!--un article-->
-  			<div class="card bg-basic">
-  				<img class="card-img-top" src="../Images/caddie.jpg" alt="Card image">
-    			<div class="card-body text-center">
-      				<h4 class="card-title">Caddie</h4>
-    				<p class="card-text">Prix : inconnu</p>
-    				<a href="#" class="btn btn-primary">En savoir plus</a>
-    			</div>
-  			</div>
+			<?php 
+    			$db_handle = mysqli_connect('localhost', 'root', '');
+    			$db_found = mysqli_select_db($db_handle, 'ecebay');
+    			
+    			if (!$db_found) { die('Database not found'); }
+    			
+    			$id = isset($_GET["id"])?$_GET["id"]:"";
+    			
+    			$categorie = mysqli_query($db_handle, "SELECT Categorie FROM items WHERE ID='" . $id . "';")->fetch_assoc()["Categorie"];
+    			$result = mysqli_query($db_handle, "SELECT * FROM items WHERE Categorie='" . $categorie . "' ORDER BY Date_MEV DESC;");
+    			$nb = 0;
+    			while (($item = $result->fetch_assoc()) && $nb<5)
+    			{
+    			    $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $item["ID"] . " AND indx = 0;")->fetch_assoc()["File"];
+    			    echo '<div class="card bg-basic text-center">';
+    			    echo '<img class="img-fluid" onclick="location.href=\'../Produit/index.php?id=' . $item["ID"] . '\';" style="width: auto; height: 16em; object-fit: contain; background: lightgrey;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">';
+    				echo '<div class="card-body text-center">
+                            <h4 class="card-title">'.$item["Nom"].'</h4>' .
+                            (($item["Type_de_vente_1"]!="offres")?'<p class="card-text">Prix : '.(($item["Type_de_vente_1"]=="achat_imm")?$item["Prix"]:(($item["Type_de_vente_1"]=="encheres")?$item["Prix_Encheres"]:'-')).'</p>':'') .
+                            '<a href="../Produit/index.php?id='. $item["ID"].'" class="btn btn-primary">En savoir plus</a>
+                          </div>
+                        </div>';
+    			    $nb+=1;
+    			}
+			?>
   		</div>
 	</div>
 	<br>

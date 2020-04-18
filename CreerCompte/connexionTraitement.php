@@ -80,13 +80,13 @@
             } else {
                 die('<script>
                         alert("Veuillez remplir tous les champs");
-        				window.location = "../CreerCompte/connexion.html";
+        				window.location = "../CreerCompte/connexion.php";
         			  </script>');
             }
         } else {
             die('<script>
                     alert("Database not found !");
-    				window.location = "../CreerCompte/connexion.html";
+    				window.location = "../CreerCompte/connexion.php";
     			  </script>');
         }
     }

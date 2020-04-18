@@ -2,8 +2,8 @@
 
 .leftnavbar {
     
-    height: 500px;
-    width: 200px;
+
+
     border-style: groove;
     z-index: 1;
     top: 0;
@@ -27,7 +27,7 @@
 
 .leftnavbartop{
     
-    position: fixed;
+
     
     background-color: #111;
     border-collapse: collapse;
@@ -130,4 +130,17 @@
 .PublierItem button, .AddSupprItem button{
     margin-top: 10%;
     margin-left: 20%;
+}
+
+.offres img{
+    max-width:60%;
+}
+
+.offres table{
+    border-style: groove;
+    border-width: 2px;
+}
+
+.offres td {
+    vertical-align: middle;
 }

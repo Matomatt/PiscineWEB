@@ -3,16 +3,22 @@
 <html>
     <head >
         <meta charset= "utf-8">
-        <meta name= "viewport" content= "width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="style.css">
 
 
-        <link rel= "stylesheet" href= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.j s"> </script>
-        <script src= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/j s/bootstrap.min.j s"> </script>
-        <link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <!--accents-->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+        <!--reseting my viewport, for making my website responsive-->
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <!-- importing bootstrap-->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
     </head>
 
@@ -34,22 +40,22 @@
                 <div class="container-fluid" >
                     <div class="row" >
                         <div class="leftnavbartop col-lg-2 col-sm-4 col-xs-3">
-                            <a><img class="img-circle" src="../Images/avatar.jpg" style="max-width: 50%;"></a>
+                            <a><img class="rounded-circle" src="../Images/avatar.jpg" style="max-width: 50%;"></a>
                             <br>
                             <a style="color: #fff; ">Mon nom</a>
                              
                         </div>
 
-                        <div class="topright col-lg-5 center-block"  style=float:none>
+                        <div class="topright col-lg-5 mx-auto"  style=float:none>
                             MON COMPTE
                         </div>
                     </div>
                 
-                    <div class="row">
+                    <div class="row ">
                         <div class="leftnavbar col-lg-2 col-sm-4 col-xs-3">
                             
                          <!-- Mettre les liens-->
-                         <a href="compteclient.html"> TABLEAU DE BORD</a>
+                         <a href="compteclient.html" style="text-align: center; font-size: 15px; margin-top: 2%;"> TABLEAU DE BORD</a>
                             <a href="info.html">Informations personelles</a>
                             <hr  color="grey" ">
                             <a href="#">Informations bancaires</a>
@@ -66,8 +72,8 @@
                 
                         </div>
                 
-                        <div class="wishlist" >
-                            <div class="col-lg-10 col-xs-5">
+                        <div class="wishlist col-lg-4"  style=float:none >
+                            <div class="col-lg-5 col-xs-5">
                                 <h3>Ma wishlist</h3>
                                 <table type="table" >
                                     <tr style="text-align: justify;">
@@ -140,8 +146,8 @@
                             </div>
             
                         </div>
-                        <div class="enchere" >
-                            <div class="col-lg-10 col-xs-5">
+                        <div class="enchere col-lg-4" >
+                            <div class="col-lg-2 col-xs-5">
                                 <h3>Consulté dernièrement</h3>
                                 <
                                 <button class="btn btn-primary" onclick="">Modifier un produit</button><br>

@@ -59,7 +59,7 @@
 			     
                         </div>
 
-                        <div class="topright col-lg-5 mx-auto"  style=float:none>
+                        <div class="topright col-lg-5 mx-auto"  style="float: none;">
                             <?php
                             $page = isset($_GET["page"])?$_GET["page"]:"";
                             switch ($page) {
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                 
-                    <div class="row ">
+                    <div class="row">
                     	<div class="leftnavbar navbar-expand-lg col-lg-2 col-sm-4 col-xs-3">
                          	<a href="../Acheteur/mon_compte.php" style="font-size: 15px; margin-top: 2%; text-decoration: underline overline; margin-left: 8%"> TABLEAU DE BORD</a>
                          	<button class="navbar-toggler navbar-light container-fluid" type="button" data-toggle="collapse" data-target="#leftPanel">
@@ -99,13 +99,16 @@
                     
                             </div>
                 		</div>
-                		<?php
-                            $page = isset($_GET["page"])?$_GET["page"]:"";
-                            if ($page!="")
-                                include '../Acheteur/'.$page.'.php';
-                            else
-                                include '../Acheteur/tableau_de_bord.php';
-                        ?>
+                		
+                		<div class="col-lg-8">
+                    		<?php
+                                $page = isset($_GET["page"])?$_GET["page"]:"";
+                                if ($page!="")
+                                    include '../Acheteur/'.$page.'.php';
+                                else
+                                    include '../Acheteur/tableau_de_bord.php';
+                            ?>
+                        </div>
                 	</div>
                 
 

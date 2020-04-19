@@ -16,9 +16,12 @@
     $db_handle = mysqli_connect('localhost', 'root', '');
     $db_found = mysqli_select_db($db_handle, $database);
     
-
-    $id=(isset($_SESSION["UserID"])?$_SESSION["UserID"]:"");
-    $user=(isset($_SESSION["UserType"])?$_SESSION["UserType"]:"");
+    session_start();
+    $id=(isset($_SESSION['UserID'])?$_SESSION['UserID']:"");
+    $user=(isset($_SESSION['UserType'])?$_SESSION['UserType']:"");
+    
+    if ($id=="")
+        die ('<script> alert("Veuillez vous connecter"); window.location = "../CreerCompte/connexion.php"; </script>');
 
    
     if(!empty($_POST['ajoutercarte']))
@@ -32,12 +35,14 @@
 
             if($result)
             {
-                echo "okay";
+                echo '<script> window.location = "../'.$user.'/mon_compte.php?page=infobancaires"; </script>';
             }
             else
             {
-                echo " La carte n'a pas été enregistrée.";
-                echo "Erreur: " . $sql . "<br>" . mysqli_error($db_handle);
+                echo '<script>
+                        alert("La carte n\'a pas été enregistrée. ' . mysqli_error($db_handle).'");
+                        window.location = "../'.$user.'/mon_compte.php?page=infobancaires";
+                      </script>';
             }
 
         }
@@ -45,7 +50,7 @@
         {
             die('<script>
                alert("Veuillez remplir tout les champs");
-               window.location = "../Acheteur/infobancaires.php";
+               window.location = "../'.$user.'/mon_compte.php?page=infobancaires";
                </script>') ;
         }
     }
@@ -73,7 +78,7 @@
         {
             die('<script>
             alert("Veuillez remplir tout les champs");
-            window.location = "../Acheteur/infobancaires.php";
+            window.location = "../'.$user.'/mon_compte.php?page=infobancaires";
             </script>') ;
         }
     }

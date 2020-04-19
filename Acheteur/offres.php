@@ -2,8 +2,8 @@
     <table class="table">
     
         <tr style="text-align: justify;">
-            <td style="max-width: 200px;">
-                <img src="../Images/pic.png" >
+            <td>
+                <img src="../Images/pic.png" style="max-width: 10em;">
             </td>
             <td >
                 <p><strong>Nom produit</strong></p>

@@ -1,6 +1,7 @@
 
 <?php
 	include '../header.php';
+	include '../processEncheres.php';
 ?>
 
 <!DOCTYPE html>

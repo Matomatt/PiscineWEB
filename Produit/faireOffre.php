@@ -28,7 +28,7 @@
         }
         
         $conn->close();
-        echo '<script> window.location.href= "../Acheteur/offres.php"; </script>';
+        echo '<script> window.location.href= "../Acheteur/mon_compte.php?page=offres"; </script>';
     }
     else
         echo '<script> alert("Erreur"); window.location.href= "../Accueil/index.php"; </script>';

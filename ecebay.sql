@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 18, 2020 at 09:54 PM
+-- Generation Time: Apr 19, 2020 at 02:23 PM
 -- Server version: 8.0.18
 -- PHP Version: 7.3.12
 
@@ -85,18 +85,20 @@ CREATE TABLE IF NOT EXISTS `adresses` (
   `Adresse_ligne_1` text NOT NULL,
   `Adresse_ligne_2` text NOT NULL,
   `Ville` tinytext NOT NULL,
-  `Code_postale` tinytext NOT NULL,
+  `Code_postale` tinytext CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `Pays` tinytext NOT NULL,
-  `Telephone` tinytext NOT NULL,
+  `Telephone` tinytext CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `adresses`
 --
 
 INSERT INTO `adresses` (`ID`, `Nom`, `Adresse_ligne_1`, `Adresse_ligne_2`, `Ville`, `Code_postale`, `Pays`, `Telephone`) VALUES
-(1, 'Jean', '3 rue des iseau', '', 'Morain', '59864', 'France', '0729864531');
+(1, 'Jean', '3 rue des iseau', '', 'Morain', '59864', 'France', '0729864531'),
+(2, 'Antine', '5 boulevard maréchale', '', 'Gué-doux', '68445', 'France', '0698547897'),
+(4, 'Le miro', 'Le-Plessi', '', 'Vigagne', '64458', 'France', '0689474826');
 
 -- --------------------------------------------------------
 
@@ -110,7 +112,8 @@ CREATE TABLE IF NOT EXISTS `carte_bancaires` (
   `ID_Acheteur` int(11) NOT NULL,
   `Nom` tinytext NOT NULL,
   `Numero` tinytext NOT NULL,
-  `Date_Expiration` date NOT NULL,
+  `Annee_exp` int(11) NOT NULL,
+  `Mois_exp` int(11) NOT NULL,
   `Code` tinytext NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_Acheteur` (`ID_Acheteur`)
@@ -209,7 +212,7 @@ CREATE TABLE IF NOT EXISTS `items` (
   `Frais_de_port` double NOT NULL,
   `Vendu` tinyint(1) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `items`
@@ -220,7 +223,8 @@ INSERT INTO `items` (`ID`, `ID_Vendeur`, `Nom`, `Prix`, `Prix_Encheres`, `Prix_d
 (9, 1, 'Ravissant vase forme navette signature à identifier !', 0, 63, 60, '<p>Ravissant vase forme navette.\r\n\r\nHauteur : 14cm\r\n\r\nPlus de photos ou d\'infos sur demande\r\n\r\nEnvoi en colis bien protégé avec suivi de commande</p>', 'BonMusee', 'neuf', '', 'encheres', '', '2020-04-10 11:52:08', 1, '', 0, 0),
 (8, 1, 'Masque coréen', 80, 45, 40, '<p>Un superbe masque traditionnel du village hahoe.</p>', 'BonMusee', 'neuf', '', 'achat_imm', 'encheres', '2020-04-18 12:57:18', 1, '', 0, 0),
 (12, 1, 'Tableau HST d\'après Claude Monet \" la femme  l\'ombrelle\" 54,5 x 66,5 cm', 300, 0, 0, '<p>Tableau huile sur toile d&#39;apr&egrave;s l&#39;oeuvre de Claude Monet &quot;La Femme &agrave;&nbsp; l&#39;ombrelle&quot; tournez &agrave; droite 54,5 x 66,5 cm</p>', 'BonMusee', 'neuf', '', 'achat_imm', '', '2020-04-18 19:46:38', 1, '', 0, 0),
-(13, 1, 'Ancienne épée d\'escrime', 55, 0, 0, '<p><strong>Ancienne &eacute;p&eacute;e&nbsp;escrime longueur 1m 05</strong></p><p>&nbsp;</p><p>Mati&egrave;re:Bronze</p><p>Type:Objet de m&eacute;tier</p><p>Authenticit&eacute;:Original</p><p>Origine:France</p>', 'BonMusee', 'neuf', '', 'offres', '', '2020-04-18 23:46:56', 1, '', 0, 0);
+(13, 1, 'Ancienne épée d\'escrime', 55, 0, 0, '<p><strong>Ancienne &eacute;p&eacute;e&nbsp;escrime longueur 1m 05</strong></p><p>&nbsp;</p><p>Mati&egrave;re:Bronze</p><p>Type:Objet de m&eacute;tier</p><p>Authenticit&eacute;:Original</p><p>Origine:France</p>', 'BonMusee', 'neuf', '', 'offres', '', '2020-04-18 23:46:56', 1, '', 0, 0),
+(14, 2, 'Bouddha Ancien Laqué Rouge Chine Antique Buddha Chinese China', 299, 200, 200, '<p>Bouddha Ancien Laqu&eacute; Rouge Chine Antique Buddha Chinese China</p><p>Dimensions totale avec socle : 11 cm * 8 cm</p>', 'BonMusee', 'use', '', 'achat_imm', 'encheres', '2020-04-19 12:30:06', 1, 'Colissimo', 15, 0);
 
 -- --------------------------------------------------------
 
@@ -235,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `medias` (
   `File` tinytext NOT NULL,
   `indx` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `medias`
@@ -253,7 +257,13 @@ INSERT INTO `medias` (`ID`, `ID_Item`, `File`, `indx`) VALUES
 (9, 12, 'uhsieq2rmazai2vkcn10zvkr8klcbtdr.jpg', 3),
 (10, 13, 'y13p1waj8tzu1d8i55nizqynr19u86mz.jpg', 0),
 (11, 13, 'd12x245div7045s8pcl58xevx5cbpse5.jpg', 1),
-(12, 13, 'zbbfv11qec99fgntdcihho610rpqz9uw.jpg', 2);
+(12, 13, 'zbbfv11qec99fgntdcihho610rpqz9uw.jpg', 2),
+(13, 14, 'jxzqzg0i0jdjp9x50wv4drnafhimlcnv.jpg', 0),
+(14, 14, '5t2yhwn4dkvqvw25l1b9bcethvbvcvii.jpg', 1),
+(15, 14, 'ui28v3dp73q6s7el1mpbnqylhu06kkl5.jpg', 2),
+(16, 14, 'eomct0bhwymr6660y7oxj9r2u9kjq1di.jpg', 3),
+(17, 14, 'la8q5b0u1xb1hbcwyykjf4i89wg799c7.jpg', 4),
+(18, 14, 'h03vzelo2nzreatgepotjyj1g2m0zoib.jpg', 5);
 
 -- --------------------------------------------------------
 
@@ -276,7 +286,8 @@ CREATE TABLE IF NOT EXISTS `notes` (
 --
 
 INSERT INTO `notes` (`Note`, `Commentaire`, `Date`, `ID_Item`, `ID_Acheteur`, `ID_Vendeur`) VALUES
-(10, 'Excellent', '2020-04-17 17:30:46', 2, 1, 1);
+(10, 'Excellent', '2020-04-17 17:30:46', 2, 1, 1),
+(3, 'Coucou', '2020-04-19 14:45:50', 8, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -322,17 +333,15 @@ CREATE TABLE IF NOT EXISTS `paniers` (
   `Quantite` int(11) NOT NULL,
   `Date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `paniers`
 --
 
 INSERT INTO `paniers` (`ID`, `ID_Acheteur`, `ID_Item`, `Quantite`, `Date`) VALUES
-(12, 1, 12, 1, '2020-04-18 20:00:59'),
-(8, 1, 8, 1, '2020-04-17 12:05:50'),
-(16, 1, 1, 3, '2020-04-18 20:08:04'),
-(17, 1, 9, 1, '2020-04-18 20:52:36');
+(20, 1, 14, 1, '2020-04-19 12:48:31'),
+(21, 1, 8, 1, '2020-04-19 14:17:18');
 
 -- --------------------------------------------------------
 
@@ -361,14 +370,15 @@ CREATE TABLE IF NOT EXISTS `soldes` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Montant` double NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `soldes`
 --
 
 INSERT INTO `soldes` (`ID`, `Montant`) VALUES
-(1, 100);
+(1, 100),
+(8, 0);
 
 -- --------------------------------------------------------
 
@@ -430,21 +440,21 @@ CREATE TABLE IF NOT EXISTS `vendeurs` (
   `Prenom` tinytext NOT NULL,
   `ID_Adresse` int(11) NOT NULL,
   `Boutique` tinytext NOT NULL,
-  `ID_Medias` int(11) NOT NULL,
   `ID_Solde` int(11) NOT NULL,
   `Telephone` tinytext NOT NULL,
   PRIMARY KEY (`ID`),
-  UNIQUE KEY `ID_Medias` (`ID_Medias`),
   UNIQUE KEY `ID_Solde` (`ID_Solde`),
   UNIQUE KEY `Boutique` (`Boutique`(255))
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `vendeurs`
 --
 
-INSERT INTO `vendeurs` (`ID`, `Email`, `Password`, `Nom`, `Prenom`, `ID_Adresse`, `Boutique`, `ID_Medias`, `ID_Solde`, `Telephone`) VALUES
-(1, 'matthieu.gaucher@edu.ece.fr', 'lebonmdp', 'G', 'M', 0, 'NitroBoutique', 1, 1, '');
+INSERT INTO `vendeurs` (`ID`, `Email`, `Password`, `Nom`, `Prenom`, `ID_Adresse`, `Boutique`, `ID_Solde`, `Telephone`) VALUES
+(1, 'matthieu.gaucher@edu.ece.fr', 'lebonmdp', 'G', 'M', 0, 'NitroBoutique', 1, ''),
+(2, 'pamplemousse@orange.fr', 'agrume101', 'Antine', 'Clem', 2, 'Choppe', 0, '0698547897'),
+(4, 'acacia@bouygues.com', 'pneuneuneu', 'Le miro', 'Robert', 4, 'Mag à zinzin', 8, '0689474826');
 
 -- --------------------------------------------------------
 

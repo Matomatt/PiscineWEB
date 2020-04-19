@@ -1,3 +1,14 @@
+<?php 
+            session_start();
+
+            //identifier la BDD
+            $database = "ecebay";
+
+            // se connecter à la BDD
+            $db_handle = mysqli_connect('localhost', 'root', '');
+            $db_found = mysqli_select_db($db_handle, $database);
+            $id=(isset($_SESSION["UserID"])?$_SESSION["UserID"]:"");
+        ?>
 <head>
 	<script>
         function addpaypal ()
@@ -87,8 +98,10 @@
                         <input type="number" placeholder="Numero" name="numeroCarte" />
                     </div>
                     <div class="form-group">
-                        <p>Date d'expiration : (AAAA/MM/JJ) </p>
-                        <input type="date"  placeholder="Date d'expiration" name="dateCarte" />
+                        <p>Date d'expiration : </p>
+                        <input type="number" min="2020" max="2040" placeholder="Annee" name="anneeCarte" />
+                        <input type="number" max="12" placeholder="Mois" name="moisCarte" />
+
                     </div>
                     <div class="form-group">
                         <input type="text"  placeholder="Cryptogramme" name="cryptoCarte" />

@@ -5,7 +5,8 @@ session_start();
     $mdpPaypal = isset($_POST["mdpPaypal"])? $_POST["mdpPaypal"] : "";
     $nomCarte = isset($_POST["nomCarte"])? $_POST["nomCarte"] : "";
     $numeroCarte = isset($_POST["numeroCarte"])? $_POST["numeroCarte"] : "";
-    $dateCarte = isset($_POST["dateCarte"])? $_POST["dateCarte"] : "";
+    $anneeCarte = isset($_POST["anneeCarte"])? $_POST["anneeCarte"] : "";
+    $moisCarte = isset($_POST["moisCarte"])? $_POST["moisCarte"] : "";
     $cryptoCarte =isset($_POST["cryptoCarte"])? $_POST["cryptoCarte"] : "";
 
     
@@ -23,10 +24,10 @@ session_start();
    
     if(!empty($_POST['ajoutercarte']))
     { 
-        if( !empty($_POST["nomCarte"]) && !empty($_POST['numeroCarte']) && !empty($_POST["dateCarte"]) && !empty($_POST['cryptoCarte']))
+        if( !empty($_POST["nomCarte"]) && !empty($_POST['numeroCarte']) && !empty($_POST["anneeCarte"]) && !empty($_POST['moisCarte']) && !empty($_POST['cryptoCarte']))
         {
-            $sql= "INSERT INTO carte_bancaires (ID_Acheteur, Nom, Numero, Date_Expiration, Code)
-                VALUES ('$id','$nomCarte', '$numeroCarte','$dateCarte','$cryptoCarte')";
+            $sql= "INSERT INTO carte_bancaires (ID_Acheteur, Nom, Numero, Annee_exp, Mois_exp, Code)
+                VALUES ('$id','$nomCarte', '$numeroCarte','$anneeCarte','$moisCarte','$cryptoCarte')";
 
             $result = mysqli_query($db_handle, $sql); 
 

@@ -85,7 +85,7 @@
                         <input type="text"  placeholder="Nom du titulaire" name="nomCarte" />
                     </div>
                     <div class="form-group">
-                        <input type="number" max="16" placeholder="Numero" name="numeroCarte" />
+                        <input type="number" placeholder="Numero" name="numeroCarte" />
                     </div>
                     <div class="form-group">
                         <p>Date d'expiration : </p>

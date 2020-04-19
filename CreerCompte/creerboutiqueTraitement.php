@@ -61,11 +61,18 @@
             else
             {   // verifier si le mot de passe et le mot de passe de verification sont les mêmes
                 if( ($mdp) == ($mdpverif))
-                {   //ajouter a la base de donnée les infos rentrées
-                    $sql = "INSERT INTO vendeurs (Email, Password, Nom, Prenom, Boutique, Telephone) 
-                        VALUES  ('$email','$mdp','$nom','$prenom','$nomboutique', '$tel')";
+                {   
+                    //ajouter a la base de donnée les infos rentrées
+                    $ID_Solde = "";
+                    if (mysqli_query($db_handle, "INSERT INTO `soldes` (`Montant`) VALUES ('0');"))
+                        $ID_Solde = mysqli_query($db_handle, "SELECT LAST_INSERT_ID() as lastID FROM soldes")->fetch_assoc()["lastID"];
+                    
+                    $sql = "INSERT INTO vendeurs (Email, Password, Nom, Prenom, Boutique, ID_Solde, Telephone) 
+                        VALUES  ('$email','$mdp','$nom','$prenom','$nomboutique', '$ID_Solde', '$tel')";
+                    echo $sql;
 
-                    $result = mysqli_query($db_handle, $sql); 
+                    $result = mysqli_query($db_handle, $sql);
+                    
 
                     if($result)
                         {
@@ -78,13 +85,7 @@
                             // relier le ID de la table adresse à ID_Adresse de la table vendeurs
                             if($result2)
                             {
-
-                                $trouverID = "SELECT MAX(ID) FROM adresses";
-                                echo "trouver iD = . $trouverID .";
-                               
-                                //$sqlupdate = "UPDATE vendeurs SET ID_Adresse = '$trouverID'";
-
-                                $sqlupd = "UPDATE vendeurs A set ID_Adresse = (SELECT max(id) from adresses) WHERE A.Email ='$email' ";
+                                $sqlupd = "UPDATE vendeurs A set ID_Adresse = (SELECT LAST_INSERT_ID() from adresses) WHERE A.Email ='$email' ";
                                 $result3 = mysqli_query($db_handle, $sqlupd);
 
                                 if ($result3)
@@ -99,9 +100,7 @@
                                         $_SESSION['UserID'] = $ID_Vendeur;
                                         $_SESSION['UserType'] = "Vendeur";
                                     }
-                                    die('<script>
-                				        window.location = "../Vendeur/mon_compte.php";
-                			            </script>');
+                                    //die('<script> window.location = "../Vendeur/mon_compte.php"; </script>');
                                 }
                                 else{
                                     die('<script>
@@ -120,8 +119,8 @@
                     else
                     {
                         die('<script>
-                        alert("N a pas été ajouté dans la base de donnée");
-                        window.location = "../CreerCompte/creerboutique.html";
+                            alert("N\'a pas été ajouté dans la base de donnée");
+                            window.location = "../CreerCompte/creerboutique.html";
                         </script>') ;
                      //echo "Erreur: " . $sql . "<br>" . mysqli_error($db_handle);
 

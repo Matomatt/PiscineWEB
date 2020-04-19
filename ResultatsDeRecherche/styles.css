@@ -1,17 +1,7 @@
-.layout {
-    margin: 4em auto;
-    padding: 1em;
-    position: relative;
-}
-
-.layout .form-control, .layout input {
-    border-radius: 0;
-}
-
 #typeVenteFilter{
 	margin: 0px;
 }
 
 .itemFrontImg{
-	width: 10%;
+	max-width: 10%;
 }

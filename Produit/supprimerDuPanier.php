@@ -1,27 +1,24 @@
 <?php
 
-	$db_handle = mysqli_connect('localhost', 'root', '');
-    $db_found = mysqli_select_db($db_handle, 'ecebay');
+	if (isset($_GET["id1"]) && isset($_GET["id2"]))
+    {        
+        $conn = new mysqli('localhost','root', '', 'ecebay');
+        
+        if ($conn->connect_error) { die('<script> alert("Database not found"); history.back(); </script>'); }
+        
+        $queryS = "DELETE FROM paniers WHERE ID=".$_GET["id1"]." AND ID_Acheteur=".$_GET["id2"];
+		$resultS = mysqli_query($conn, $queryS);
 
-    if (!$db_found) { die('Database not found'); }
-	
-	/*$id=$_GET['idItem'];
-
-	echo $id;*/
-
-	$query = "DELETE FROM paniers WHERE idItem=".$_GET["idItem"]."";
-	/*$id=$_GET['idItem']." ";*/
-
-
-    $result = mysqli_query($db_handle, $query);
-
-	// requête de suppression
-	if($result)
-	{
-     	echo $id." a bien été supprimé";
-     	echo '<a href="../Acheteur/panier.php">retour au panier</a>';
-    }
-	else
-     	echo "Erreur lors de la suppression";
-
+       
+       if ($conn->resultS === TRUE) {
+            echo "Ajouté au panier !<br>";
+        } 
+        else {
+            echo '<script> alert("Error: ' . $sql . ' ' . $conn->error . '"); </script>';
+        }
+        
+        $conn->close();
+        
+        echo '<script> window.location.href= "../Acheteur/panier.php?id=' . $_GET["id1"] . '"; </script>';
+    }   
 ?>

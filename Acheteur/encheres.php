@@ -2,7 +2,7 @@
     session_start();
 
     //identifier la BDD
-    $database = "ecebay";
+    $database = "ecebay2";
 
     // se connecter à la BDD
     $db_handle = mysqli_connect('localhost', 'root', '');
@@ -19,7 +19,7 @@
 
         $sql= "SELECT Prix_Max,Prix_Encheres, Nom, Description, File
                 FROM encheres E, items I, medias M
-                WHERE E.ID_Acheteur = '$id' AND M.ID_Item =  I.ID AND E.ID_ITEM = M.ID_Item";
+                WHERE E.ID_Acheteur = '$id' AND M.ID_Item =  I.ID AND E.ID_ITEM = M.ID_Item AND M.indx ='0'";
         $result = mysqli_query($db_handle, $sql);
 
         while ($row = mysqli_fetch_array($result)){
@@ -43,28 +43,7 @@
         </tr>
         
         <?php } ?>
-        <table type="table" >
-            <tr style="text-align: justify;">
-                <td>
-                     <img src="../Images/pic.png" style="max-width: auto;">
-                </td>
-                   <td style="padding: 5px; padding-right: 15px;">
-                       <p class="nomproduit"><strong>Nom produit</strong></p>
-                       <p class="description">Description Produit Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Fuga et veritatis voluptas reprehenderit iste iusto ducimus! </p>
-                   </td>
-                  <td>
-                     <p class="prix">Prix enchéri</p>
-                </td>
-                <td>
-                    <p class="prix">Enchère actuelle</p>
-               </td>
-               <td>
-                <p class="temps">Temps restant</p>
-             </td>
 
-            </tr>
-    </table>
 </div>
 
 </div>

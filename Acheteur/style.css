@@ -1,7 +1,7 @@
 .leftnavbar {
     
-    height: 500px;
-    width: 200px;
+
+
     border-style: groove;
     z-index: 1;
     top: 0;
@@ -24,8 +24,6 @@
 
 
 .leftnavbartop{
-    
-    position: fixed;
     
     background-color: #111;
     border-collapse: collapse;
@@ -51,13 +49,12 @@
     font-size: 40px;
 
     margin-top: 2%;
-} 
+}  
 
 .wishlist, .enchere{
     margin-left: 5%;
     border-style:groove;
-     width: 400px;
-    height:400px;
+    height: 600px;
     text-align: center;
     overflow-x: hidden;
     overflow-x: auto;

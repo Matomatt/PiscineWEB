@@ -1,5 +1,5 @@
 
-
+/*https://codepen.io/davidelvar/pen/dYMgrR */
 .leftnavbar {
     
 
@@ -137,10 +137,45 @@
 }
 
 .offres table{
-    border-style: groove;
+    border: 3px solid #E1E1E3;
     border-width: 2px;
+
 }
 
 .offres td {
     vertical-align: middle;
+    text-align: center;
+}
+
+.button1{
+    padding: 7px 7px 7px 7px;
+    font-family: monospace;
+    font-size: 15px;
+    color: grey;
+    letter-spacing: 1px;
+    line-height: 15px;
+    border: 2px solid grey;
+    border-radius: 50px;
+    background-color: transparent;
+    transition: all 0.3s ease 0s;
+}
+
+.button1:hover{
+
+    border: 2px solid #1289A7 ;
+    color: white;
+    background-color: #1289A7;
+
+}
+
+.refuse:hover{
+    border: 2px solid red ;
+    color: white;
+    background-color: red;
+}
+
+.accept:hover{
+    border: 2px solid green ;
+    color: white;
+    background-color: green;
 }

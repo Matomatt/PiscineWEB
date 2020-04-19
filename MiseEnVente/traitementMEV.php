@@ -18,7 +18,8 @@
 ?>
 
 <?php
-	$ID_Vendeur = 1; //Variable de session
+    session_start();
+    $ID_Vendeur = isset($_SESSION['UserID']) && isset($_SESSION['UserType'])?($_SESSION['UserType']=="Vendeur" || $_SESSION['UserType']=="Admin"?$_SESSION['UserID']:""):""; //Variable de session
 	$Nom = isset($_POST["titre"])?lesBonsBackslash($_POST["titre"]):"";
 	$Prix = isset($_POST["prix"])?$_POST["prix"]:"";
 	$Prix_Encheres = isset($_POST["prixencheres"])?$_POST["prixencheres"]:"";
@@ -35,6 +36,13 @@
 
 	$error ="";
 
+	if ($ID_Vendeur == "")
+	{
+	    die('<script>
+                alert("Vous n\'êtes pas connecté en tant que vendeur !");
+                window.location = "../CreerCompte/connexion.php";
+            </script>') ;
+	}
 	if ($Nom == "")
 	{
 		$error .= "Il faut spécifier le titre de l'annonce. ";
@@ -143,8 +151,8 @@
 			  </script>');
 	}
 
-	$sql = "INSERT INTO items (ID_Vendeur, Nom, Prix, Prix_Encheres, Prix_depart_encheres, Description, Categorie, Etat, Marque, Type_de_vente_1, Type_de_vente_2, Quantite)
-	VALUES ('" . $ID_Vendeur . "', '" . $Nom . "', '" . $Prix . "', '" . $Prix_Encheres . "', '" . $Prix_Encheres . "', '" . $Description .  "', '" . $Categorie .  "', '" . $Etat .  "', '" . $Marque .  "', '" . $Type_de_vente_1 .  "', '" . $Type_de_vente_2 .  "', '" . $Quantite .  "')";
+	$sql = "INSERT INTO items (ID_Vendeur, Nom, Prix, Prix_Encheres, Prix_depart_encheres, Description, Categorie, Etat, Marque, Type_de_vente_1, Type_de_vente_2, Quantite, Type_livraison, Frais_de_port)
+	VALUES ('" . $ID_Vendeur . "', '" . $Nom . "', '" . $Prix . "', '" . $Prix_Encheres . "', '" . $Prix_Encheres . "', '" . $Description .  "', '" . $Categorie .  "', '" . $Etat .  "', '" . $Marque .  "', '" . $Type_de_vente_1 .  "', '" . $Type_de_vente_2 .  "', '" . $Quantite .  "', '" . $Type_livraison .  "', '" . $Frais_de_port .  "')";
 
 	if ($conn->query($sql) === TRUE) {
 		$last_id = $conn->insert_id;
@@ -171,5 +179,5 @@
 
 	$conn->close();
 	
-	echo '<script> window.location.href= "../Vendeur/pagevendeur.html"; </script>';
+	echo '<script> window.location.href= "../Vendeur/boutique.php?id='.$ID_Vendeur.'"; </script>';
 ?>

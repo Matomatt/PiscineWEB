@@ -23,15 +23,7 @@
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-        <title>Panier ECEbay</title>
-
-        <script type="text/javascript">
-        function ajouterAuPanier(id1, id2)
-        {
-            window.location.href = "../Produit/supprimerDuPanier.php?id1=" + id + "&id2=" + id2;
-        }
-        </script>
-
+        <title>Panier - ECEbay</title>
     </head>
 
     <body>           
@@ -50,25 +42,16 @@
                     if (!$db_found) { die('Database not found'); }
 
                     /*Pour avoir l'utilisateur connecté*/
-                    if (!isset($_SESSION["UserID"]) || !isset($_SESSION["UserType"]))
-                    {
-                        die('<script>
-                                alert("Veuillez vous connecter à votre compte");
-                                window.location = "../CreerCompte/connexion.php";
-                             </script>');
-                    }
-                    if ($_SESSION["UserType"] != "Acheteur")
-                    {
-                        die('<script>
-                                alert("Veuillez vous connecter à votre compte Acheteur");
-                                window.location = "../CreerCompte/connexion.php";
-                             </script>');
-                    }
+                    if (!isset($_SESSION['UserType']) || !isset($_SESSION['UserID']))
+                        echo '<script> window.location = "../CreerCompte/connexion.php"; </script>';
+                        
+                    if ($_SESSION['UserType'] != "Acheteur")
+                        echo '<script> window.location = "../CreerCompte/connexion.php"; </script>';
                                             
 
                     /*Pour avoir id de l'acheteur*/
-                    $id=(isset($_SESSION["UserID"])?$_SESSION["UserID"]:"");
-                    $query = "SELECT * FROM items WHERE ID IN (SELECT Id_Item FROM paniers WHERE ID_Acheteur=".$id.")";
+                    $ID_Acheteur=(isset($_SESSION["UserID"])?$_SESSION["UserID"]:"");
+                    $query = "SELECT * FROM items WHERE ID IN (SELECT Id_Item FROM paniers WHERE ID_Acheteur=".$ID_Acheteur.")";
                     $result = mysqli_query($db_handle, $query);
 
                     if (!$result)
@@ -77,16 +60,12 @@
                     }
 
                     $prixTotalArticle=0;
-
                     $prixTotalArticles=0;
-
-                    $ID_Acheteur=0;
-
-                    $item=0;
+                    $totalfdp = 0;
 
                     while($row = $result->fetch_assoc()) 
                     {   
-                        $queryQT = "SELECT Quantite FROM paniers WHERE Id_Item =" . $row["ID"] . " AND ID_Acheteur=".$id.";";
+                        $queryQT = "SELECT Quantite FROM paniers WHERE Id_Item =" . $row["ID"] . " AND ID_Acheteur=".$ID_Acheteur.";";
                         $resultQT = mysqli_query($db_handle, $queryQT);
                         $Quantite = 1;
                         if ($resultQT)
@@ -96,41 +75,40 @@
                         /*on récupère les données de la table medias*/
                         $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
                         echo '<tr>
-                                <td><img style="width:100px;" src="../UploadedContent/'. (($img!="") ? $img : 'blank.png') . '" ></td>';
+                                <td style="text-align: center"><img style="max-width: 10em; max-height: 10em" src="../UploadedContent/'. (($img!="") ? $img : 'blank.png') . '" ></td>';
 
                         echo '<td>
-                                <p class="nomproduit"><strong>Nom produit : </strong>'.$row["Nom"].'</p>
-                                <p class="description">Description Produit : '.$row["Description"].'</p>
-                            </td>
-                            <td><p class="prix">Prix Unitaire : '.$row["Prix"].'€</p></td> 
-                           <td><p class="quantite">Quantité : '.$Quantite.'</p></td>
-                            <td><p class="prix">Prix : '.($prixTotalArticle=$row["Prix"]*$Quantite).'€</p></td>
-			                <td><button><a href="javascript:supprimerDuPanier('.$item["ID"].', ' . $ID_Acheteur . ');">Supprimer</a></td>
+                                <strong>'.$row["Nom"].'</strong>
+                                <hr>
+                                <div style="margin-left: 2em">
+                                    Quantité : <form method="post" action="../Acheteur/modifPanier.php?id='.$row["ID"].'"> <input type="number" min="1" max="'.$row["Quantite"].'" value="'.$Quantite.'" name="qt"></input>
+                                    <button type="submit" class="btn btn-light" style="font-size: 50%">Modifier</button> </form>
+                                </div>
+                             </td>
+                             <td style="text-align: center;">
+                                <div  style="margin-left: 3em;">
+                                    Prix : '.$row["Prix"].'€<br>
+                                    Frais de port : '.$row["Frais_de_port"].'€<br>
+    			                    <button><a href="../Produit/supprimerDuPanier.php?id1='.$row["ID"].'&id2='.$ID_Acheteur.'">Supprimer</a>
+                                </div>
+                             </td>
                        </tr>'; 
 
-                        $prixTotalArticles=$prixTotalArticles+$prixTotalArticle;  
+                        $prixTotalArticles += ($row["Prix"]*$Quantite);
+                        $totalfdp += $row["Frais_de_port"];
                     }
 
-                    echo '<tr>
-                            <th rowspan="5">Prix Total</th>
+                    echo '</table> <hr> <table><tr>
+                            <th rowspan="5"><div style="margin-left: 2em; margin-right: 4em">Prix Total</div></th>
                             <td>'.$prixTotalArticles.'€</td>
                             </tr>
                             <tr>
-                                <td>Frais de ports : 10€</td>
-                            </tr>';
-
-                    $prixTotal=0;
-                    $frais=10;
-
-                    $prixTotal=$prixTotalArticles+$frais;
-
-                    echo '<tr>
-                            <td>Total : '.$prixTotal.'€</td>
+                                <td>Frais de ports : '.$totalfdp.'€</td>
+                         </tr>
+                         <tr>
+                            <td>Total : '.($prixTotalArticles+$totalfdp).'€</td>
                         </tr>';
-                  
-                ?>      
-                unset($_SESSION['messageretour']);
-                 
+                ?>
             </table> 
             <br>      
             <button onclick="location.href='../Accueil/index.php';">Poursuivre mes achats</button>

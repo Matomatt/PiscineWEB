@@ -82,17 +82,23 @@
                                 $trouverID = "SELECT MAX(ID) FROM adresses";
                                 echo "trouver iD = . $trouverID .";
                                
-                                $sqlupdate = "UPDATE vendeurs SET ID_Adresse = '$trouverID'";
+                                //$sqlupdate = "UPDATE vendeurs SET ID_Adresse = '$trouverID'";
 
-                                $sqlupd = "UPDATE vendeurs A set ID_Adresse = (SELECT max(id) from adresses) where A.Email ='$email' ";
+                                $sqlupd = "UPDATE vendeurs A set ID_Adresse = (SELECT max(id) from adresses) WHERE A.Email ='$email' ";
                                 $result3 = mysqli_query($db_handle, $sqlupd);
 
                                 if ($result3)
                                 {
-                                    //session_start();
-                                    //$ID_Vendeur = $result->fetch_assoc()["ID"];
-                                    //$_SESSION['UserID'] = $ID_Vendeur;
-                                    //$_SESSION['UserType'] = "Vendeur";
+                                    session_destroy();
+                                    session_start();
+                                    $sqlid = "SELECT ID FROM vendeurs WHERE Email ='$email';";
+                                    $result4 = mysqli_query($db_handle, $sqlid);
+                                    if ($result4)
+                                    {
+                                        $ID_Vendeur = $result4->fetch_assoc()["ID"];
+                                        $_SESSION['UserID'] = $ID_Vendeur;
+                                        $_SESSION['UserType'] = "Vendeur";
+                                    }
                                     die('<script>
                 				        window.location = "../Vendeur/mon_compte.php";
                 			            </script>');

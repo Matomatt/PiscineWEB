@@ -6,15 +6,15 @@
         
         if ($conn->connect_error) { die('<script> alert("Database not found"); history.back(); </script>'); }
         
-        $queryS = "DELETE FROM paniers WHERE ID=".$_GET["id1"]." AND ID_Acheteur=".$_GET["id2"];
+        $queryS = "DELETE FROM paniers WHERE ID_Item=".$_GET["id1"]." AND ID_Acheteur=".$_GET["id2"];
 		$resultS = mysqli_query($conn, $queryS);
 
        
-       if ($conn->resultS === TRUE) {
-            echo "Ajouté au panier !<br>";
+		if ($resultS === TRUE) {
+            echo "Supprimé du panier !<br>";
         } 
         else {
-            echo '<script> alert("Error: ' . $sql . ' ' . $conn->error . '"); </script>';
+            echo '<script> alert("Error: ' . $queryS . ' ' . $conn->error . '"); </script>';
         }
         
         $conn->close();

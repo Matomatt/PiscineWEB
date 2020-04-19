@@ -20,7 +20,7 @@
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">s
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<!--external style sheet-->
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
@@ -37,12 +37,6 @@
 						<h4>Filtres</h4>
 						<table>
 							<?php
-							
-								/*if (isset($_POST["rechercher"]))
-									echo '<input type="text" name="rechercher" value="' .  $_POST["rechercher"] . '" style="display:none">';
-								else
-									echo '<input type="text" name="rechercher" value="" >';*/
-								
 								echo '<tr>
 									<td>
 									<h6>Types de vente</h6>

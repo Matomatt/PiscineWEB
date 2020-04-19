@@ -78,7 +78,7 @@
 		if (isset($_SESSION['UserType']) && isset($_SESSION['UserID']))
 		{
 			if ($_SESSION['UserType'] == "Acheteur")
-				echo '<input type="image" class="img-fluid" src="../Images/user-default.png" onclick="location.href=\'../Acheteur/compteclient.php\';" style="max-width: 4em;"></input>';
+				echo '<input type="image" class="img-fluid" src="../Images/user-default.png" onclick="location.href=\'../Acheteur/mon_compte.php\';" style="max-width: 4em;"></input>';
 			else if ($_SESSION['UserType'] == "Vendeur")
 				echo '<input type="image" class="img-fluid" src="../Images/user-default.png" onclick="location.href=\'../Vendeur/comptevendeur.php\';" style="max-width: 4em;"></input>';
 			else if ($_SESSION['UserType'] == "Admin")

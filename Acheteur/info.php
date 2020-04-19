@@ -19,8 +19,13 @@
     </head>
 
     <body>
-	<?php
+    	<?php
 	    include '../header.php';
+	    ?>
+
+    	<h6><a href="javascript:history.back()"><- Retour aux résultats</a></h6>
+
+	<?php
 
 		$db_handle = mysqli_connect('localhost', 'root', '');
 		$db_found = mysqli_select_db($db_handle, 'ecebay');

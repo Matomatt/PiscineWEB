@@ -56,15 +56,15 @@
                             
                          <!-- Mettre les liens-->
                          <a href="compteclient.html" style="text-align: center; font-size: 15px; margin-top: 2%;"> TABLEAU DE BORD</a>
-                            <a href="info.html">Informations personelles</a>
+                            <a href="info.php">Informations personelles</a>
                             <hr  color="grey" ">
                             <a href="#">Informations bancaires</a>
                             <hr color="grey" ">
-                            <a href="historique.html">Historique des achats</a>
+                            <a href="historique.php">Historique des achats</a>
                             <hr color="grey" ">
-                            <a href="encheres">Enchères en cours</a>
+                            <a href="encheres.php">Enchères en cours</a>
                             <hr color="grey" ">
-                            <a href="#">Les offres</a>
+                            <a href="offres.php">Les offres</a>
                             <hr color="grey" ">
                             <a href="#">Mes paramètres</a>
                             <hr color="grey" ">

@@ -94,7 +94,7 @@
                                     //$_SESSION['UserID'] = $ID_Vendeur;
                                     //$_SESSION['UserType'] = "Vendeur";
                                     die('<script>
-                				        window.location = "../Vendeur/comptevendeur.php";
+                				        window.location = "../Vendeur/mon_compte.php";
                 			            </script>');
                                 }
                                 else{

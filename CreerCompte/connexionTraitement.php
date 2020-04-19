@@ -48,7 +48,7 @@
                         $ID_Vendeur = $result->fetch_assoc()["ID"];
                         $_SESSION['UserID'] = $ID_Vendeur;
                         $_SESSION['UserType'] = "Vendeur";
-                        $path = "../Vendeur/comptevendeur.php";
+                        $path = "../Vendeur/mon_compte.php";
                     }
                     
                 } else {
@@ -56,7 +56,7 @@
                     $ID_Acheteur = $result->fetch_assoc()["ID"];
                     $_SESSION['UserID'] = $ID_Acheteur;
                     $_SESSION['UserType'] = "Acheteur";
-                    $path = "../Acheteur/compteclient.php";
+                    $path = "../Acheteur/mon_compte.php";
                 }
             } else {
                 $error = "Veuillez remplir tous les champs";

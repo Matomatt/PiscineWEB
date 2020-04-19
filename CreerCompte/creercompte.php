@@ -95,24 +95,24 @@
                                    // $_SESSION['UserID'] = $ID_Acheteur;
                                     //$_SESSION['UserType'] = "Acheteur";
                                     die('<script>
-                				        window.location = "../Acheteur/compteclient.php";
+                				        window.location = "../Acheteur/mon_compte.php";
                 			         </script>');
                                 }
                                 else{die('<script>
-                                    alert("Une erreur s est produite");
-                                    window.location = "../CreerCompte/creerboutique.html";
+                                    alert("Une erreur s\'est produite");
+                                    window.location = "../CreerCompte/creercompte.html";
                                     </script>') ;}
                             }
                             else{die('<script>
-                                alert("Une erreur s est produite");
-                                window.location = "../CreerCompte/creerboutique.html";
+                                alert("Une erreur s\'est produite");
+                                window.location = "../CreerCompte/creercompte.html";
                                 </script>') ;}
 
                         }
                     else
                     {
                         die('<script>
-                        alert("N a pas été ajouté dans la base de donnée");
+                        alert("N\'a pas été ajouté dans la base de donnée");
                         window.location = "../CreerCompte/creercompte.html";
                         </script>') ;
                         //echo "Erreur: " . $sql . "<br>" . mysqli_error($db_handle);

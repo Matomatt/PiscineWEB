@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
     <head >
@@ -55,7 +55,7 @@
                         <div class="leftnavbar col-lg-2 col-sm-4 col-xs-3">
                             
                          <!-- Mettre les liens-->
-                         <a href="compteclient.html" style="text-align: center; font-size: 15px; margin-top: 2%;"> TABLEAU DE BORD</a>
+                         <a href="compteclient.php" style="text-align: center; font-size: 15px; margin-top: 2%;"> TABLEAU DE BORD</a>
                             <a href="info.php">Informations personelles</a>
                             <hr  color="grey" ">
                             <a href="#">Informations bancaires</a>

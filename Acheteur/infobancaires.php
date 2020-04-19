@@ -20,18 +20,7 @@
             {div.style.display = 'none';}
         }
 
-        function valPaypal()
-        {
-            var div=document.getElementById("affichagePaypal");
-            var div2=document.getElementById("formPaypal");
-            if(div.style.display === 'none'){
-                div.style.display = 'block';
-                div2.style.display ='none';
-            }
-            else
-            {div.style.display = 'none';
-            div2.style.display ='block';}
-        }
+
     </script>
 </head>
 

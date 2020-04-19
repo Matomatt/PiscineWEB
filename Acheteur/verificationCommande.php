@@ -29,7 +29,7 @@
 		<div class="table-responsive col-md-4">
 			<table>
 				<tr>
-					<th>Adresse de livraison <a href="../Acheteur/modifier.html">Modifier</a></th>
+					<th>Adresse de livraison <a href="../Acheteur/modifierDeb.php">Modifier</a></th>
 				</tr>
 				
 				<?php
@@ -113,13 +113,13 @@
 		<div class="table-responsive col-md-4">
 			<table>
 				<tr>
-					<th>Mode de paiement <a href="#">Modifier</a></th>
+					<th>Mode de paiement</th>
 				</tr>
 				<tr>
 					<td>Numéro carte?</td> 
 				</tr>
 				<tr>
-					<th>Adresse de facturation <a href="#">Modifier</a></th>
+					<th>Adresse de facturation <a href="../Acheteur/modifierDeb.php">Modifier</a></th>
 				</tr>
 
 				<?php

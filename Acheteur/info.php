@@ -1,5 +1,5 @@
 <?php
-
+	
 	$db_handle = mysqli_connect('localhost', 'root', '');
 	$db_found = mysqli_select_db($db_handle, 'ecebay');
 
@@ -56,6 +56,9 @@
 		$row2=$result->fetch_assoc();
 
 		echo'	<table>
+					<tr>
+						<th><a href="../Acheteur/modifDebInfo.php">Modifier</a></th>
+					</tr>
 					<tr>
 						<td>Nom : </td>
 						<td>'.$row["Nom"].'</td>

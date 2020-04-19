@@ -38,7 +38,13 @@
 	<!--barre catégories, achat,vente-->
 	<div class="nav justify-content-center" style="background-color: #fafafa; padding:13px;">
 		<button type="button" class="btn btn-light secondHeaderButton" onclick="location.href='../ResultatsDeRecherche/index.php';">Acheter</button>
-		<button type="button" class="btn btn-light secondHeaderButton" onclick="location.href='../MiseEnVente/index.html'">Vendre</button>
+		<?php 
+		      $type = (isset($_SESSION['UserType'])?$_SESSION['UserType']:"");
+		      if ($type == "Vendeur")
+		          echo '<button type="button" class="btn btn-light secondHeaderButton" onclick="location.href=\'../MiseEnVente/index.html\'">Vendre</button>';
+		      else 
+		          echo '<button type="button" class="btn btn-light secondHeaderButton" onclick="location.href=\'../CreerCompte/creerboutique.html\'">Vendre</button>';
+		?>
 		<button type="button" class="btn btn-light secondHeaderButton" onclick="location.href='../ResultatsDeRecherche/index.php?categorie=FerOuTres';">Ferraille/Trésor</button>
 		<button type="button" class="btn btn-light secondHeaderButton" onclick="location.href='../ResultatsDeRecherche/index.php?categorie=BonMusee';">Bon pour le Musée</button>
 		<button type="button" class="btn btn-light secondHeaderButton" onclick="location.href='../ResultatsDeRecherche/index.php?categorie=AccesVIP';">Accessoire VIP</button>

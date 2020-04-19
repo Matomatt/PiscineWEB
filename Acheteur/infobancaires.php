@@ -1,14 +1,4 @@
-<?php 
-            session_start();
 
-            //identifier la BDD
-            $database = "ecebay";
-
-            // se connecter à la BDD
-            $db_handle = mysqli_connect('localhost', 'root', '');
-            $db_found = mysqli_select_db($db_handle, $database);
-            $id=(isset($_SESSION["UserID"])?$_SESSION["UserID"]:"");
-        ?>
 <head>
 	<script>
         function addpaypal ()

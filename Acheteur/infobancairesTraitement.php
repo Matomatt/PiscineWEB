@@ -1,5 +1,4 @@
 <?php
-session_start();
         //Récupérer les données venant de creerboutique.html
     $emailPaypal = isset($_POST["emailPaypal"])? $_POST["emailPaypal"] : "";
     $mdpPaypal = isset($_POST["mdpPaypal"])? $_POST["mdpPaypal"] : "";

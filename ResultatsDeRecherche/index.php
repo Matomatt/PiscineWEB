@@ -25,10 +25,9 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
-<body>
-	<div class="container layout">
-		<div class="row">
-			<nav class="navbar navbar-expand-lg">
+<body class="container layout">
+	<div style="float: left">
+	<nav class="navbar navbar-expand-lg">
 				<button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#filters">
             		<span class="navbar-toggler-icon"></span>
         		</button>
@@ -85,16 +84,17 @@
 										}
 
 								echo '</td>
-							</tr>';
-								
-							?>
+							</tr>'; ?>
+							
 							<tr> <td align="center"><br><input type="submit" name="Rechercher" value="Rechercher"></td> </tr>
 						</table>
 					</form>
 				</div>
 			</nav>
-			<div class="col-lg-9">
+	</div>
+	<div class="col-lg-9" style="float: left">
 					<h3 class="feature-title">Items en vente</h3>
+					<table border=1 frame=void rules=rows>
 					<?php 
 						$db_handle = mysqli_connect('localhost', 'root', '');
 						$db_found = mysqli_select_db($db_handle, 'ecebay');
@@ -162,7 +162,7 @@
 							}
 						}
 
-						$result = mysqli_query($db_handle, $query);
+						$result = mysqli_query($db_handle, $query.'ORDER BY Date_MEV DESC');
 
 						if (!$result)
 						{
@@ -173,14 +173,17 @@
 						{
 							die('None');
 						}
-
-						echo "<table>";
+                    
 						while($row = $result->fetch_assoc()) {
-							echo "<tr> <td align='center'>";
+						    echo '<tr><td>';
 							$img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
-							echo '<input type="image" class="img-fluid" onclick="location.href=\'../Produit/index.php?id=' . $row["ID"] . '\';" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '" style="max-width: 13em; max-height: 10em"> </input> </td> <td align="center">' . $row["Nom"] . "<br> $" . $row["Prix"] . '</td>';
+							echo '<div class="col-lg-4" style="margin-top: 1em; margin-bottom: 1em; text-align: center; float:left">
+                                  <input type="image" class="img-fluid" onclick="location.href=\'../Produit/index.php?id=' . $row["ID"] . '\';" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '" style="max-height: 10em"> </input> 
+                                  </div> 
+                                  <div class="col-lg-4" style="margin-top: 1em; margin-bottom: 1em; text-align: center; float:left">' . $row["Nom"] . "<br> $" . $row["Prix"] . '</div>';
 							
-							echo '<td  align="center"><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+							echo '<div class="col-lg-4" style="margin-top: 1em; margin-bottom: 1em; text-align: center; float:left">
+                                  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 									<input type="hidden" name="cmd" value="_xclick">
 									<input type="hidden" name="business" value="gauchermatthieu918@gmail.com">
 									<input type="hidden" name="lc" value="US">
@@ -191,20 +194,17 @@
 									<input type="hidden" name="button_subtype" value="services">
 									<input type="hidden" name="no_note" value="0">
 									<input type="hidden" name="tax_rate" value="0.000">
-									<input type="hidden" name="shipping" value="0.00">
+									<input type="hidden" name="shipping" value="' . $row["Frais_de_port"] . '">
 									<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest">
 									<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 									<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-									</form>';
-							echo "</td> </tr>";
-							echo "<tr> <td> <br> </td> </tr>";
+									</form> </div>';
+							echo '</td></tr>';
 						}
-						echo "</table>";
 					?>
+					</table>
 			</div>
-		</div>
 		
-	</div>
 </body>
 
 </html>

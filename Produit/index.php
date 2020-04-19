@@ -121,10 +121,15 @@
 							$item = mysqli_query($db_handle, "SELECT * FROM items WHERE ID=" . $id . ";")->fetch_assoc();
 
 							$nbLikes = mysqli_query($db_handle, 'SELECT COUNT( * ) as "Number of Rows" FROM wishlists WHERE ID_Item = ' . $id . ';')->fetch_assoc()["Number of Rows"];
-
+                            $dejalike=0;
+							if ($result = mysqli_query($db_handle,"SELECT * FROM wishlists WHERE ID_Acheteur=" . $ID_Acheteur . " AND ID_Item=" . $id)) {
+							    if (!empty($result->fetch_assoc()))
+							        $dejalike=1;
+							}
+							
 							echo '<tr>
-									<th>'. $item["Nom"] . '<br>
-									<button class="btn btn-danger" onclick="window.location.href=\'../Produit/ajouterWishlist.php?id='.$id.'\'"> &#x2661; </button> ('. $nbLikes . ' &#x2661;)</th>
+									<th>'. $item["Nom"] . '<br> ('. $nbLikes . ')
+									<button class="btn '.($dejalike==0?'btn-light':'btn-danger').'" onclick="window.location.href=\'../Produit/ajouterWishlist.php?id='.$id.'\'"> &#x2661; </button></th>
 								</tr>';
 
 							$boutique = mysqli_query($db_handle, 'SELECT Boutique FROM vendeurs WHERE ID="' . $item["ID_Vendeur"] . '";')->fetch_assoc()["Boutique"];

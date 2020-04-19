@@ -28,7 +28,7 @@
 		<div class="table-responsive col-md-4">
 			<table>
 				<tr>
-					<th>Adresse de livraison <a href="#">Modifier</a></th>
+					<th>Adresse de livraison <a href="../Acheteur/modifier.html">Modifier</a></th>
 				</tr>
 				
 				<?php

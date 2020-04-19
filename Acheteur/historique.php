@@ -79,7 +79,11 @@
                 $ID_Acheteur=0;
 
                 while($row = $result->fetch_assoc()) 
-                {   
+                {  
+                    /*sauvegarder les données pour utilisation dans ajouterAvis.php*/
+                    $_SESSION["vID_Item"]=$row["ID"];
+                    $_SESSION["vID_Vendeur"]=$row["ID_Vendeur"];
+
                     /*on récupère les données de la table medias*/
                     $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
 
@@ -106,14 +110,15 @@
                                         <div class="tab-content">
                                             <div class="tab-pane container active" id="commentaires">
                                                 <div id="demo" class="collapse">
-                                                    <form method="post" action="avis.php">
-                                                        <input type="text" class="form-control" placeholder="Entrez votre avis" name="avis">
-                                                        <button type="submit" class="btn btn-primary"><a style="color:white;" href="javascript:ajouterAvis(' . $item["ID"] . ', ' . $ID_Acheteur . ','.$avis.');"> Envoyer</a></button>
+                                                    <form method="post" action="ajouterAvis.php">
+                                                        <input type="text" class="form-control" placeholder="Entrez votre avis" name="commentaire">
+                                                        <button type="submit" class="btn btn-primary">Envoyer</button>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
-                                    </td>                        
+                                    </td> 
+
                                 </tr>';  
                 }
     ?>

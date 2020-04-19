@@ -48,7 +48,7 @@
                             if (!empty($offreAccepted))
                             {
                                 $prixOffre = $offreAccepted->fetch_assoc()["Prix"];
-                                $PrixArticle = ($prixOffre<$PrixArticle?$prixOffre:$PrixArticle);
+                                $PrixArticle = ($prixOffre!=""?($prixOffre<$PrixArticle?$prixOffre:$PrixArticle):$PrixArticle);
                             }
                             
                     }

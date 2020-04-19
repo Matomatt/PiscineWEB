@@ -69,21 +69,26 @@
 							if (!$db_found) { die('Database not found'); }
 
 							$id = isset($_GET["id"])?$_GET["id"]:"";
+							
 							$first = 0;
 							$imgs = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $id . " ORDER BY indx ASC;");
-							while($img = $imgs->fetch_assoc()) {
-								if ($first == 0)
-								{
-									echo '<div class="carousel-item active">
+							if ($imgs)
+							{
+							    while($img = $imgs->fetch_assoc()) {
+							        if ($first == 0)
+							        {
+							            echo '<div class="carousel-item active">
+			      							<img class="img-fluid" src="../UploadedContent/' . ($img["File"]!=""?$img["File"]:"blank.png") . '" alt="photo">
+										</div>';
+							        }
+							        else
+							            echo '<div class="carousel-item">
 			      							<img class="img-fluid" src="../UploadedContent/' . $img["File"] . '" alt="photo">
 										</div>';
-								}
-								else
-									echo '<div class="carousel-item">
-			      							<img class="img-fluid" src="../UploadedContent/' . $img["File"] . '" alt="photo">
-										</div>';
-								$first+=1;
+						            $first+=1;
+							    }
 							}
+							
 							//<!-- indicateur slide-->
 							echo '<ul class="carousel-indicators">';
 							echo '<li data-target="#carroussel" data-slide-to="0" class="active"></li>';
@@ -110,7 +115,7 @@
 						<?php
 						    $ID_Acheteur = isset($_SESSION["UserID"]) && isset($_SESSION["UserType"])?($_SESSION["UserType"] == "Acheteur"?$_SESSION["UserID"]:""):"";
 						
-						    echo 'ID acheteur : ' . $ID_Acheteur;
+						    //echo 'ID acheteur : ' . $ID_Acheteur;
 							$db_handle = mysqli_connect('localhost', 'root', '');
 							$db_found = mysqli_select_db($db_handle, 'ecebay');
 
@@ -132,8 +137,11 @@
 									<button class="btn '.($dejalike==0?'btn-light':'btn-danger').'" onclick="window.location.href=\'../Produit/ajouterWishlist.php?id='.$id.'\'"> &#x2661; </button></th>
 								</tr>';
 
-							$boutique = mysqli_query($db_handle, 'SELECT Boutique FROM vendeurs WHERE ID="' . $item["ID_Vendeur"] . '";')->fetch_assoc()["Boutique"];
-							$moyenneNotes = mysqli_query($db_handle, 'SELECT AVG( Note ) as "moyenne" FROM notes WHERE ID_Vendeur = ' . $item["ID_Vendeur"] . ';')->fetch_assoc()["moyenne"];
+							$boutique = mysqli_query($db_handle, 'SELECT Boutique FROM vendeurs WHERE ID="' . $item["ID_Vendeur"] . '";');
+							$boutique = ($boutique?$boutique->fetch_assoc()["Boutique"]:"");
+							
+							$moyenneNotes = mysqli_query($db_handle, 'SELECT AVG( Note ) as "moyenne" FROM notes WHERE ID_Vendeur = ' . $item["ID_Vendeur"] . ';');
+							$moyenneNotes = ($moyenneNotes?$moyenneNotes->fetch_assoc()["moyenne"]:"");
 							
 							echo '<tr>
 									<td>Vendu par : <a href="../Vendeur/boutique.php?id='. $item["ID_Vendeur"] . '"> ' . $boutique . '</a> ('. (int)$moyenneNotes/2 . '&#9733;)</td>
@@ -146,10 +154,10 @@
 							{
 								echo '<tr>
 										<td>Prix : ' . $item["Prix"] . '€ </td>
-									</tr>
-									<tr>
-										<td><button class="btn btn-primary" type="submit">Achat immédiat</button></td>
 									</tr>';
+									//<tr>
+									//	<td><button class="btn btn-primary" type="submit">Achat immédiat</button></td>
+									//</tr>;
 								
 									$dejaDansLePanier = mysqli_query($db_handle, 'SELECT Quantite FROM paniers WHERE ID_Item="' . $item["ID"] . '" AND ID_Acheteur =' . $ID_Acheteur . ';');
 									
@@ -192,7 +200,7 @@
         								    <div class="collapse" id="encherir" style="text-align: center; box-shadow: 0px 2px 6px 0px #000000;">
                                             <form method="post" action="encherir.php?id1='. $id .'&id2='. $ID_Acheteur .'">
                                             	<h4>Enchérir</h4>
-                                            	Enchère maximale actuelle : ' . $item["Prix_Encheres"] . '<br>
+                                            	Enchère actuelle : ' . $item["Prix_Encheres"] . '€<br>
     											Votre enchère : <input type="number" name="enchere" min="'. ($item["Prix_Encheres"]+1) .'"></input>€ <br><br>' .
     											(($ID_Acheteur!="")?'<button type="submit">Valider</button></form>':'</form><button onclick="window.location.href=\'../CreerCompte/connexion.php?idItem=' . $item["ID"] . '\'">Valider</button>') .
 									   '</div></td>

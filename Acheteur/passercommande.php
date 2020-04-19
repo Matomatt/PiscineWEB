@@ -48,16 +48,32 @@
             else {
                 $query = "UPDATE `items` SET `Quantite` = '".($QuantiteTotal-$Quantite)."', `Vendu` = '".(($QuantiteTotal-$Quantite)<=0?"1":"0")."' WHERE `items`.`ID` = ".$ID_Item.";";
                 
-                echo $query . '<br>';
                 $result = mysqli_query($db_handle, $query);
                 
                 if (!$result)
                     die ('<script> alert ("ERREUR : Item pas mis à jour !"); </script>');
+                
+                $queryS = "DELETE FROM paniers WHERE ID_Item=".$ID_Item. (($QuantiteTotal-$Quantite)>0?" AND ID_Acheteur=".$ID_Acheteur:";");
+                
+                $resultS = mysqli_query($db_handle, $queryS);
+                
+                if (!$resultS)
+                    echo '<script> alert("Error: ' . $queryS . ' ' . $conn->error . '"); </script>';
+                
+                if (($QuantiteTotal-$Quantite)>0)
+                {
+                    $queryU = "UPDATE paniers SET Quantite = ".($QuantiteTotal-$Quantite)." WHERE Quantite>".($QuantiteTotal-$Quantite)." AND ID_Item=".$ID_Item.";";
+                    
+                    $resultU = mysqli_query($db_handle, $queryU);
+                    
+                    if (!$resultS)
+                        echo '<script> alert("Error: ' . $queryU . ' ' . $conn->error . '"); </script>';
+                }
             }
             
             
         }
     }
     
-    //echo '<script> window.location = "../Acheteur/mon_compte.php?page=historique.php"; </script>';
+    echo '<script> window.location = "../Acheteur/mon_compte.php?page=historique"; </script>';
 ?>

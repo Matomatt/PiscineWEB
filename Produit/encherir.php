@@ -7,6 +7,19 @@
         
         if ($conn->connect_error) { die('<script> alert("Database not found"); history.back(); </script>'); }
 
+        $getSurencheresQuery = 'SELECT * FROM encheres WHERE ID_Item=' . $_GET["id1"] . ' AND ID_Acheteur = ' . $_GET["id2"] . ';';
+        $getSurencheres = $conn->query($getSurencheresQuery);
+        if ($getSurencheres)
+        {
+            while ($ench = $getSurencheres->fetch_assoc())
+            {
+                $queryDelete = "DELETE FROM `encheres` WHERE `encheres`.`ID` =" . $ench["ID"] . ";";
+                $resultDelete = $conn->query($queryDelete);
+                if (!$resultDelete)
+                    echo "Error deleting... " . $queryDelete . '<br>';
+            }
+        }
+        
         $sql = "INSERT INTO `encheres` (`ID_Acheteur`, `ID_Item`, `Prix_Max`) VALUES ('" . $_GET["id2"] . "', '" . $_GET["id1"] . "', '" . $enchere . "');";
         
         if ($conn->query($sql) === TRUE) {

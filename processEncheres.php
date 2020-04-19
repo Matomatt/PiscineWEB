@@ -35,7 +35,6 @@
                 {
                     while ($enchereAsuppr = $surenchere->fetch_assoc())
                     {
-                        
                         $queryDelete = "DELETE FROM `encheres` WHERE `encheres`.`ID` =" . $enchereAsuppr["ID"] . ";";
                         $resultDelete = mysqli_query($db_handle, $queryDelete);
                         if (!$resultDelete)

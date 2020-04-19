@@ -288,7 +288,7 @@
 	                                if (!empty($offreAccepted))
 	                                {
 	                                    $prixOffre = $offreAccepted->fetch_assoc()["Prix"];
-	                                    $PrixArticle = ($prixOffre<$PrixArticle?$prixOffre:$PrixArticle);
+	                                    $PrixArticle = ($prixOffre!=""?($prixOffre<$PrixArticle?$prixOffre:$PrixArticle):$PrixArticle);
 	                                }
 	                                
 	                        }
@@ -409,7 +409,7 @@
                         if (!empty($offreAccepted))
                         {
                             $prixOffre = $offreAccepted->fetch_assoc()["Prix"];
-                            $PrixArticle = ($prixOffre<$PrixArticle?$prixOffre:$PrixArticle);
+                            $PrixArticle = ($prixOffre!=""?($prixOffre<$PrixArticle?$prixOffre:$PrixArticle):$PrixArticle);
                             $type_de_vente = "offres";
                         }
                             

@@ -51,14 +51,39 @@
 
                                 echo '<p><strong>Nom de la Boutique : </strong>'.$row["Boutique"].' </p><br>
                                     <p><strong>Contact : </strong>'.$row["Email"].'<br>'.$row["Telephone"].'</p><br>';
-                            ?>               
-                           
-                        </div>
-                        <div class="droite">
-                            <p><strong>
-                                Notes
-                            </strong></p>
-                        </div>
+                            ?>
+
+                            <?php
+
+                                $ID_Vendeur=$_SESSION["UserID"];
+                                $query = "SELECT * FROM notes WHERE ID_Vendeur=".$ID_Vendeur."";
+                                $result = mysqli_query($db_handle, $query);
+
+                                if (!$result)
+                                {
+                                  die('Couldn\'t find table');
+                                }
+
+                                echo '</div>        
+                                      <div class="droite">
+                                        <p><strong>Notes : </strong><br>';
+
+                                $i=0;
+                                $sommeNotes=0;
+                                $moyenne=0;
+
+                                while($row = $result->fetch_assoc()) 
+                                { 
+                                    echo $row["Note"].'<br>';
+                                    $sommeNotes=$sommeNotes+$row["Note"];
+                                    ++$i; 
+                                }
+
+                                echo 'Moyenne = '.$sommeNotes/$i.'';
+
+                                echo '</p>
+                                    </div>';
+                            ?>
                         
                     </div>
                     <div class="Images/avatar col-xs-4 col-lg-3 col-sm-3  mx-auto "  style="float:none; margin-top: -20%;">

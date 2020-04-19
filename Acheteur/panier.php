@@ -25,6 +25,13 @@
 
         <title>Panier ECEbay</title>
 
+        <script type="text/javascript">
+        function ajouterAuPanier(id1, id2)
+        {
+            window.location.href = "../Produit/supprimerDuPanier.php?id1=" + id + "&id2=" + id2;
+        }
+        </script>
+
     </head>
 
     <body>           
@@ -98,8 +105,7 @@
                             <td><p class="prix">Prix Unitaire : '.$row["Prix"].'€</p></td> 
                            <td><p class="quantite">Quantité : '.$Quantite.'</p></td>
                             <td><p class="prix">Prix : '.($prixTotalArticle=$row["Prix"]*$Quantite).'€</p></td>
-			<td><button><a href="../Produit/supprimerDuPanier.php?idItem='.$item["ID"].'">Supprimer</button></td>
-                            
+			                <td><button><a href="javascript:supprimerDuPanier('.$item["ID"].', ' . $ID_Acheteur . ');">Supprimer</a></td>
                        </tr>'; 
 
                         $prixTotalArticles=$prixTotalArticles+$prixTotalArticle;  

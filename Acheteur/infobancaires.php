@@ -1,3 +1,39 @@
+<head>
+	<script>
+        function addpaypal ()
+        {
+            var div = document.getElementById("formPaypal");
+            if(div.style.display === 'none'){
+                div.style.display = 'block';
+            }
+            else
+            {div.style.display = 'none';}
+        }
+        function addcarte ()
+        {
+            var div = document.getElementById("formCarte");
+            if(div.style.display === 'none'){
+                div.style.display = 'block';
+            }
+            else
+            {div.style.display = 'none';}
+        }
+
+        function valPaypal()
+        {
+            var div=document.getElementById("affichagePaypal");
+            var div2=document.getElementById("formPaypal");
+            if(div.style.display === 'none'){
+                div.style.display = 'block';
+                div2.style.display ='none';
+            }
+            else
+            {div.style.display = 'none';
+            div2.style.display ='block';}
+        }
+    </script>
+</head>
+
 <div class=" col-lg-8 col-sm-3 col-xs-2 mx-auto" style="float:none; text-align: center;  ">
     <div class="row justify-content-center" style="float:none ">
         <div class="solde col-lg-4" style="border-style: groove;">
@@ -86,38 +122,6 @@
     
 </div>
 <!--  
-        <script>
-            function addpaypal ()
-            {
-                var div = document.getElementById("formPaypal");
-                if(div.style.display === 'none'){
-                    div.style.display = 'block';
-                }
-                else
-                {div.style.display = 'none';}
-            }
-            function addcarte ()
-            {
-                var div = document.getElementById("formCarte");
-                if(div.style.display === 'none'){
-                    div.style.display = 'block';
-                }
-                else
-                {div.style.display = 'none';}
-            }
-
-            function valPaypal()
-            {
-                var div=document.getElementById("affichagePaypal");
-                var div2=document.getElementById("formPaypal");
-                if(div.style.display === 'none'){
-                    div.style.display = 'block';
-                    div2.style.display ='none';
-                }
-                else
-                {div.style.display = 'none';
-                div2.style.display ='block';}
-            }
-        </script>
+        
 -->
 

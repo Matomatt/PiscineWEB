@@ -75,26 +75,30 @@
                     </div>
                 
                     <div class="row ">
-                        <div class="leftnavbar col-lg-2 col-sm-4 col-xs-3">
-                            
-                         <!-- Mettre les liens-->
-                         <a href="../Acheteur/mon_compte.php" style="font-size: 15px; margin-top: 2%; text-decoration: underline overline;"> TABLEAU DE BORD</a>
-                            <a href="../Acheteur/mon_compte.php?page=info">Informations personelles</a>
-                            <hr  color="grey" ">
-                            <a href="../Acheteur/mon_compte.php?page=infobancaires">Informations bancaires</a>
-                            <hr color="grey" ">
-                            <a href="../Acheteur/mon_compte.php?page=historique">Historique des achats</a>
-                            <hr color="grey" ">
-                            <a href="../Acheteur/mon_compte.php?page=encheres">Enchères en cours</a>
-                            <hr color="grey" ">
-                            <a href="../Acheteur/mon_compte.php?page=offres">Les offres</a>
-                            <hr color="grey" ">
-                            <a href="../Acheteur/mon_compte.php?page=parametres">Mes paramètres</a>
-                            <hr color="grey" ">
-                            <a href="../deconnexion.php">Déconnexion</a>
-                
-                        </div>
-                
+                    	<div class="leftnavbar navbar-expand-lg col-lg-2 col-sm-4 col-xs-3">
+                         	<a href="../Acheteur/mon_compte.php" style="font-size: 15px; margin-top: 2%; text-decoration: underline overline; margin-left: 8%"> TABLEAU DE BORD</a>
+                         	<button class="navbar-toggler navbar-light container-fluid" type="button" data-toggle="collapse" data-target="#leftPanel">
+                    			<span class="navbar-toggler-icon"></span>
+                    		</button>
+            				<div class="collapse show" id="leftPanel">
+                             <!-- Mettre les liens-->
+                                <hr  color="grey" ">
+                                <a href="../Acheteur/mon_compte.php?page=info">Informations personelles</a>
+                                <hr  color="grey" ">
+                                <a href="../Acheteur/mon_compte.php?page=infobancaires">Informations bancaires</a>
+                                <hr color="grey" ">
+                                <a href="../Acheteur/mon_compte.php?page=historique">Historique des achats</a>
+                                <hr color="grey" ">
+                                <a href="../Acheteur/mon_compte.php?page=encheres">Enchères en cours</a>
+                                <hr color="grey" ">
+                                <a href="../Acheteur/mon_compte.php?page=offres">Les offres</a>
+                                <hr color="grey" ">
+                                <a href="../Acheteur/mon_compte.php?page=parametres">Mes paramètres</a>
+                                <hr color="grey" ">
+                                <a href="../deconnexion.php">Déconnexion</a>
+                    
+                            </div>
+                		</div>
                 		<?php
                             $page = isset($_GET["page"])?$_GET["page"]:"";
                             if ($page!="")
@@ -102,14 +106,12 @@
                             else
                                 include '../Acheteur/tableau_de_bord.php';
                         ?>
-                        
-                        
-                <br>
-                
-                </div>
+                	</div>
                 
 
     </body>
 </html>
+
+<?php include '../footer.html' ?>
 
 

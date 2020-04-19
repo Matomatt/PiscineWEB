@@ -213,7 +213,6 @@
   	</div>
 	</div>
 	
-	<hr>
 	<!--dernier div : pied de page-->
 	<div id="div6">
 		<?php

@@ -31,9 +31,9 @@
 	<title>Page Produit - ECEbay</title>
 
 	<script type="text/javascript">
-		function ajouterAuPanier(id1, id2)
+		function ajouterAuPanier(id)
 		{
-			window.location.href = "../Produit/ajouterAuPanier.php?id1=" + id1 + "&id2=" + id2 + "&qt=" + getQuantite();
+			window.location.href = "../Produit/ajouterAuPanier.php?id=" + id + "&qt=" + getQuantite();
 		}
 		function getQuantite()
 		{
@@ -124,14 +124,14 @@
 
 							echo '<tr>
 									<th>'. $item["Nom"] . '<br>
-									<button class="btn btn-danger" type="submit"> &#x2661; </button> ('. $nbLikes . ' &#x2661;)</th>
+									<button class="btn btn-danger" onclick="window.location.href=\'../Produit/ajouterWishlist.php?id='.$id.'\'"> &#x2661; </button> ('. $nbLikes . ' &#x2661;)</th>
 								</tr>';
 
 							$boutique = mysqli_query($db_handle, 'SELECT Boutique FROM vendeurs WHERE ID="' . $item["ID_Vendeur"] . '";')->fetch_assoc()["Boutique"];
 							$moyenneNotes = mysqli_query($db_handle, 'SELECT AVG( Note ) as "moyenne" FROM notes WHERE ID_Vendeur = ' . $item["ID_Vendeur"] . ';')->fetch_assoc()["moyenne"];
 							
 							echo '<tr>
-									<td>Vendu par : <a href="../Vendeur/pagevendeur.html?id='. $item["ID_Vendeur"] . '"> ' . $boutique . '</a> ('. (int)$moyenneNotes/2 . '&#9733;)</td>
+									<td>Vendu par : <a href="../Vendeur/boutique.php?id='. $item["ID_Vendeur"] . '"> ' . $boutique . '</a> ('. (int)$moyenneNotes/2 . '&#9733;)</td>
 								</tr>';
 							
 							echo '<tr>
@@ -159,7 +159,7 @@
 									        if ($ID_Acheteur != "")
 									        {
 									            echo'<tr>
-    												<td><a href="javascript:ajouterAuPanier(' . $item["ID"] . ', ' . $ID_Acheteur . ');" > Ajouter au panier </a></td>
+    												<td><a href="javascript:ajouterAuPanier(' . $item["ID"] . ');" > Ajouter au panier </a></td>
     											</tr>';
 									        }
 									        else

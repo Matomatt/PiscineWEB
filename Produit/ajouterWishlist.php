@@ -8,26 +8,17 @@ if (isset($_GET["id"]))
             if ($ID_Acheteur == "")
                 die ('<script> window.location.href= "../Produit/index.php?id=' . $_GET["id"] . '"; </script>');
             
-            $Quantite = isset($_GET["qt"])?($_GET["qt"] != ""?$_GET["qt"]:1):1;
-            
             $conn = new mysqli('localhost','root', '', 'ecebay');
             
             if ($conn->connect_error) { die('<script> alert("Database not found"); history.back(); </script>'); }
             
-            $queryQT = "SELECT Quantite FROM items WHERE ID =" . $_GET["id"];
-            $resultQT = mysqli_query($conn, $queryQT);
-            if ($resultQT)
-            {
-                if (($qt = $resultQT->fetch_assoc()["Quantite"]) < $Quantite)
-                    $Quantite = $qt;
-            }
-            if ($Quantite < 1) $Quantite = 1;
+            //$sql = "SELECT * FROM wishlists (`ID_Acheteur`, `ID_Item`) VALUES ('" . $ID_Acheteur . "', '" . $_GET["id"] . "');";
             
-            $sql = "INSERT INTO `paniers` (`ID_Acheteur`, `ID_Item`, `Quantite`) VALUES ('" . $ID_Acheteur . "', '" . $_GET["id"] . "', '" . $Quantite . "');";
+            $sql = "INSERT INTO `wishlists` (`ID_Acheteur`, `ID_Item`) VALUES ('" . $ID_Acheteur . "', '" . $_GET["id"] . "');";
             
             if ($conn->query($sql) === TRUE) {
                 $last_id = $conn->insert_id;
-                echo "Ajouté au panier ! " . $last_id . " id<br>";
+                echo "Ajouté a la wishlist ! " . $last_id . " id<br>";
             } else {
                 echo '<script> alert("Error: ' . $sql . ' ' . $conn->error . '"); </script>';
             }

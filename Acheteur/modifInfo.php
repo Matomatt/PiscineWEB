@@ -4,6 +4,7 @@
     $prenom = isset($_POST["prenom"])? $_POST["prenom"] : "";
     $nom = isset($_POST["nom"])? $_POST["nom"] : "";
     $tel = isset($_POST["tel"])? $_POST["tel"] : "";
+    $email= isset($_POST["email"])? $_POST["email"] : "";
     $ad1 = isset($_POST["adresse"])? $_POST["adresse"] : "";
     $ad2 = isset($_POST["cpadresse"])? $_POST["cpadresse"] : "";
     $ville = isset($_POST["ville"])? $_POST["ville"] : "";
@@ -41,7 +42,7 @@ session_start();
         if(!empty($_POST["prenom"]) && !empty($_POST['nom']) && !empty($_POST['tel']) 
         && !empty($_POST['adresse']) && !empty($_POST['ville']) && !empty($_POST['cp']) && !empty($_POST['pays']))
         {        
-            
+   
 /* requête acheteur*/
             $query="SELECT * FROM acheteurs WHERE ID=".$ID_Acheteur.";" ;
         
@@ -54,7 +55,7 @@ session_start();
 
             $row = $result->fetch_assoc();
 
-            $sqlupdate = "UPDATE acheteurs SET Nom = '$nom',Prenom = '$prenom', Telephone = '$tel'";
+            $sqlupdate = "UPDATE acheteurs SET Nom = '$nom',Prenom = '$prenom', Telephone = '$tel', Email='$email'";
 
             $result = mysqli_query($db_handle, $sqlupdate);
 
@@ -83,7 +84,7 @@ session_start();
 
             echo '<script> alert("Modifications effectuées"); </script>';
 
-            echo '<script> window.location.href= "../Acheteur/verificationCommande.php"; </script>';
+            echo '<script> window.location.href= "../Acheteur/mon_compte.php"; </script>';
         }
     }
 

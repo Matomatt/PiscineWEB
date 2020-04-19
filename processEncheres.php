@@ -15,18 +15,20 @@
     
     while($item = $result->fetch_assoc())
     {
-        $MeilleureEnchere = mysqli_query($db_handle,'SELECT ID_Acheteur, MAX(Prix_Max) as "PrixMax" FROM encheres WHERE ID_Item=' . $item["ID"] );
+        $MeilleureEnchere = mysqli_query($db_handle,'SELECT ID_Acheteur, Prix_Max FROM encheres WHERE ID_Item=' . $item["ID"] . ' ORDER BY Prix_Max DESC');
         
         if (!$MeilleureEnchere)
             die ("Erreur lors de la requète");
         
         if (!empty($MeilleureEnchere))
         {
-            $MeilleureEnchere = $MeilleureEnchere->fetch_assoc();
+            $tmp = $MeilleureEnchere->fetch_assoc();
+            $SecondeMeilleureEnchere = $MeilleureEnchere->fetch_assoc();
+            $MeilleureEnchere = $tmp;
             
-            if ($MeilleureEnchere["PrixMax"] != "")
+            if ($MeilleureEnchere["Prix_Max"] != "")
             {
-                $getSurencheresQuery = 'SELECT * FROM encheres WHERE ID_Item=' . $item["ID"]. ' AND ID_Acheteur = ' . $MeilleureEnchere["ID_Acheteur"] . ' AND Prix_Max <> ' . $MeilleureEnchere["PrixMax"] . ';';
+                $getSurencheresQuery = 'SELECT * FROM encheres WHERE ID_Item=' . $item["ID"]. ' AND ID_Acheteur = ' . $MeilleureEnchere["ID_Acheteur"] . ' AND Prix_Max <> ' . $MeilleureEnchere["Prix_Max"] . ';';
                 $surenchere = mysqli_query($db_handle, $getSurencheresQuery);
                 
                 if ($surenchere)
@@ -43,9 +45,12 @@
                 else
                     echo ("Error get surenchere " . $getSurencheresQuery) . '<br>';
                 
-                if ($MeilleureEnchere["PrixMax"] > $item["Prix_Encheres"])
+                if ($MeilleureEnchere["Prix_Max"] > $item["Prix_Encheres"])
                 {
-                    $queryUpdate = "UPDATE `items` SET `Prix_Encheres` = '" . $MeilleureEnchere["PrixMax"] . "' WHERE `items`.`ID` = " . $item["ID"] . ";";
+                    $Prix_Encheres = ($SecondeMeilleureEnchere["Prix_Max"] != ""?$SecondeMeilleureEnchere["Prix_Max"]+1:$item["Prix_Encheres"]+1);
+                    
+                    $queryUpdate = "UPDATE `items` SET `Prix_Encheres` = '" . $Prix_Encheres . "' WHERE `items`.`ID` = " . $item["ID"] . ";";
+                    
                     $resultUpdate = mysqli_query($db_handle, $queryUpdate);
                     if (!$resultUpdate)
                         echo "Error updating... " . $queryUpdate . '<br>';

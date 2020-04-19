@@ -26,7 +26,7 @@
 
     $id=(isset($_SESSION["UserID"])?$_SESSION["UserID"]:"");
 
-    $query = "SELECT * FROM items WHERE ID IN (SELECT Id_Item FROM paniers WHERE ID_Acheteur=".$id.")";
+    $query = "SELECT * FROM transactions WHERE ID_Acheteur=".$id." ORDER BY Date DESC";
     $result = mysqli_query($db_handle, $query);
 
     if (!$result)
@@ -34,50 +34,60 @@
         die('Couldn\'t find table');
     }
 
-    $prixTotalArticle=0;
-
-    $prixTotalArticles=0;
-
-    $item=0;
-
-    $ID_Acheteur=0;
-
     while($row = $result->fetch_assoc()) 
-    {  
-        /*sauvegarder les données pour utilisation dans ajouterAvis.php*/
-        $_SESSION["vID_Item"]=$row["ID"];
-        $_SESSION["vID_Vendeur"]=$row["ID_Vendeur"];
-
+    {
         /*on récupère les données de la table medias*/
-        $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
+        $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID_Item"] . " AND indx = 0;")->fetch_assoc() ["File"];
+        $item = mysqli_query($db_handle, "SELECT * FROM items WHERE ID=" . $row["ID_Item"] . ";")->fetch_assoc();
 
         echo' <tr style="text-align: justify;">
-                <td>
-                    <img style="max-width:10em ;" src="../UploadedContent/'. (($img!="") ? $img : 'blank.png') . '" >
+                <td style="text-align: center">
+                    <img style="max-width:10em; max-height: 8em;" src="../UploadedContent/'. (($img!="") ? $img : 'blank.png') . '" >
                 </td>
                 <td style="padding: 5px; padding-right: 15px;">
-                    <p class="nomproduit"><strong>Nom produit</strong>'.$row["Nom"].'</p>
-                    <p class="description">Description Produit : '.$row["Description"].'</p>
-                </td>
-                <td>
-                    <p class="prix">Prix : '.$row["Prix"].'€</p>
+                    <strong>'.$item["Nom"].'</strong><br>
+                    Prix : '.$row["Montant"].'€<br>
+                    Livraison : '.$row["Prix_livraison"].'€
                 </td>
                 <td>
                     <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link " data-toggle="tab" href="#commentaires"><button data-toggle="collapse" data-target="#demo">Laisser un avis</button></a>
+                        <li class="nav-item">';
+                            
+        
+        $note = mysqli_query($db_handle, "SELECT * FROM notes WHERE ID_Item=" . $row["ID_Item"] . " AND ID_Acheteur=".$id.";");
+        $good=0;
+        if ($note)
+        {
+            $note = $note->fetch_assoc();
+            if ($note["ID"] != "")
+            {
+                echo '<a class="nav-link " data-toggle="tab"><button data-toggle="collapse" data-target="#demo'.$row["ID"].'">Mon avis</button></a>
                         </li>
                     </ul>
                     <br>
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div class="tab-pane container active" id="commentaires">
-                            <div id="demo" class="collapse">
-                                <form method="post" action="ajouterAvis.php">
-                                    <input type="text" class="form-control" placeholder="Entrez votre avis" name="commentaire">
+                        <div class="tab-pane container active">
+                        <div id="demo'.$row["ID"].'" class="collapse">' .
+                            $note["Commentaire"] . '<br>' . $note["Note"]/2 . '&#9733';
+                $good=1;
+            }
+        }
+        if ($good==0)
+            echo '<a class="nav-link " data-toggle="tab"><button data-toggle="collapse" data-target="#demo'.$row["ID"].'">Laisser un avis</button></a>
+                        </li>
+                    </ul>
+                    <br>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane container active">
+                            <div id="demo'.$row["ID"].'" class="collapse">
+                                <form method="post" action="ajouterAvis.php?id1='.$row["ID_Item"].'&id2='.$row["ID_Vendeur"].'&id3='.$id.'">
+                                    <input type="text" placeholder="Entrez votre avis" name="commentaire"\>
+                                    <input type="number" min="0" max="10" placeholder="Note" name="note"\>
                                     <button type="submit" class="btn btn-primary">Envoyer</button>
-                                </form>
-                            </div>
+                                </form>';
+                       echo '</div>
                         </div>
                     </div>
                 </td> 

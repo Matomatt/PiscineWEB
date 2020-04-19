@@ -54,6 +54,7 @@ session_start();
 
             $row = $result->fetch_assoc();
 
+            /*
             $sqlupdate = "UPDATE acheteurs SET Nom = '$nom',Prenom = '$prenom', Telephone = '$tel'";
 
             $result = mysqli_query($db_handle, $sqlupdate);
@@ -62,17 +63,9 @@ session_start();
             {
                 die('Couldn\'t update');
             }
-/*requête adresse*/
-            $query="SELECT * FROM adresses WHERE ID=".$row["ID_Adresse"].";" ;
-        
-            $result = mysqli_query($db_handle, $query);
+            */
 
-            if (!$result)
-            {
-                die('Couldn\'t find table 2');
-            }
-
-            $sqlupdate = "UPDATE adresses SET Nom = '$nom', Telephone = '$tel', Adresse_ligne_1 = '$ad1', Adresse_ligne_2 = '$ad2', Ville = '$ville', Pays = '$pays', Code_postale = '$cp'";
+            $sqlupdate = "UPDATE adresses SET Nom = '$nom', Telephone = '$tel', Adresse_ligne_1 = '$ad1', Adresse_ligne_2 = '$ad2', Ville = '$ville', Pays = '$pays', Code_postale = '$cp' WHERE ID=".$row["ID_Adresse"].";";
 
             $result = mysqli_query($db_handle, $sqlupdate);
 
@@ -81,7 +74,7 @@ session_start();
                 die('Couldn\'t update');
             }
 
-            echo '<script> alert("Modifications effectuées"); </script>';
+            //echo '<script> alert("Modifications effectuées"); </script>';
 
             echo '<script> window.location.href= "../Acheteur/verificationCommande.php"; </script>';
         }

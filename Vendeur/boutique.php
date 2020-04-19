@@ -36,7 +36,7 @@
 
                             <?php
 
-                                $ID_Vendeur=$_SESSION["UserID"];
+                                $ID_Vendeur=isset($_GET["id"])?$_GET["id"]:0;
                                 $query = "SELECT * FROM vendeurs WHERE ID=".$ID_Vendeur."";
                                 $result = mysqli_query($db_handle, $query);
 
@@ -79,8 +79,8 @@
         
                 <?php
 
-                $ID_Vendeur=$_SESSION["UserID"];
-                $query = "SELECT * FROM items WHERE ID_Vendeur=".$ID_Vendeur."";
+                $ID_Vendeur=isset($_GET["id"])?$_GET["id"]:0;
+                $query = "SELECT * FROM items WHERE ID_Vendeur=".$ID_Vendeur." AND Vendu=0";
                 $result = mysqli_query($db_handle, $query);
 
                 if (!$result)
@@ -94,10 +94,9 @@
                     $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
                     echo'<div class="col-sm-3">
                             <img class="img-thumbnail" src="../UploadedContent/'. (($img!="") ? $img : 'blank.png') . '" >  
-                            <p class="caption"> <strong>Nom : </strong>'.$row["Nom"].'<br>
-                                                        Prix : '.$row["Prix"].'€ <br>
-                                                        Quantité : '.$row["Quantite"].'<br>
-                                                        Description : '.$row["Description"].'</p>
+                            <strong>'.$row["Nom"].'</strong><br>
+                            Prix : '.$row["Prix"].'€ <br>
+                            Quantité : '.$row["Quantite"].'<br>
                         </div>';
                 }
                 ?>

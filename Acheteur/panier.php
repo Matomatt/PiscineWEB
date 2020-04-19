@@ -132,7 +132,7 @@
                              </td>
                        </tr>'; 
 
-                        $prixTotalArticles += ($row["Prix"]*$Quantite);
+                        $prixTotalArticles += ($PrixArticle*$Quantite);
                         $totalfdp += $row["Frais_de_port"];
                     }
 

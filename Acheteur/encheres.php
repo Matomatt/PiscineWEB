@@ -1,6 +1,4 @@
 <?php 
-    session_start();
-
     //identifier la BDD
     $database = "ecebay";
 
@@ -17,12 +15,12 @@
     <table type="table" >
         <?php
 
-        $sql= "SELECT Prix_Max,Prix_Encheres, Nom, Description, File
+        $sql= "SELECT DISTINCT E.ID, Prix_Max, Prix_Encheres, Nom, Description, File
                 FROM encheres E, items I, medias M
-                WHERE E.ID_Acheteur = '$id' AND M.ID_Item =  I.ID AND E.ID_ITEM = M.ID_Item";
+                WHERE E.ID_Acheteur = '$id' AND M.ID_Item =  I.ID AND E.ID_ITEM = M.ID_Item AND M.indx=0";
         $result = mysqli_query($db_handle, $sql);
 
-        while ($row = mysqli_fetch_array($result)){
+        while ($row = $result->fetch_assoc()){
         ?>    
         <tr style="text-align: justify;">
             <td>

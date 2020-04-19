@@ -90,7 +90,6 @@
 
                                 if ($result3)
                                 {
-                                    session_destroy();
                                     session_start();
                                     $sqlid = "SELECT ID FROM vendeurs WHERE Email ='$email';";
                                     $result4 = mysqli_query($db_handle, $sqlid);

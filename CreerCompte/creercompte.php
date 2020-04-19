@@ -65,56 +65,59 @@
                 {//ajouter a la base de donnée les infos rentrées
                     $sql = "INSERT INTO acheteurs (Email, Password, Nom, Prenom, Telephone) 
                         VALUES  ('$email','$mdp','$nom','$prenom','$tel')";
+                    
+                    echo $sql;
 
                     $result = mysqli_query($db_handle, $sql); 
 
                     if($result)
+                    {
+                        // inserer dans la table adresse
+                        $sqladresse =" INSERT INTO adresses (Nom, Adresse_ligne_1 , Adresse_ligne_2, Ville, Code_postale, Pays, Telephone) 
+                        VALUES  ('$nom', '$adresse', '$cpltadresse', '$ville' , '$cp' , '$pays' , '$tel')";
+
+                        $result2 = mysqli_query($db_handle, $sqladresse); 
+
+                        // relier le ID de la table adresse à ID_Adresse de la table acheteurs
+                        if($result2)
                         {
-                            // inserer dans la table adresse
-                            $sqladresse =" INSERT INTO adresses (Nom, Adresse_ligne_1 , Adresse_ligne_2, Ville, Code_postale, Pays, Telephone) 
-                            VALUES  ('$nom', '$adresse', '$cpltadresse', '$ville' , '$cp' , '$pays' , '$tel')";
 
-                            $result2 = mysqli_query($db_handle, $sqladresse); 
+                            $trouverID = "SELECT MAX(ID) FROM adresses";
+                            echo "trouver iD = . $trouverID .";
+                           
+                            $sqlupdate = "UPDATE acheteurs SET ID_Adresse = '$trouverID'";
 
-                            // relier le ID de la table adresse à ID_Adresse de la table acheteurs
-                            if($result2)
+                            $sqlupd = "UPDATE acheteurs A set ID_Adresse = (SELECT max(id) from adresses) where A.Email ='$email' ";
+                           //$sqlupd = "SELECT ID FROM adresses LEFT JOIN acheteurs ON adresses.ID=acheteurs.ID_Adresse WHERE (adresses.Telephone = $tel AND adresses.Nom = $nom) ";
+                            $result3 = mysqli_query($db_handle, $sqlupd);
+                            if ($result3)
                             {
-
-                                $trouverID = "SELECT MAX(ID) FROM adresses";
-                                echo "trouver iD = . $trouverID .";
-                               
-                                $sqlupdate = "UPDATE acheteurs SET ID_Adresse = '$trouverID'";
-
-                                $sqlupd = "UPDATE acheteurs A set ID_Adresse = (SELECT max(id) from adresses) where A.Email ='$email' ";
-                               //$sqlupd = "SELECT ID FROM adresses LEFT JOIN acheteurs ON adresses.ID=acheteurs.ID_Adresse WHERE (adresses.Telephone = $tel AND adresses.Nom = $nom) ";
-                                $result3 = mysqli_query($db_handle, $sqlupd);
-                                if ($result3)
+                                session_start();
+                                $sqlid = "SELECT ID FROM acheteurs WHERE Email ='$email';";
+                                $result4 = mysqli_query($db_handle, $sqlid);
+                                if ($result4)
                                 {
-                                    //session_start();
-                                    //$ID_Acheteur = $result->fetch_assoc()["ID"];
-                                   // $_SESSION['UserID'] = $ID_Acheteur;
-                                    //$_SESSION['UserType'] = "Acheteur";
-                                    die('<script>
+                                    $ID_Acheteur = $result4->fetch_assoc()["ID"];
+                                    $_SESSION['UserID'] = $ID_Acheteur;
+                                    $_SESSION['UserType'] = "Acheteur";
+                                }
+                                die('<script>
                 				        window.location = "../Acheteur/mon_compte.php";
                 			         </script>');
-                                }
-                                else{die('<script>
-                                    alert("Une erreur s\'est produite");
-                                    window.location = "../CreerCompte/creercompte.html";
-                                    </script>') ;}
                             }
-                            else{die('<script>
-                                alert("Une erreur s\'est produite");
-                                window.location = "../CreerCompte/creercompte.html";
-                                </script>') ;}
-
+                            else {
+                                die('<script> alert("Une erreur s\'est produite"); window.location = "../CreerCompte/creercompte.html";  </script>') ;
+                            }
                         }
+                        else{die('<script>
+                            alert("Une erreur s\'est produite");
+                            window.location = "../CreerCompte/creercompte.html";
+                            </script>') ;}
+
+                    }
                     else
                     {
-                        die('<script>
-                        alert("N\'a pas été ajouté dans la base de donnée");
-                        window.location = "../CreerCompte/creercompte.html";
-                        </script>') ;
+                        //die('<script> alert("N\'a pas été ajouté dans la base de donnée"); window.location = "../CreerCompte/creercompte.html"; </script>') ;
                         //echo "Erreur: " . $sql . "<br>" . mysqli_error($db_handle);
                     }
                 }

@@ -33,11 +33,49 @@
                     /*on récupère les données de la table medias*/
                     $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
                     echo '<tr style="text-align: justify;">
-                            <td><img style="max-width: 10em; max-height: 10em" src="../UploadedContent/'. (($img!="") ? $img : 'blank.png') . '" ></td>';
+                            <td><img onclick="location.href=\'../Produit/index.php?id=' . $row["ID"] . '\';" style="max-width: 10em; max-height: 10em" src="../UploadedContent/'. (($img!="") ? $img : 'blank.png') . '" ></td>';
 
+                    $PrixArticle = $row["Prix"];
+                    if ($row["Type_de_vente_1"] == "encheres")
+                        $PrixArticle = $row["Prix_Encheres"];
+                    else if ($row["Type_de_vente_1"] == "offres" || $row["Type_de_vente_2"] == "offres")
+                    {
+                        $offreAccepted = mysqli_query($db_handle,'SELECT Prix FROM offres WHERE ID_Item=' . $row["ID"] .' AND ID_Acheteur=' . $ID_Acheteur .' AND Accepted=1 ORDER BY Date DESC');
+                        
+                        if (!$offreAccepted)
+                            die ("Erreur lors de la requète");
+                            
+                            if (!empty($offreAccepted))
+                            {
+                                $prixOffre = $offreAccepted->fetch_assoc()["Prix"];
+                                $PrixArticle = ($prixOffre<$PrixArticle?$prixOffre:$PrixArticle);
+                            }
+                            
+                    }
+                    else if ($row["Type_de_vente_2"] == "encheres")
+                    {
+                        if (date('Y-m-d h:i:s', strtotime($row["Date_MEV"]. ' + 7 days')) < date('Y-m-d h:i:s', time()))
+                        {
+                            $MeilleureEnchere = mysqli_query($db_handle,'SELECT MAX(Prix_Max) as "PrixMax" FROM encheres WHERE ID_Item=' . $row["ID"] .' AND ID_Acheteur=' . $ID_Acheteur);
+                            
+                            if (!$MeilleureEnchere)
+                                die ("Erreur lors de la requète");
+                                
+                                if (!empty($MeilleureEnchere))
+                                {
+                                    $MeilleureEnchere = $MeilleureEnchere->fetch_assoc()["PrixMax"];
+                                    
+                                    if ($MeilleureEnchere["PrixMax"] >= $row["Prix_Encheres"])
+                                    {
+                                        $PrixArticle = $row["Prix_Encheres"];
+                                    }
+                                }
+                        }
+                    }
+                        
                     echo '<td style="padding-left: 1em;">
                             <strong>'.$row["Nom"].'</strong><br>
-                            Prix : '.$row["Prix"].'€
+                            Prix : '.$PrixArticle.'€
                         </td>
                         <td>
                             <button style="margin-left: 1em;"><a href="../Produit/supprimerDeWishlists.php?id1='.$row["ID"].'&id2='.$ID_Acheteur.'">Supprimer</a></button>

@@ -23,12 +23,9 @@
 
     </head>
 
-    <body>
- 
+<body>
+	<?php include '../header.php'; ?>
 
-
-
-      
     <div class="container-fluid">
         <div class="row" >
             <div class="col-xs-8 col-sm-7 col-lg-9  mx-auto"  style=float:none>
@@ -91,9 +88,8 @@
             </div>
         </div>
     </div>
-        
-
     
-    </body>
+</body>
 </html>
 
+<?php include '../footer.html' ?>

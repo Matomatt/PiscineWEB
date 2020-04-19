@@ -35,7 +35,7 @@
 				    if (!isset($_SESSION['UserType']) || !isset($_SESSION['UserID']))
 				        echo '<script> window.location = "../CreerCompte/connexion.php"; </script>';
 				    
-				    if ($_SESSION['UserType'] != "Acheteur") 
+				    if ($_SESSION['UserType'] != "Vendeur") 
 				        echo '<script> window.location = "../CreerCompte/connexion.php"; </script>';
 				    
 				    $db_handle = mysqli_connect('localhost', 'root', '');
@@ -44,7 +44,7 @@
 				    if (!$db_found)
 				        die ("Impossible d'accéder à la base de donnée");
 				        
-			        $query = "SELECT * FROM acheteurs WHERE ID=".$_SESSION['UserID'];
+			        $query = "SELECT * FROM vendeurs WHERE ID=".$_SESSION['UserID'];
 			        $result = mysqli_query($db_handle, $query);
 			        
 			        if (!$result)
@@ -52,9 +52,10 @@
 			        $user = $result->fetch_assoc();
 			        
 			        if (empty($user))
-			            die ('<script> alert("Erreur lors de la requète : aucune info sur cet acheteur"); window.location = "../Accueil/index.php"; </script>');
+			            die ('<script> alert("Erreur lors de la requète : aucune info sur ce vendeur"); window.location = "../Accueil/index.php"; </script>');
 			        
 			        echo '<a style="color: #fff; ">'. $user["Prenom"] ." ". $user["Nom"] .'</a>';
+			        echo '<a style="color: #fff;" href="../Vendeur/boutique.php?id='.$user["ID"].'">'. $user["Boutique"] .'</a>';
 			     ?>
 			     
                         </div>
@@ -65,8 +66,8 @@
                             switch ($page) {
                                 case "info": echo 'Informations personelles'; break;
                                 case "infobancaires": echo 'Moyen de paiements'; break;
-                                case "historique": echo 'Historique des achats'; break;
-                                case "encheres": echo 'Enchères en cours'; break;
+                                case "historique": echo 'Historique des ventes'; break;
+                                case "evaluation": echo 'Evaluations reçues'; break;
                                 case "offres": echo 'Offres en cours'; break;
                                 case "parametres": echo 'Paramètres'; break;
                                 default: echo 'MON COMPTE'; 
@@ -76,24 +77,26 @@
                 
                     <div class="row ">
                     	<div class="leftnavbar navbar-expand-lg col-lg-2 col-sm-4 col-xs-3">
-                         	<a href="../Acheteur/mon_compte.php" style="font-size: 15px; margin-top: 2%; text-decoration: underline overline; margin-left: 8%"> TABLEAU DE BORD</a>
+                         	<a href="../Vendeur/mon_compte.php" style="font-size: 15px; margin-top: 2%; text-decoration: underline overline; margin-left: 8%"> TABLEAU DE BORD</a>
                          	<button class="navbar-toggler navbar-light container-fluid" type="button" data-toggle="collapse" data-target="#leftPanel">
                     			<span class="navbar-toggler-icon"></span>
                     		</button>
             				<div class="collapse show" id="leftPanel">
                              <!-- Mettre les liens-->
                                 <hr>
-                                <a href="../Acheteur/mon_compte.php?page=info">Informations personelles</a>
+                                <a href="../Vendeur/mon_compte.php?page=info">Informations personelles</a>
                                 <hr>
-                                <a href="../Acheteur/mon_compte.php?page=infobancaires">Informations bancaires</a>
+                                <a href="../Vendeur/mon_compte.php?page=infobancaires">Informations bancaires</a>
                                 <hr >
-                                <a href="../Acheteur/mon_compte.php?page=historique">Historique des achats</a>
+                                <a href="../Vendeur/mon_compte.php?page=historique">Historique des ventes</a>
                                 <hr>
-                                <a href="../Acheteur/mon_compte.php?page=encheres">Enchères en cours</a>
+                                <a href="../Vendeur/mon_compte.php?page=offres">Offres en cours</a>
                                 <hr>
-                                <a href="../Acheteur/mon_compte.php?page=offres">Offres en cours</a>
+                                <?php echo '<a href="../Vendeur/boutique.php?id='.$_SESSION['UserID'].'">Ma boutique</a>'; ?>
                                 <hr>
-                                <a href="../Acheteur/mon_compte.php?page=parametres">Mes paramètres</a>
+                                <a href="../Vendeur/mon_compte.php?page=evaluation">Evaluations reçues</a>
+                                <hr>
+                                <a href="../Vendeur/mon_compte.php?page=parametres">Mes paramètres</a>
                                 <hr>
                                 <a href="../deconnexion.php">Déconnexion</a>
                     
@@ -102,9 +105,9 @@
                 		<?php
                             $page = isset($_GET["page"])?$_GET["page"]:"";
                             if ($page!="")
-                                include '../Acheteur/'.$page.'.php';
+                                include '../Vendeur/'.$page.'.php';
                             else
-                                include '../Acheteur/tableau_de_bord.php';
+                                include '../Vendeur/tableau_de_bord.php';
                         ?>
                 	</div>
                 

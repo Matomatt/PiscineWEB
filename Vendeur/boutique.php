@@ -24,7 +24,8 @@
     </head>
 
 <body>
-	<?php include '../header.php'; ?>
+	<?php include '../header.php'; 
+    ?>
 
     <div class="container-fluid">
         <div class="row" >
@@ -32,9 +33,25 @@
                 <div class="banniere ">   
                     <div class="opacite col-xs-6 col-lg-9 col-sm-5  mx-auto"  style=float:none>
                         <div class="gauche">
-                            <p><strong>Nom de la Boutique  </strong> </p><br>
-                            <p><strong>Contact </strong> </p><br>
-                            <p><strong>Objets en vente  </strong> </p><br>                 
+
+                            <?php
+
+                                $ID_Vendeur=$_SESSION["UserID"];
+                                $query = "SELECT * FROM vendeurs WHERE ID=".$ID_Vendeur."";
+                                $result = mysqli_query($db_handle, $query);
+
+                                if (!$result)
+                                {
+                                  die('Couldn\'t find table');
+                                }
+
+                                $row = $result->fetch_assoc();
+
+                            
+
+                                echo '<p><strong>Nom de la Boutique : </strong>'.$row["Boutique"].' </p><br>
+                                    <p><strong>Contact : </strong>'.$row["Email"].'<br>'.$row["Telephone"].'</p><br>';
+                            ?>               
                            
                         </div>
                         <div class="droite">
@@ -49,7 +66,7 @@
                     </div>
                 </div>
             </div>
-         </div>
+        </div>
 
          <div class="row "  style="margin-top: 10%;">
             <div class="col-lg-3 col-sm-4 col-xs-4">
@@ -57,38 +74,36 @@
             </div>
          </div>
 
-         <div class="col-xs-8 col-sm-7 col-lg-8  mx-auto"  style=float:none>
-        <div class="row ">
-            
-            <div class="col-lg-3">
-                <img class="img-thumbnail " src="../Images/pic.png" >
-                <p class="caption"> Lorem ipsum dolor sit amet consectetur adipisicing elit.Blanditiis 
-                        aspernatur minus voluptates beatae amet labore rerum saepe commodi est, assumenda nostrum
-                         officia, doloribus, voluptate modi sapiente dolorum libero culpa qui! </p>
-                </div>
-                <div class="col-lg-3" >			
-                    <img class="img-thumbnail" src="../Images/pic.png" >
-                    <p class="caption"> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                         Similique aut eaque sapiente molestiae voluptatum mollitia cupiditate voluptate?
-                          At similique excepturi quas repellendus nihil deleniti voluptatem blanditiis!
-                           Officiis quibusdam ducimus iure. </p>
-                </div>
-                <div class="col-sm-3">
-                    <img class="img-thumbnail" src="../Images/pic.png">
-                    <p class="caption">  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                         Cum ipsa ab nihil officia aspernatur quos illo dicta reiciendis sint? 
-                         Pariatur ipsa esse quia iste ad mollitia harum expedita, optio inventore. </p>
-                </div>
-                <div class="col-sm-3">
-                    <img class="img-thumbnail" src="../Images/pic.png">
-                    <p class="caption">  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                         Cum ipsa ab nihil officia aspernatur quos illo dicta reiciendis sint? 
-                         Pariatur ipsa esse quia iste ad mollitia harum expedita, optio inventore. </p>
-                </div>
+        <div class="col-xs-8 col-sm-7 col-lg-8  mx-auto"  style=float:none>
+            <div class="row ">
+        
+                <?php
+
+                $ID_Vendeur=$_SESSION["UserID"];
+                $query = "SELECT * FROM items WHERE ID_Vendeur=".$ID_Vendeur."";
+                $result = mysqli_query($db_handle, $query);
+
+                if (!$result)
+                {
+                  die('Couldn\'t find table');
+                }
+
+                while($row = $result->fetch_assoc()) 
+                { 
+                    /*on récupère les données de la table medias*/
+                    $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
+                    echo'<div class="col-sm-3">
+                            <img class="img-thumbnail" src="../UploadedContent/'. (($img!="") ? $img : 'blank.png') . '" >  
+                            <p class="caption"> <strong>Nom : </strong>'.$row["Nom"].'<br>
+                                                        Prix : '.$row["Prix"].'€ <br>
+                                                        Quantité : '.$row["Quantite"].'<br>
+                                                        Description : '.$row["Description"].'</p>
+                        </div>';
+                }
+                ?>
             </div>
         </div>
     </div>
-    
 </body>
 </html>
 

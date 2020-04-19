@@ -12,7 +12,14 @@ if (isset($_GET["id"]))
             
             if ($conn->connect_error) { die('<script> alert("Database not found"); history.back(); </script>'); }
             
-            //$sql = "SELECT * FROM wishlists (`ID_Acheteur`, `ID_Item`) VALUES ('" . $ID_Acheteur . "', '" . $_GET["id"] . "');";
+            $sql = "SELECT * FROM wishlists WHERE ID_Acheteur=" . $ID_Acheteur . " AND ID_Item=" . $_GET["id"];
+            
+            if ($result = $conn->query($sql)) {
+                if (!empty($result->fetch_assoc()))
+                    die ('<script> window.location.href= "../Produit/index.php?id=' . $_GET["id"] . '"; </script>');
+            } else {
+                echo '<script> alert("Error: ' . $sql . ' ' . $conn->error . '"); </script>';
+            }
             
             $sql = "INSERT INTO `wishlists` (`ID_Acheteur`, `ID_Item`) VALUES ('" . $ID_Acheteur . "', '" . $_GET["id"] . "');";
             

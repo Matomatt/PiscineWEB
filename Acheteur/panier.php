@@ -75,25 +75,26 @@
                         /*on récupère les données de la table medias*/
                         $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
                         echo '<tr>
-                                <td><img style="max-width: 10em" src="../UploadedContent/'. (($img!="") ? $img : 'blank.png') . '" ></td>';
+                                <td style="text-align: center"><img style="max-width: 10em; max-height: 10em" src="../UploadedContent/'. (($img!="") ? $img : 'blank.png') . '" ></td>';
 
                         echo '<td>
                                 <strong>'.$row["Nom"].'</strong>
                                 <hr>
-                                '.$row["Description"].'
+                                <div style="margin-left: 2em">
+                                    Quantité : <form method="post" action="../Acheteur/modifPanier.php?id='.$row["ID"].'"> <input type="number" min="1" max="'.$row["Quantite"].'" value="'.$Quantite.'" name="qt"></input>
+                                    <button type="submit" class="btn btn-light" style="font-size: 50%">Modifier</button> </form>
+                                </div>
                              </td>
                              <td style="text-align: center;">
                                 <div  style="margin-left: 3em;">
-                                    Prix Unitaire : '.$row["Prix"].'€<br>
-                                    Quantité : '.$Quantite.'<br>
+                                    Prix : '.$row["Prix"].'€<br>
                                     Frais de port : '.$row["Frais_de_port"].'€<br>
-                                    Prix : '.($prixTotalArticle=$row["Prix"]*$Quantite).'€<br>
     			                    <button><a href="../Produit/supprimerDuPanier.php?id1='.$row["ID"].'&id2='.$ID_Acheteur.'">Supprimer</a>
                                 </div>
                              </td>
                        </tr>'; 
 
-                        $prixTotalArticles=$prixTotalArticles+$prixTotalArticle;
+                        $prixTotalArticles += ($row["Prix"]*$Quantite);
                         $totalfdp += $row["Frais_de_port"];
                     }
 

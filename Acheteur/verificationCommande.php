@@ -180,13 +180,13 @@
 
 			        echo'	<tr>
 			        			<td>'.$row["Prenom"].'&nbsp;'.$row["Nom"].'</td>
-			        		<tr>
+			        		</tr>
 			        		<tr>
 			        			<td>'.$row2["Adresse_ligne_1"].'&nbsp;'.$row2["Adresse_ligne_2"].'</td>
 			        		</tr>
 			        		<tr>
 			        			<td>'.$row2["Ville"].','.$row2["Code_postale"].'</td>
-			        		<tr>
+			        		</tr>
 			        		<tr>
 			        			<td>'.$row2["Pays"].'</td>
 			        		</tr>

@@ -80,7 +80,7 @@
 
                     $prixTotalArticles=0;
 
-                    $idItem=0;
+                    $ID_Acheteur=0;
 
                     $item=0;
 

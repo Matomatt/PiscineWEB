@@ -35,7 +35,6 @@
 </head>
 
 <body>
-	<hr>
 	<!--barre catégories, achat,vente-->
 	<div class="nav justify-content-center" style="background-color: lightgrey; padding:13px;">
 		<button type="button" class="btn btn-light" onclick="location.href='../ResultatsDeRecherche/index.php';">Acheter</button>
@@ -81,7 +80,7 @@
             {
               /*affichage 1ere image*/
               echo '<div class="carousel-item active">
-                      <img class="img-fluid" alt="Article" style="width: 26em; height: 23em; object-fit:contain; background: lightgrey;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">
+                      <img class="img-fluid" onclick="location.href=\'../Produit/index.php?id=' . $row["ID"] . '\';" alt="Article" style="width: 26em; height: 23em; object-fit:contain; background: lightgrey;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">
                     </div>';
               $first = 1;
             }
@@ -90,7 +89,7 @@
             {
               /*affichage autres images*/
               echo '<div class="carousel-item">
-                      <img class="img-fluid" alt="Article" style="width: 26em; height: 23em; object-fit: contain; background: lightgrey;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">
+                      <img class="img-fluid" onclick="location.href=\'../Produit/index.php?id=' . $row["ID"] . '\';" alt="Article" style="width: 26em; height: 23em; object-fit: contain; background: lightgrey;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">
                     </div>';
             }             
           }               
@@ -141,7 +140,7 @@
             echo '<div class="card bg-basic">';
             /*on récupère les données de la table medias*/
             $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
-            echo '<img class="img-fluid" style="width: auto; height: 16em; object-fit: contain; background: lightgrey;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">';
+            echo '<img class="img-fluid" onclick="location.href=\'../Produit/index.php?id=' . $row["ID"] . '\';" style="width: auto; height: 16em; object-fit: contain; background: lightgrey;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">';
             echo '<div class="card-body text-center">
                     <h4 class="card-title">'.$row["Nom"].'</h4>
                     <p class="card-text">Prix : '.$row["Prix"].'€</p>
@@ -190,7 +189,7 @@
             echo '<div class="card bg-basic">';
             /*on récupère les données de la table medias*/
             $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
-            echo '<img class="img-fluid" style="width: auto; height: 16em; object-fit: contain; background: lightgrey;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">';
+            echo '<img class="img-fluid" onclick="location.href=\'../Produit/index.php?id=' . $row["ID"] . '\';" style="width: auto; height: 16em; object-fit: contain; background: lightgrey;" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '">';
             echo '<div class="card-body text-center">
                     <h4 class="card-title">'.$row["Nom"].'</h4>
                     <p class="card-text">Prix : '.$row["Prix"].'€</p>

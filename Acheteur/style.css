@@ -133,3 +133,11 @@
     border-style: groove;
     border-color: #A7A7A7;
 }
+
+.offre img{
+    max-width: 50%;
+}
+
+.listeCartes td{
+    padding-right: 30px;
+}

@@ -29,7 +29,7 @@
                 <div class="container-fluid" >
                     <div class="row" >
                         <div class="leftnavbartop col-lg-2 col-sm-4 col-xs-3">
-                            <a><img class="img-circle" src="../Images/avatar.jpg" style="max-width: 50%;"></a>
+                            <a><img class="rounded-circle" src="../Images/avatar.jpg" style="max-width: 50%;"></a>
                             <br>
                             <a style="color: #fff; ">Mon nom</a>
                             <a style="color: #fff; ">Nom de ma boutique</a>
@@ -82,6 +82,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
     </body>
 </html>

@@ -18,7 +18,7 @@
         
         $conn->close();
         include '../processEncheres.php';
-       // echo '<script> window.location.href= "../Acheteur/encheres.php"; </script>';
+        echo '<script> window.location.href= "../Acheteur/encheres.php"; </script>';
     }
     else
         echo '<script> window.location.href= "../Accueil/index.php"; </script>';

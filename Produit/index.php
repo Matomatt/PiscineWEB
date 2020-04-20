@@ -42,6 +42,20 @@
 	</script>
 </head>
 <body>
+    <?php 
+        $ID_Vendeur = isset($_SESSION["UserID"]) && isset($_SESSION["UserType"])?($_SESSION["UserType"] == "Vendeur"?$_SESSION["UserID"]:""):""; 
+        
+        $id = isset($_GET["id"])?$_GET["id"]:"";
+        
+        $db_handle = mysqli_connect('localhost', 'root', '');
+        $db_found = mysqli_select_db($db_handle, 'ecebay');
+        
+        if (!$db_found) { die('Database not found'); }
+        $item = mysqli_query($db_handle, "SELECT * FROM items WHERE ID=" . $id . ";");
+        $item = ($item)?$item->fetch_assoc():"";
+        if ($item=="")
+            die ('<script> window.location = "../Accueil/index.php"; </script>');
+    ?>
 	<!-- 2eme div : retour aux r�sultats-->
 	<div id="div2">
 		<h6><a href="javascript:history.back()"><- Retour aux résultats</a></h6>
@@ -49,7 +63,11 @@
 	<br>
 	<!-- 3eme div : pr�sentation produits et info vendeur-->
 	<div id="div3">
-		<h4>Article</h4>	
+		<h4>Article</h4>
+		<div class="container" style="text-align: right">
+    		<?php if ($ID_Vendeur == $item["ID_Vendeur"]) echo '<a href="../Produit/delete.php?id='.$id.'"> Supprimer </a>'?>
+    		<?php //if ($ID_Vendeur == $item["ID_Vendeur"]) echo '<a href="../Produit/modify.php?id='.$id.'"> Modifier </a>'?>
+		</div>
 		<br>
 		<div class="wrapper container">
 		<br>
@@ -63,13 +81,6 @@
 			  			<div class="carousel-inner">
 
 						<?php
-							$db_handle = mysqli_connect('localhost', 'root', '');
-							$db_found = mysqli_select_db($db_handle, 'ecebay');
-
-							if (!$db_found) { die('Database not found'); }
-
-							$id = isset($_GET["id"])?$_GET["id"]:"";
-							
 							$first = 0;
 							$imgs = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $id . " ORDER BY indx ASC;");
 							if ($imgs)
@@ -114,17 +125,9 @@
 					<table>
 						<?php
 						    $ID_Acheteur = isset($_SESSION["UserID"]) && isset($_SESSION["UserType"])?($_SESSION["UserType"] == "Acheteur"?$_SESSION["UserID"]:""):"";
-						
-						    //echo 'ID acheteur : ' . $ID_Acheteur;
-							$db_handle = mysqli_connect('localhost', 'root', '');
-							$db_found = mysqli_select_db($db_handle, 'ecebay');
-
-							if (!$db_found) { die('Database not found'); }
-							
+						   
 							$id = isset($_GET["id"])?$_GET["id"]:"";
-							$first = 0;
-							$item = mysqli_query($db_handle, "SELECT * FROM items WHERE ID=" . $id . ";")->fetch_assoc();
-
+							
 							$nbLikes = mysqli_query($db_handle, 'SELECT COUNT( * ) as "Number of Rows" FROM wishlists WHERE ID_Item = ' . $id . ';')->fetch_assoc()["Number of Rows"];
                             $dejalike=0;
 							if ($result = mysqli_query($db_handle,"SELECT * FROM wishlists WHERE ID_Acheteur=" . $ID_Acheteur . " AND ID_Item=" . $id)) {

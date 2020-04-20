@@ -32,7 +32,7 @@
 	$id=(isset($_SESSION["UserID"])?$_SESSION["UserID"]:"");
 	$ID_Vendeur=isset($_GET["id"])?$_GET["id"]:0;
 	
-	$query = "SELECT * FROM vendeurs WHERE ID=".$ID_Vendeur."";
+	$query = "SELECT * FROM vendeurs WHERE ID=".$ID_Vendeur;
 	$result = mysqli_query($db_handle, $query);
 	
 	if (!$result)
@@ -99,7 +99,7 @@
                 <?php
 
                 $ID_Vendeur=isset($_GET["id"])?$_GET["id"]:0;
-                $query = "SELECT * FROM items WHERE ID_Vendeur=".$ID_Vendeur. ($id==$ID_Vendeur?"":" AND Vendu=0");
+                $query = "SELECT * FROM items WHERE ID_Vendeur=".$ID_Vendeur. ($id==$ID_Vendeur?"":" AND Vendu=0") ." ORDER BY Date_MEV DESC";
                 $result = mysqli_query($db_handle, $query);
 
                 if (!$result)

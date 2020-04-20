@@ -36,6 +36,7 @@
 
 	$error ="";
 
+	
 	if ($ID_Vendeur == "")
 	{
 	    die('<script>

@@ -77,12 +77,8 @@
 		session_start();
 		if (isset($_SESSION['UserType']) && isset($_SESSION['UserID']))
 		{
-			if ($_SESSION['UserType'] == "Acheteur")
-				echo '<input type="image" class="img-fluid" src="../Images/user-default.png" onclick="location.href=\'../Acheteur/mon_compte.php\';" style="max-width: 4em;"></input>';
-			else if ($_SESSION['UserType'] == "Vendeur")
-				echo '<input type="image" class="img-fluid" src="../Images/user-default.png" onclick="location.href=\'../Vendeur/mon_compte.php\';" style="max-width: 4em;"></input>';
-			else if ($_SESSION['UserType'] == "Admin")
-				echo '<input type="image" class="img-fluid" src="../Images/user-default.png" onclick="location.href=\'../Admin/compteadmin.html\';" style="max-width: 4em;"></input>';
+			if ($_SESSION['UserType'] != "")
+			    echo '<input type="image" class="img-fluid" src="../Images/user-default.png" onclick="location.href=\'../'.$_SESSION['UserType'].'/mon_compte.php\';" style="max-width: 4em;"></input>';
 			else
 				echo '<button class="btn" onclick="location.href=\'../CreerCompte/connexion.php\';">Connexion</button>';
 		}

@@ -57,21 +57,20 @@
 
 .AddSupprItem, .AddVendeur{
     margin-left: 5%;
+    margin-top: 5%;
     border-style:groove;
-     width: 400px;
-    height:200px;
     text-align: center;
+    float: left;
 }
 
 .AddSupprItem h3,.AddVendeur h3{
-    text-align: center;
-    margin-top: 5px;
-    margin-left: 20%;
+  text-align: center;
+  margin-top: 5%;
 
 }
 
 
  .AddSupprItem button, .AddVendeur button{
-    margin-top: 10%;
-    margin-left: 20%;
+   margin-top: 5%;
+   margin-bottom: 5%;
 }

@@ -88,30 +88,15 @@
                                 $sqlupd = "UPDATE vendeurs A set ID_Adresse = (SELECT ID FROM adresses WHERE ID=LAST_INSERT_ID()) WHERE A.Email ='$email' ";
                                 $result3 = mysqli_query($db_handle, $sqlupd);
 
-                                if ($result3)
-                                {
-                                    session_start();
-                                    $sqlid = "SELECT ID FROM vendeurs WHERE Email ='$email';";
-                                    $result4 = mysqli_query($db_handle, $sqlid);
-                                    if ($result4)
-                                    {
-                                        $ID_Vendeur = $result4->fetch_assoc()["ID"];
-                                        $_SESSION['UserID'] = $ID_Vendeur;
-                                        $_SESSION['UserType'] = "Vendeur";
-                                    }
-                                    //die('<script> window.location = "../Vendeur/mon_compte.php"; </script>');
-                                }
-                                else{
-                                    die('<script>
-                                    alert("Une erreur s est produite");
-                                    window.location = "../CreerCompte/creerboutique.html";
-                                    </script>') ;
-                                    }
+                                echo $sqlupd;
+                                
+                                if (!$result3)
+                                   die('<script> alert("Une erreur s est produite"); window.location = "../Admin/creerboutique.html"; </script>') ;
                             }
                             else{
                                 die('<script>
                                 alert("Une erreur s est produite");
-                                window.location = "../CreerCompte/creerboutique.html";
+                                window.location = "../Admin/creerboutique.html";
                                 </script>') ;}
 
                         }
@@ -119,7 +104,7 @@
                     {
                         die('<script>
                             alert("N\'a pas été ajouté dans la base de donnée");
-                            window.location = "../CreerCompte/creerboutique.html";
+                            window.location = "../Admin/creerboutique.html";
                         </script>') ;
                      //echo "Erreur: " . $sql . "<br>" . mysqli_error($db_handle);
 
@@ -130,7 +115,7 @@
                 {
                     die('<script>
                     alert("Les deux mots de passe ne correspondent pas");
-                    window.location = "../CreerCompte/creerboutique.html";
+                    window.location = "../Admin/creerboutique.html";
                     </script>') ;
                 }
             }
@@ -139,7 +124,7 @@
         else
         {die('<script>
             alert("Base de donnée introuvable");
-            window.location = "../CreerCompte/creerboutique.html";
+            window.location = "../Admin/creerboutique.html";
             </script>');}
 
         }
@@ -148,11 +133,11 @@
         {
             die('<script>
                         alert("Veuillez remplir tous les champs");
-        				window.location = "../CreerCompte/creerboutique.html";
+        				window.location = "../Admin/creerboutique.html";
         		</script>');
         }
     }
 
-   
+    echo '<script> window.location = "../Admin/mon_compte.php?page=vendeurs"; </script>';
 
 ?>

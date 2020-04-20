@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Création boutique - ECEbay</title>
+        <meta charset= "utf-8">
+        <meta name= "viewport" content= "width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="style2.css">
+
+        <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.j s"> </script>
+        <script src= "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/j s/bootstrap.min.j s"> </script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    </head>
+
+    <body>
+
+
+
+        <div class="container ">
+            <div class=" col-lg-9 center-block" style="float:none;">
+
+    <div class="creercompte">
+        <h2 style="text-align: center;">Bonjour ! </h2>
+        <h4 style="text-align: center;">Saissisez les informations afin de créer la boutique !</h4><br>
+            
+    <form method="post" action="creerboutiqueTraitement.php">
+
+        <div class="row">
+            <div class="col-lg-6 col-xs-6 col-md-6" >
+                 
+                <div class="form-group">
+                    <input type="text" placeholder="Nom de la boutique *" name="nomboutique"/><br>
+                </div>
+                <div class="form-group">
+                    <input type="text"  placeholder="Prénom *" name="prenom" />
+                </div>
+                <div class="form-group">
+                    <input type="text"  placeholder="Nom *" name="nom" />
+                </div>
+                <div class="form-group">
+                    <input type="email"  placeholder="E-mail *" name="email" />
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Mot de passe *" name="mdp" />
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Confirmer le mot de passe *"  name="mdpverif"/>
+                </div>
+               
+            </div>
+
+            <div class="col-lg-6 col-xs-6 col-md-6">
+                <div class="form-group">
+                    <input type="tel"  placeholder="Numéro de téléphone *"  name="tel" />
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Adresse *" name="adresse"><br>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Complement d'adresse" name="cpadresse"><br>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Ville *" name="ville"><br>
+                </div>
+                <div class="form-group">
+                    <input type="number" placeholder="Code Postal *" name="cp"><br>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Pays *" name="pays"><br>
+                </div>
+                    <input type="submit"   value="Enregistrer" name="bouton1"/>
+            </div>
+            
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+
+
+    </body>
+
+</html>

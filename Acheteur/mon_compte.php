@@ -25,13 +25,7 @@
     <body >
 
                 <?php include '../header.php'; ?>
-                
-                <div class="container-fluid" >
-                    <div class="row" >
-                        <div class="leftnavbartop col-lg-2 col-sm-4 col-xs-3">
-                            <a><img class="rounded-circle" src="../Images/avatar.jpg" style="max-width: 50%;"></a> <br>
-                            
-				<?php
+                <?php
 				    if (!isset($_SESSION['UserType']) || !isset($_SESSION['UserID']))
 				        echo '<script> window.location = "../CreerCompte/connexion.php"; </script>';
 				    
@@ -53,7 +47,14 @@
 			        
 			        if (empty($user))
 			            die ('<script> alert("Erreur lors de la requète : aucune info sur cet acheteur"); window.location = "../Accueil/index.php"; </script>');
-			        
+		        ?>
+                
+                <div class="container-fluid" >
+                    <div class="row" >
+                        <div class="leftnavbartop col-lg-2 col-sm-4 col-xs-3">
+                            <a><img class="rounded-circle" src="../UploadedContent/<?php echo ($user["Photo"]!=""?$user["Photo"]:"user-default.png"); ?>" style="max-width: 8em; max-height: 8em;"></a> <br>
+                      
+			    <?php    
 			        echo '<a style="color: #fff; ">'. $user["Prenom"] ." ". $user["Nom"] .'</a>';
 			     ?>
 			     
@@ -68,7 +69,7 @@
                                 case "historique": echo 'Historique des achats'; break;
                                 case "encheres": echo 'Enchères en cours'; break;
                                 case "offres": echo 'Offres en cours'; break;
-                                case "parametres": echo 'Paramètres'; break;
+                                case "modifierPP": echo 'Modifier ma PP'; break;
                                 default: echo 'MON COMPTE'; 
                             } ?>
                         </div>
@@ -93,7 +94,7 @@
                                 <hr>
                                 <a href="../Acheteur/mon_compte.php?page=offres">Offres en cours</a>
                                 <hr>
-                                <a href="../Acheteur/mon_compte.php?page=parametres">Mes paramètres</a>
+                                <a href="../Acheteur/mon_compte.php?page=modifierPP">Modifier ma PP</a>
                                 <hr>
                                 <a href="../deconnexion.php">Déconnexion</a>
                     

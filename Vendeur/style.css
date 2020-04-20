@@ -58,10 +58,12 @@
 .banniere {
    
     border-style: groove;
-     background-image: url(../Images/bubble.jpg) ;
-     height: 230px;
-     opacity: 0.9;
-     z-index: 1;
+    background-image: url(../Images/bubble.jpg) ;
+    height: 15em;
+    opacity: 0.9;
+    z-index: 1;
+    background-repeat:no-repeat;
+    background-size:cover;
  }
 
  .gauche{

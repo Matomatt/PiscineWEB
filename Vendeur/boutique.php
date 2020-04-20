@@ -22,64 +22,58 @@
         <!--external style sheet-->
 
     </head>
+    
+<?php 
+    $db_handle = mysqli_connect('localhost', 'root', '');
+    $db_found = mysqli_select_db($db_handle, 'ecebay');
+    
+    if (!$db_found) { die('Database not found'); }
 
+	$id=(isset($_SESSION["UserID"])?$_SESSION["UserID"]:"");
+	$ID_Vendeur=isset($_GET["id"])?$_GET["id"]:0;
+	
+	$query = "SELECT * FROM vendeurs WHERE ID=".$ID_Vendeur."";
+	$result = mysqli_query($db_handle, $query);
+	
+	if (!$result)
+	{
+	    die('Couldn\'t find table');
+	}
+	
+	$vendeur = $result->fetch_assoc();
+?>
+	
 <body>
-	<?php include '../header.php'; 
-    ?>
-
+	<?php include '../header.php'; ?>
+	
     <div class="container-fluid">
         <div class="row" >
             <div class="col-xs-8 col-sm-7 col-lg-9  mx-auto"  style=float:none>
-                <div class="banniere ">   
+                <div class="banniere" style="background-image: url('../UploadedContent/<?php echo ($vendeur["BG"]!=""?$vendeur["BG"]:"blank.png"); ?>')">   
                     <div class="opacite col-xs-6 col-lg-9 col-sm-5  mx-auto"  style=float:none>
                         <div class="gauche">
 
-                            <?php
-
-                                $ID_Vendeur=isset($_GET["id"])?$_GET["id"]:0;
-                                $query = "SELECT * FROM vendeurs WHERE ID=".$ID_Vendeur."";
-                                $result = mysqli_query($db_handle, $query);
-
-                                if (!$result)
-                                {
-                                  die('Couldn\'t find table');
-                                }
-
-                                $row = $result->fetch_assoc();
-
-                            
-
-                                echo '<p><strong>Nom de la Boutique : </strong>'.$row["Boutique"].' </p><br>
-                                    <p><strong>Contact : </strong>'.$row["Email"].'<br>'.$row["Telephone"].'</p><br>';
+                            <?php 
+                                echo '<br><h4>'.$vendeur["Boutique"].'</h4>
+                                    <p><strong>Contact : </strong>'.$vendeur["Email"].'<br>'.$vendeur["Telephone"].'</p>';
                             ?>
 
                             <?php
-
-                                $ID_Vendeur=$_SESSION["UserID"];
-                                $query = "SELECT * FROM notes WHERE ID_Vendeur=".$ID_Vendeur."";
+                                $query = "SELECT AVG(Note) as moy, COUNT(Note) as nb FROM notes WHERE ID_Vendeur=".$ID_Vendeur."";
                                 $result = mysqli_query($db_handle, $query);
 
                                 if (!$result)
                                 {
                                   die('Couldn\'t find table');
                                 }
+                                
+                                $notes = $result->fetch_assoc();
 
                                 echo '</div>        
-                                      <div class="droite">
-                                        <p><strong>Notes : </strong><br>';
+                                      <div class="droite" style="margin-top: 2em">
+                                        <p><strong>'.(int)($notes["moy"]/2).'/5 &#9733</strong><br>';
 
-                                $i=0;
-                                $sommeNotes=0;
-                                $moyenne=0;
-
-                                while($row = $result->fetch_assoc()) 
-                                { 
-                                    echo $row["Note"].'<br>';
-                                    $sommeNotes=$sommeNotes+$row["Note"];
-                                    ++$i; 
-                                }
-
-                                echo 'Moyenne = '.$sommeNotes/$i.'';
+                                echo 'Avec '.$notes["nb"].' notes';
 
                                 echo '</p>
                                     </div>';
@@ -87,7 +81,7 @@
                         
                     </div>
                     <div class="Images/avatar col-xs-4 col-lg-3 col-sm-3  mx-auto "  style="float:none; margin-top: -20%;">
-                        <img  src="../Images/avatar.jpg" class="img-circle" style="max-width: 50%; margin-top: 2%; margin-left: 15%;">
+                        <img  src="../UploadedContent/<?php echo ($vendeur["PP"]!=""?$vendeur["PP"]:"user-default.png"); ?>" class="img-circle" style="max-width: 50%; margin-top: 2%; margin-left: 15%;">
                     </div>
                 </div>
             </div>
@@ -105,7 +99,7 @@
                 <?php
 
                 $ID_Vendeur=isset($_GET["id"])?$_GET["id"]:0;
-                $query = "SELECT * FROM items WHERE ID_Vendeur=".$ID_Vendeur." AND Vendu=0";
+                $query = "SELECT * FROM items WHERE ID_Vendeur=".$ID_Vendeur. ($id==$ID_Vendeur?"":" AND Vendu=0");
                 $result = mysqli_query($db_handle, $query);
 
                 if (!$result)
@@ -117,8 +111,8 @@
                 { 
                     /*on récupère les données de la table medias*/
                     $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
-                    echo'<div class="col-sm-3">
-                            <img class="img-thumbnail" src="../UploadedContent/'. (($img!="") ? $img : 'blank.png') . '" >  
+                    echo'<div class="col-sm-3" style="text-align: center">
+                            <img onclick="location.href=\'../Produit/index.php?id=' . $row["ID"] . '\';" style="max-height: 10em" src="../UploadedContent/'. (($img!="") ? $img : 'blank.png') . '" ><br>
                             <strong>'.$row["Nom"].'</strong><br>
                             Prix : '.$row["Prix"].'€ <br>
                             Quantité : '.$row["Quantite"].'<br>

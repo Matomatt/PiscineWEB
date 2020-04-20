@@ -20,7 +20,7 @@
     if ($_SESSION["UserType"] != "Vendeur")
     {
         die('<script>
-                alert("Veuillez vous connecter à votre compte Acheteur");
+                alert("Veuillez vous connecter à votre compte Vendeur");
                 window.location = "../CreerCompte/connexion.php";
             </script>');
     }

@@ -123,7 +123,7 @@
 		}
 		else if (!isset($_FILES["media".$i])) {
 			$errorToPrint .= "media $i doesn't exist. ";
-		} else {
+		} else if ($_FILES["media".$i]["error"] != 4) {
 			$errorToPrint .= 'Error number ' . $_FILES["media".$i]["error"] . '. ';
 		}
 	}

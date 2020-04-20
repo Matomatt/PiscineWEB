@@ -129,11 +129,11 @@
 							
 						}
 
-						$categorie = (isset($_GET["categorie"])?htmlspecialchars($_GET["categorie"]):(isset($_POST["categorie"])?$_POST["categorie"]:"none"));
+						$categorie = (isset($_GET["categorie"])?$_GET["categorie"]:(isset($_POST["categorie"])?$_POST["categorie"]:"none"));
 
 						if ($categorie != "none")
 						{
-							$query .= ' AND (Categorie="' . $categorie .'");';
+							$query .= ' AND (Categorie="' . $categorie .'")';
 						}
 						else
 						{
@@ -162,7 +162,8 @@
 							}
 						}
 
-						$result = mysqli_query($db_handle, $query.'ORDER BY Date_MEV DESC');
+						//echo $query.' ORDER BY Date_MEV DESC';
+						$result = mysqli_query($db_handle, $query.' ORDER BY Date_MEV DESC');
 
 						if (!$result)
 						{
@@ -180,7 +181,7 @@
 							echo '<div class="col-lg-4" style="margin-top: 1em; margin-bottom: 1em; text-align: center; float:left">
                                   <input type="image" class="img-fluid" onclick="location.href=\'../Produit/index.php?id=' . $row["ID"] . '\';" src="../UploadedContent/' . (($img!="") ? $img : 'blank.png') . '" style="max-height: 10em"> </input> 
                                   </div> 
-                                  <div class="col-lg-4" style="margin-top: 1em; margin-bottom: 1em; text-align: center; float:left">' . $row["Nom"] . "<br> $" . $row["Prix"] . '</div>';
+                                  <div class="col-lg-4" style="margin-top: 1em; margin-bottom: 1em; text-align: center; float:left">' . $row["Nom"] . "<br> " . $row["Prix"] . '€</div>';
 							
 							echo '<div class="col-lg-4" style="margin-top: 1em; margin-bottom: 1em; text-align: center; float:left">
                                   <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">

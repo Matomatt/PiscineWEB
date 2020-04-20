@@ -25,13 +25,7 @@
     <body >
 
                 <?php include '../header.php'; ?>
-                
-                <div class="container-fluid" >
-                    <div class="row" >
-                        <div class="leftnavbartop col-lg-2 col-sm-4 col-xs-3">
-                            <a><img class="rounded-circle" src="../Images/avatar.jpg" style="max-width: 50%;"></a> <br>
-                            
-				<?php
+                <?php
 				    if (!isset($_SESSION['UserType']) || !isset($_SESSION['UserID']))
 				        echo '<script> window.location = "../CreerCompte/connexion.php"; </script>';
 				    
@@ -53,7 +47,15 @@
 			        
 			        if (empty($user))
 			            die ('<script> alert("Erreur lors de la requète : aucune info sur ce vendeur"); window.location = "../Accueil/index.php"; </script>');
-			        
+			    ?>
+			    
+                <div class="container-fluid" >
+                    <div class="row" >
+                        <div class="leftnavbartop col-lg-2 col-sm-4 col-xs-3">
+                            <a><img class="rounded-circle" src="../UploadedContent/<?php echo ($user["PP"]!=""?$user["PP"]:"user-default.png"); ?>" style="max-width: 8em; max-height: 8em;"></a> <br>
+                            
+				
+			     <?php
 			        echo '<a style="color: #fff; ">'. $user["Prenom"] ." ". $user["Nom"] .'</a>';
 			        echo '<a style="color: #fff;" href="../Vendeur/boutique.php?id='.$user["ID"].'">'. $user["Boutique"] .'</a>';
 			     ?>
@@ -69,7 +71,7 @@
                                 case "historique": echo 'Historique des ventes'; break;
                                 case "evaluation": echo 'Evaluations reçues'; break;
                                 case "offres": echo 'Offres en cours'; break;
-                                case "parametres": echo 'Paramètres'; break;
+                                case "modifierPP": echo 'Modifier mon profil'; break;
                                 default: echo 'MON COMPTE'; 
                             } ?>
                         </div>
@@ -96,7 +98,7 @@
                                 <hr>
                                 <a href="../Vendeur/mon_compte.php?page=evaluation">Evaluations reçues</a>
                                 <hr>
-                                <a href="../Vendeur/mon_compte.php?page=parametres">Mes paramètres</a>
+                                <a href="../Vendeur/mon_compte.php?page=modifierPP">Modifier photos</a>
                                 <hr>
                                 <a href="../deconnexion.php">Déconnexion</a>
                     

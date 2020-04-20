@@ -30,7 +30,7 @@
 
         $row = $result->fetch_assoc();
 
-        $sqlupdate = "UPDATE vendeurs SET Nom = '$nom',Prenom = '$prenom', Telephone = '$tel', Email='$email'";
+        $sqlupdate = "UPDATE vendeurs SET Nom = '$nom',Prenom = '$prenom', Telephone = '$tel', Email='$email' WHERE ID=".$ID_Vendeur;
 
         $result = mysqli_query($db_handle, $sqlupdate);
 

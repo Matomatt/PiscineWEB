@@ -24,7 +24,7 @@
 	$id=(isset($_SESSION["UserID"])?$_SESSION["UserID"]:"");
 
 	/*on récupère les données de la table acheteurs*/
-	$query = "SELECT * FROM acheteurs WHERE ID_Adresse=".$id."";
+	$query = "SELECT * FROM acheteurs WHERE ID=".$id."";
 	$result = mysqli_query($db_handle, $query);
 
 	if (!$result)

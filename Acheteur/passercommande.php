@@ -46,6 +46,14 @@
             if (!$result)
                 die ('<script> alert ("ERREUR : Commande de cet item non passée !")</script>');
             else {
+                //Commande passée, on transmets l'argent au vendeur
+                $query = "UPDATE soldes S SET S.Montant = (S.Montant+".$Montant.") WHERE S.ID IN (SELECT ID_Solde FROM vendeurs WHERE ID = ".$ID_Vendeur.");";
+                
+                $result = mysqli_query($db_handle, $query);
+                
+                if (!$result)
+                    die ('<script> alert ("ERREUR : Item pas mis à jour !"); </script>');
+                
                 $query = "UPDATE `items` SET `Quantite` = '".($QuantiteTotal-$Quantite)."', `Vendu` = '".(($QuantiteTotal-$Quantite)<=0?"1":"0")."' WHERE `items`.`ID` = ".$ID_Item.";";
                 
                 $result = mysqli_query($db_handle, $query);

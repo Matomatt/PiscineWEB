@@ -76,7 +76,12 @@
                             $resultUpdate = mysqli_query($db_handle, $queryUpdate);
                             if (!$resultUpdate)
                                 echo "Error updating... " . $queryUpdate . '<br>';
-                                    
+                            
+                            $queryUpdate = "DELETE FROM paniers WHERE ID_Item=" . $item["ID"] . " AND ID_Acheteur=" . $MeilleureEnchere["ID_Acheteur"];
+                            $resultUpdate = mysqli_query($db_handle, $queryUpdate);
+                            if (!$resultUpdate)
+                                echo "Error updating... " . $queryUpdate . '<br>';
+                                
                             //echo 'On remets les encheres max de tout le monde a zero <br>';
                             $encheres = mysqli_query($db_handle,'SELECT * FROM encheres WHERE ID_Item=' . $item["ID"]);
                             

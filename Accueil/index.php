@@ -63,7 +63,7 @@
 
           if (!$db_found) { die('Database not found'); }
           /*on récupère les données de la table items*/
-          $query = "SELECT * FROM items ORDER BY Date_MEV DESC";
+          $query = "SELECT * FROM items WHERE vendu=0 ORDER BY Date_MEV DESC";
           $result = mysqli_query($db_handle, $query);
 
           if (!$result)
@@ -134,17 +134,12 @@
 
         if (!$db_found) { die('Database not found'); }
         /*on récupère les données de la table items*/
-        $query = "SELECT * FROM items WHERE (Type_de_vente_1='encheres' OR Type_de_vente_2='encheres') ORDER BY Date_MEV DESC";
+        $query = "SELECT * FROM items WHERE (Type_de_vente_1='encheres' OR Type_de_vente_2='encheres') AND vendu=0 ORDER BY Date_MEV DESC";
         $result = mysqli_query($db_handle, $query);
 
         if (!$result)
         {
           die('Couldn\'t find table');
-        }
-                      
-        if (mysqli_num_rows($result) < 1)
-        {
-          die('Empty');
         }
         
         $nb=0;
@@ -185,24 +180,17 @@
 
         if (!$db_found) { die('Database not found'); }
         /*on récupère les données de la table items*/
-        $query = "SELECT * FROM items WHERE Type_de_vente_1='achat_imm' ORDER BY Date_MEV DESC";
+        $query = "SELECT * FROM items WHERE Type_de_vente_1='achat_imm' AND Vendu='0' ORDER BY Date_MEV DESC";
         $result = mysqli_query($db_handle, $query);
 
         if (!$result)
         {
           die('Couldn\'t find table');
         }
-                      
-        if (mysqli_num_rows($result) < 1)
-        {
-          die('Empty');
-        }
 
         $nb=0;
         while(($row = $result->fetch_assoc()) && $nb<5) 
         {
-          if($row["Type_de_vente_1"] == "achat_imm" OR $row["Type_de_vente_2"] == "achat_imm")
-          {
             echo '<div class="card bg-basic">';
             /*on récupère les données de la table medias*/
             $img = mysqli_query($db_handle, "SELECT File FROM medias WHERE ID_Item=" . $row["ID"] . " AND indx = 0;")->fetch_assoc() ["File"];
@@ -214,7 +202,6 @@
                   </div>
                 </div>';
             $nb+=1;
-          }
         }               
       ?>
   	</div>

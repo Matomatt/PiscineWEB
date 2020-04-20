@@ -236,15 +236,13 @@
 				<div class="tab-content">
 					<div class="tab-pane container active" id="description">
 						<div id="demo" class="collapse">
+							<?php echo $item["Description"]; ?>
+							<br>
+							Catégorie:	<?php echo $item["Categorie"]; ?>
+							<br>
+							Marque:	<?php echo $item["Marque"]; ?>
+							<hr>
 							Le vendeur assume l'entière responsabilité de cette annonce.
-							<br>
-							Caractéristiques de l'objet
-							<br>
-							Etat :	Occasion : Objet ayant été utilisé. 
-							<br>
-							Catégorie:	Accessoire VIP
-							<br>
-							Marque:	Bla	
 						</div>
 					</div>
 				</div>
@@ -269,7 +267,7 @@
     			$id = isset($_GET["id"])?$_GET["id"]:"";
     			
     			$categorie = mysqli_query($db_handle, "SELECT Categorie FROM items WHERE ID='" . $id . "';")->fetch_assoc()["Categorie"];
-    			$result = mysqli_query($db_handle, "SELECT * FROM items WHERE Categorie='" . $categorie . "' ORDER BY Date_MEV DESC;");
+    			$result = mysqli_query($db_handle, "SELECT * FROM items WHERE Categorie='" . $categorie . "' AND Vendu=0 ORDER BY Date_MEV DESC;");
     			$nb = 0;
     			while (($item = $result->fetch_assoc()) && $nb<5)
     			{

@@ -69,6 +69,15 @@
                     if (!$resultS)
                         echo '<script> alert("Error: ' . $queryU . ' ' . $conn->error . '"); </script>';
                 }
+                else
+                {
+                    $queryS = "DELETE FROM wishlists WHERE ID_Item=".$ID_Item;
+                    
+                    $resultS = mysqli_query($db_handle, $queryS);
+                    
+                    if (!$resultS)
+                        echo '<script> alert("Error: ' . $queryS . ' ' . $conn->error . '"); </script>';
+                }
             }
             
             

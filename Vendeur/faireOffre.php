@@ -13,7 +13,7 @@
         {
             echo '<script> alert("' . $result->num_rows . '"); </script>';
             if ($result->num_rows >= 5)
-                die( '<script> alert("Vous avez déjà envoyé 5 offres sur cet item"); window.location.href= "../Acheteur/mon_compte.php?page=offres"; </script>');
+                die( '<script> alert("Vous avez déjà envoyé 5 offres sur cet item"); window.location.href= "../Acheteur/offres.php"; </script>');
         }
         else
             echo '<script> alert("Error: ' . $sql . ' ' . $conn->error . '"); </script>';

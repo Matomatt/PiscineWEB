@@ -16,42 +16,32 @@
     /*Pour avoir id du vendeur*/
     $ID_Vendeur=(isset($_SESSION["UserID"])?$_SESSION["UserID"]:"");
 
-    //si le bouton a été sollicité
-    if(!empty($_POST['bouton1']))
+    if(isset($_POST["prenom"]) && isset($_POST['nom']) && isset($_POST['tel']) && isset($_POST['email']))   
     {
-        echo 'bonjour2';
-        //Si tout les champs sont remplis
-        if(!empty($_POST["prenom"]) && !empty($_POST['nom']) && !empty($_POST['tel']) 
-        && !empty($_POST['mail']))
-            
-        {        
-            
-   
-/* requête vendeur*/
-            $query="SELECT * FROM vendeurs WHERE ID=".$ID_Vendeur.";" ;
-        
-            $result = mysqli_query($db_handle, $query);
+        /* requête vendeur*/
+        $query="SELECT * FROM vendeurs WHERE ID=".$ID_Vendeur.";" ;
+    
+        $result = mysqli_query($db_handle, $query);
 
-            if (!$result)
-            {
-                die('Couldn\'t find table ');
-            }
-
-            $row = $result->fetch_assoc();
-
-            $sqlupdate = "UPDATE vendeurs SET Nom = '$nom',Prenom = '$prenom', Telephone = '$tel', Email='$email'";
-
-            $result = mysqli_query($db_handle, $sqlupdate);
-
-            if (!$result)
-            {
-                die('Couldn\'t update');
-            }
-
-            echo '<script> alert("Modifications effectuées"); </script>';
-
-            echo '<script> window.location.href= "../Vendeur/mon_compte.php"; </script>';
+        if (!$result)
+        {
+            die('Couldn\'t find table ');
         }
+
+        $row = $result->fetch_assoc();
+
+        $sqlupdate = "UPDATE vendeurs SET Nom = '$nom',Prenom = '$prenom', Telephone = '$tel', Email='$email'";
+
+        $result = mysqli_query($db_handle, $sqlupdate);
+
+        if (!$result)
+        {
+            die('Couldn\'t update');
+        }
+
+        echo '<script> alert("Modifications effectuées"); </script>';
+
+        echo '<script> window.location.href= "../Vendeur/mon_compte.php"; </script>';
     }
 
 ?>
